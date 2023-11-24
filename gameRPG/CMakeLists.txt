@@ -10,4 +10,7 @@ add_executable(gameRPG
         include/Player.h
         src/Map.cpp
         include/Map.h
+        include/Quest.h
+        include/Item.h
+        src/Quest.cpp
 )
