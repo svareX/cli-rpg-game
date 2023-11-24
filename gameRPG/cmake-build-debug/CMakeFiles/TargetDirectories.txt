@@ -1,0 +1,3 @@
+C:/ZOO_RPG/zoo_zs2023_xtemelko/gameRPG/cmake-build-debug/CMakeFiles/gameRPG.dir
+C:/ZOO_RPG/zoo_zs2023_xtemelko/gameRPG/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/ZOO_RPG/zoo_zs2023_xtemelko/gameRPG/cmake-build-debug/CMakeFiles/rebuild_cache.dir

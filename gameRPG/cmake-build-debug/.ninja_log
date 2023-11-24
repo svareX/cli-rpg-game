@@ -1,0 +1,6 @@
+# ninja log v5
+7	3010	7225245497113917	CMakeFiles/gameRPG.dir/src/main.cpp.obj	e3b1ec545257704f
+15	864	7225249265557689	build.ninja	364febbf5c544393
+3010	3223	7225245499181660	gameRPG.exe	5d706d9b3a22d9a8
+17	951	7225245476516420	CMakeFiles/gameRPG.dir/src/Player.cpp.obj	2d82f79e18361c88
+24	1210	7225245479099534	CMakeFiles/gameRPG.dir/src/Map.cpp.obj	1c44b2e8d67c9fc7
