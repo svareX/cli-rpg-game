@@ -1,16 +1,20 @@
 #include <iostream>
 #include <vector>
+#include <string>
 #include <windows.h>
 #include <iomanip>
 
 #include "../include/Map.h"
 #include "../include/Player.h"
+#include "../include/Weapon.h"
 
 using namespace std;
 
 int main() {
     Map* gameMap = new Map();
     Player player(*gameMap);
+    Weapon* zbran = new Weapon();
+    cout << zbran->getName();
 
     char input;
     do{

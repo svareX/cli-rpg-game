@@ -5,9 +5,16 @@
 #ifndef GAMERPG_ITEM_H
 #define GAMERPG_ITEM_H
 
+#include <string>
+
+
 class Item{
+    std::string m_name;
+
 public:
     Item();
+    Item(std::string name);
+    virtual std::string getName();
 };
 
 #endif //GAMERPG_ITEM_H
