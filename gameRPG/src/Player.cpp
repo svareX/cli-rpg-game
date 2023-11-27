@@ -20,21 +20,29 @@ void Player::movePlayer(char move) {
         case 'W':
             if (playerY > 0) {
                 playerY--;
+            } else {
+                cerr << "You have reached the border!" << endl;
             }
             break;
         case 'A':
             if (playerX > 0) {
                 playerX--;
+            } else {
+                cerr << "You have reached the border!" << endl;
             }
             break;
         case 'S':
             if (playerY < map_size - 1) {
                 playerY++;
+            } else {
+                cerr << "You have reached the border!" << endl;
             }
             break;
         case 'D':
             if (playerX < map_size - 1) {
                 playerX++;
+            } else {
+                cerr << "You have reached the border!" << endl;
             }
             break;
     }
