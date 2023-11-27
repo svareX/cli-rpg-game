@@ -13,8 +13,8 @@ using namespace std;
 int main() {
     Map* gameMap = new Map();
     Player player(*gameMap);
-    Weapon* zbran = new Weapon();
-    cout << zbran->getName();
+    Weapon* zbran = new Weapon("Mec", 10, 10, 500);
+    zbran->printInfo();
 
     char input;
     do{

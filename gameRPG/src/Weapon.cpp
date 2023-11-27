@@ -9,18 +9,26 @@ using namespace std;
 Weapon::Weapon() : Item() {
     this->m_damage = 0;
     this->m_critical_chance = 0;
-    this->m_durability = 0;
 }
 
 Weapon::Weapon(std::string name, float damage, float critical_chance, int durability) : Item(name) {
     this->m_damage = damage;
     this->m_critical_chance = critical_chance;
-    this->m_durability = durability;
 }
 
+float Weapon::getDamage() {
+    return m_damage;
+}
+
+float Weapon::getCriticalChance() {
+    return m_critical_chance;
+}
 void Weapon::printInfo(){
-    std::cout << endl << this->m_name;
-    std::cout << endl << this->m_damage;
-    std::cout << endl << this->m_critical_chance;
-    std::cout << endl << this->m_durability;
+    std::cout << endl << getName();
+    std::cout << endl << getDamage();
+    std::cout << endl << getCriticalChance();
+}
+
+Weapon::~Weapon() {
+    std::cout << std::endl << "Sword has been destroyed.";
 }
