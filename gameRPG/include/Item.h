@@ -10,19 +10,25 @@
 
 class Item{
     std::string m_name;
+    bool m_is_equipped;
     int m_quality;
+
+public:
     enum Quality {
         common,
         rare,
         epic
     };
-
-public:
     Item();
     Item(std::string name);
+    Item(std::string name, int quality);
     Item(std::string name, Quality quality);
+
     virtual std::string getName();
     virtual std::string getQuality();
+    virtual bool getIsEquipped();
+
+    virtual void setIsEquipped();
 };
 
 #endif //GAMERPG_ITEM_H

@@ -8,13 +8,17 @@ using namespace std;
 
 Item::Item() {
     this->m_quality = Quality::common;
+    this->m_is_equipped = false;
     this->m_name = "Item";
 }
-Item::Item(string name) {
-    this->m_quality = Quality::common;
+Item::Item(string name) : Item() {
     this->m_name = name;
 }
-Item::Item(string name, Quality quality) {
+Item::Item(string name, int quality) : Item() {
+    this->m_quality = quality;
+    this->m_name = name;
+}
+Item::Item(string name, Quality quality) : Item() {
     this->m_quality = quality;
     this->m_name = name;
 }
@@ -33,4 +37,12 @@ std::string Item::getQuality() {
         quality = "Epic";
     }
     return quality;
+}
+
+bool Item::getIsEquipped() {
+    return m_is_equipped;
+}
+
+void Item::setIsEquipped() {
+    this->m_is_equipped = true;
 }
