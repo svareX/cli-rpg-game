@@ -1,6 +1,7 @@
 /cmake-build-debug
 cmake-build-debug
-cmake-build-debug/Testing/*.log
+/cmake-build-debug/
+/.idea/
 
 ### C++ template
 # Compiled Object files
