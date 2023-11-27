@@ -16,8 +16,7 @@ private:
     Map& map;
 public:
     Player(Map& gameMap);
-    void movePlayer(char move);
-    void attackSequence();
+
     int attack(int eHealth, int hStrength);
 
     void setPlayerX(int x);

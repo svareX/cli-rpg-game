@@ -12,9 +12,22 @@ const int map_size = 5;
 class Player;
 
 class Map {
+    int m_playerX;
+    int m_playerY;
+
 public:
     Map();
-    void displayMap(Player* player);
+
+    int getPlayerX();
+    int getPlayerY();
+
+    void setPlayerX(int x);
+    void setPlayerY(int y);
+    void setPlayerCoordinates(int x, int y);
+
+    void displayMap();
+    void movePlayer(char move);
+    void attackSequence();
     vector<vector<char>> gameMap;
 };
 
