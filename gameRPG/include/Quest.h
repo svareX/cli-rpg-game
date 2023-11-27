@@ -7,21 +7,24 @@
 
 #include <iostream>
 #include <vector>
-#include "Item.h"
 #include "Map.h"
+
 using namespace std;
 
 struct QuestGiven{
-    std::string task;
-    Item* itemRequired;
+    string task;
     float goldAmount;
 };
+
+class Map;
+
 
 class Quest{
     int questGiverX, questGiverY;
     QuestGiven quest;
-    Map& map; //temporary
+    Map& map;
 public:
     Quest(Map& gameMap);
+    void displayQuest();
 };
 #endif //GAMERPG_QUEST_H

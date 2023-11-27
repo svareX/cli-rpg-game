@@ -7,15 +7,20 @@
 
 #include <vector>
 #include "Player.h"
+#include "Quest.h"
 using namespace std;
 const int map_size = 5;
+
 class Player;
+class Quest;
 
 class Map {
 public:
     Map();
     void displayMap(Player* player);
     vector<vector<char>> gameMap;
+    vector<Quest*> quests;
+    void addQuest(Quest* quest);
 };
 
 #endif //GAMERPG_MAP_H

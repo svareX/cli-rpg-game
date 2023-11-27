@@ -30,3 +30,6 @@ void Map::displayMap(Player* player){
         cout << endl;
     }
 }
+void Map::addQuest(Quest* quest){
+    quests.push_back(quest);
+}

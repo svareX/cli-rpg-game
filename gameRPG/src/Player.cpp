@@ -2,11 +2,11 @@
 // Created by temel on 23.11.2023.
 //
 #include "../include/Player.h"
-#include "../include/Map.h"
+#include "../include/Quest.h"
+
 #include <iostream>
 #include <vector>
 
-using namespace std;
 
 Player::Player(Map& gameMap): map(gameMap) {
     health = 100;
@@ -48,6 +48,10 @@ void Player::movePlayer(char move) {
     }
     if (playerX == 4 && playerY == 0) {
         attackSequence();
+    }
+
+    if (map.gameMap[playerY][playerX] == 'Q'){
+        map.quests[0]->displayQuest();
     }
     system("CLS");
 }

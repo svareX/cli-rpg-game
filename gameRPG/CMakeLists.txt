@@ -13,4 +13,5 @@ add_executable(gameRPG
         include/Quest.h
         include/Item.h
         src/Quest.cpp
+        src/Item.cpp
 )
