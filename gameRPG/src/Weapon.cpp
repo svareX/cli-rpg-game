@@ -25,6 +25,7 @@ float Weapon::getCriticalChance() {
 }
 void Weapon::printInfo(){
     std::cout << endl << getName();
+    std::cout << endl << getQuality();
     std::cout << endl << getDamage();
     std::cout << endl << getCriticalChance();
 }

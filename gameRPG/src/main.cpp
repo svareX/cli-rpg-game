@@ -16,6 +16,7 @@ int main() {
     Weapon* zbran = new Weapon("Mec", 10, 10, 500);
     zbran->printInfo();
 
+    /*
     char input;
     do{
         gameMap->displayMap(&player);
@@ -23,6 +24,7 @@ int main() {
         cin >> input;
         player.movePlayer(input);
     } while (input != 'q');
-
+     */
+    
     return 0;
 }
