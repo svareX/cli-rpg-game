@@ -10,6 +10,7 @@
 using namespace std;
 
 int main() {
+    srand(time(0));
     Map* gameMap = new Map();
     Player player(*gameMap);
     Quest* quest1 = new Quest(*gameMap);

@@ -6,24 +6,27 @@
 #include "../include/Map.h"
 #include <vector>
 #include <cstdlib>
+#include <ctime>
 
-const char* boldOn = "\033[1m";
-const char* boldOff = "\033[0m";
-
-QuestGiven test[2] = {{"Hello, can you please bring me my AMULET? I lost it somewhere in the forest.", 50, },
-                      {"Good evening, can you please help me find my sacred AXE? I will pay you accordingly.", 100}};
+vector <QuestGiven> quests = {
+        {"Hello, can you please bring me my amulet? I lost it somewhere in the forest.", 50},
+        {"Good evening to you traveller, can you please help me find my sacred axe? I will pay you accordingly.", 100},
+        {"Greetings, brave adventurer! I seek a rare potion. It is said to be hidden in a cave nearby.", 75},
+        {"Ahoy there! My ship was wrecked, and I need help recovering the treasure chest. Care to lend a hand?", 120},
+        {"Mysterious stranger, a dangerous beast roams the mountains. Defeat it, and I will reward you generously.", 90}
+};
 
 using namespace std;
 Quest::Quest(Map& gameMap): map(gameMap){
     int rndX = rand()% map_size;
     int rndY = rand()% map_size;
+    int random = rand()%quests.size();
     questGiverX = rndX;
     questGiverY = rndY;
-    int arraySize = sizeof(test) / sizeof(test[0]);
-    int random = rand()%arraySize;
-    questInfo = test[random];
+    questInfo = quests[random];
+    quests.erase(quests.begin() + random);
     questInfo.status = NotAccepted;
-    test[random] = test[arraySize-1];
+
     map.addQuestToMap(this);
 }
 

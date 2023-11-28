@@ -16,7 +16,7 @@ private:
     int playerX, playerY;
     Map& map;
 public:
-    std::vector<Quest*> pendingQuests;
+    std::vector<Quest*> QuestList;
     Player(Map& gameMap);
     void movePlayer(char move);
     void attackSequence();

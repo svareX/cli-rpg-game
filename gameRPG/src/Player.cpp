@@ -98,7 +98,7 @@ int Player::attack(int eHealth, int hStrength) {
 }
 
 void Player::acceptQuest(Quest *quest){
-    pendingQuests.push_back(quest);
+    QuestList.push_back(quest);
     quest->setQuestStatus(Pending);
     map.gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = '.';
 }
@@ -106,8 +106,8 @@ void Player::acceptQuest(Quest *quest){
 void Player::printQuestList(){
     system("CLS");
     int i = 1;
-    if (!pendingQuests.empty()){
-        for (auto quest : pendingQuests)
+    if (!QuestList.empty()){
+        for (auto quest : QuestList)
         {
             QuestGiven info = quest->getQuestInfo();
             cout << i << ". " << "Quest:" << endl;
