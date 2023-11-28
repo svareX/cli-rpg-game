@@ -7,8 +7,11 @@
 #include <vector>
 #include <cstdlib>
 
-QuestGiven test[2] = {{"Hello, can you please bring me my amulet? I lost is somewhere in the forest.", 50},
-                      {"Good evening to you traveller, can you please help me find my sacred axe? I will pay you accordingly.", 100}};
+const char* boldOn = "\033[1m";
+const char* boldOff = "\033[0m";
+
+QuestGiven test[2] = {{"Hello, can you please bring me my AMULET? I lost is somewhere in the forest.", 50},
+                      {"Good evening to you traveller, can you please help me find my sacred AXE? I will pay you accordingly.", 100}};
 
 using namespace std;
 Quest::Quest(Map& gameMap): map(gameMap){
@@ -16,26 +19,29 @@ Quest::Quest(Map& gameMap): map(gameMap){
     int rndY = rand()% map_size;
     questGiverX = rndX;
     questGiverY = rndY;
-    int random = rand()%sizeof(test-1);
+    int arraySize = sizeof(test) / sizeof(test[0]);
+    int random = rand()%arraySize;
     questInfo = test[random];
+    test[random] = test[arraySize-1];
     map.addQuestToMap(this);
 }
 
-void Quest::display(){
+void Quest::display(Player* player){
     system("cls");
     char input;
-    cout << questInfo.task << " " << questInfo.goldAmount << endl;
+    cout << questInfo.task << endl << "Reward: " << questInfo.goldAmount << " gold" << endl;
     cout << "Do you wanna add this quest to quest list? " << endl;
     cin >> input;
     switch(toupper(input)){
         case 'A':
             cout << "Added." << endl;
-            cout << this->questInfo.task << endl;
+            player->acceptQuest(this);
             break;
         case 'N':
             cout << "Ignored." << endl;
             break;
     }
+    cout << "Press ENTER to continue..." << endl;
     cin.ignore();
     cin.get();
 }

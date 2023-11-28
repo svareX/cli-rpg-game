@@ -17,6 +17,7 @@ struct QuestGiven{
 };
 
 class Map;
+class Player;
 
 
 class Quest{
@@ -26,7 +27,7 @@ class Quest{
     vector<Quest*> allQuests;
 public:
     Quest(Map& gameMap);
-    void display();
+    void display(Player* player);
     void addQuest(Quest* quest);
     int getQuestGiverX();
     int getQuestGiverY();

@@ -54,8 +54,11 @@ void Player::movePlayer(char move) {
         attackSequence();
     }
     if (map.gameMap[playerY][playerX] == 'Q'){
-        map.quests[0]->display();
-        acceptQuest(map.quests[0]);
+        for(auto x : map.quests){
+            if (x->getQuestGiverX() == playerX && x->getQuestGiverY() == playerY){
+                x->display(this);
+            }
+        }
     }
     system("CLS");
 }
@@ -101,13 +104,16 @@ void Player::acceptQuest(Quest *quest){
 
 void Player::printQuestList(){
     system("CLS");
+    int i = 1;
     if (!pendingQuests.empty()){
         for (auto quest : pendingQuests)
         {
             QuestGiven info = quest->getQuestInfo();
+            cout << i << ". " << "Quest:" << endl;
             cout << info.task << endl;
             cout << "Gold amount: " << info.goldAmount << endl;
             cout << "---------------------------" << endl;
+            i++;
         }
     }
     else{

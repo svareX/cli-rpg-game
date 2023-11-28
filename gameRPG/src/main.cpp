@@ -21,7 +21,6 @@ int main() {
         cout << "Where do you wanna move?" << endl;
         cin >> input;
         player.movePlayer(input);
-
     } while (input != 'q');
 
     return 0;
