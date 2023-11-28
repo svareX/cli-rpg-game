@@ -41,9 +41,10 @@ void Map::setPlayerCoordinates(int x, int y) {
 
 void Map::displayMap(){
     system("cls");
+    cout << getPlayerY() << " | " << getPlayerX() << endl;
     for (int i = 0; i < map_size; i++){
         for (int j = 0; j < map_size; j++){
-            if (i == getPlayerX() && j == getPlayerY()){
+            if (i == getPlayerY() && j == getPlayerX()){
                 cout << setw(2) << 'P';
             }
             else{
@@ -109,12 +110,12 @@ void Map::attackSequence() {
             cin >> choice;
             switch (toupper(choice)) {
                 case 'A':
-                    eHealth = attack(eHealth, hStrength);
+                    //eHealth = attack(eHealth, hStrength);
                     break;
             }
         }
         cout << "Enemy has been slained." << endl;
-        map.gameMap[0][4] = '.';
+        gameMap[0][4] = '.';
         cin.ignore();
     }
 }

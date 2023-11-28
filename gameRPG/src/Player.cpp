@@ -8,7 +8,11 @@
 
 using namespace std;
 
-Player::Player(Map& gameMap): map(gameMap) {
+Player::Player() {
+    health = 100;
+    strength = 2;
+}
+Player::Player(Map* gameMap): map(gameMap) {
     health = 100;
     strength = 2;
     playerX = 0;

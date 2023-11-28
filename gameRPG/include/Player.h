@@ -13,9 +13,10 @@ class Player {
 private:
     int health, strength;
     int playerX, playerY;
-    Map& map;
+    Map* map;
 public:
-    Player(Map& gameMap);
+    Player();
+    Player(Map* gameMap);
 
     int attack(int eHealth, int hStrength);
 
