@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 
+class Quest;
 
 Player::Player(Map& gameMap): map(gameMap) {
     health = 100;
@@ -45,13 +46,16 @@ void Player::movePlayer(char move) {
                 cerr << "You have reached the border!" << endl;
             }
             break;
+        case 'L':
+            printQuestList();
+            break;
     }
     if (playerX == 4 && playerY == 0) {
         attackSequence();
     }
-
     if (map.gameMap[playerY][playerX] == 'Q'){
-        map.quests[0]->displayQuest();
+        map.quests[0]->display();
+        acceptQuest(map.quests[0]);
     }
     system("CLS");
 }
@@ -88,6 +92,30 @@ void Player::attackSequence() {
 int Player::attack(int eHealth, int hStrength) {
     eHealth -= hStrength;
     return eHealth;
+}
+
+void Player::acceptQuest(Quest *quest){
+    pendingQuests.push_back(quest);
+    map.gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = '.';
+}
+
+void Player::printQuestList(){
+    system("CLS");
+    if (!pendingQuests.empty()){
+        for (auto quest : pendingQuests)
+        {
+            QuestGiven info = quest->getQuestInfo();
+            cout << info.task << endl;
+            cout << "Gold amount: " << info.goldAmount << endl;
+            cout << "---------------------------" << endl;
+        }
+    }
+    else{
+        cout << "You currently have no quest." << endl;
+    }
+    cout << "Press Enter to Continue";
+    cin.ignore();
+    cin.get();
 }
 
 void Player::setPlayerX(int x) { playerX = x; }

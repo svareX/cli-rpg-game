@@ -20,7 +20,7 @@ public:
     void displayMap(Player* player);
     vector<vector<char>> gameMap;
     vector<Quest*> quests;
-    void addQuest(Quest* quest);
+    void addQuestToMap(Quest* quest);
 };
 
 #endif //GAMERPG_MAP_H

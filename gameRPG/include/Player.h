@@ -7,6 +7,7 @@
 
 #include "Map.h"
 
+class Quest;
 class Map;
 
 class Player {
@@ -15,10 +16,13 @@ private:
     int playerX, playerY;
     Map& map;
 public:
+    std::vector<Quest*> pendingQuests;
     Player(Map& gameMap);
     void movePlayer(char move);
     void attackSequence();
     int attack(int eHealth, int hStrength);
+    void acceptQuest(Quest* quest);
+    void printQuestList();
 
     void setPlayerX(int x);
     void setPlayerY(int y);

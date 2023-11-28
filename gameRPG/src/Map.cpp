@@ -30,6 +30,7 @@ void Map::displayMap(Player* player){
         cout << endl;
     }
 }
-void Map::addQuest(Quest* quest){
+void Map::addQuestToMap(Quest* quest){
     quests.push_back(quest);
+    gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = 'Q';
 }

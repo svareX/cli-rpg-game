@@ -12,8 +12,8 @@ using namespace std;
 int main() {
     Map* gameMap = new Map();
     Player player(*gameMap);
-    Quest* quest = new Quest(*gameMap);
-    gameMap->addQuest(quest);
+    Quest* quest1 = new Quest(*gameMap);
+    Quest* quest2 = new Quest(*gameMap);
 
     char input;
     do{

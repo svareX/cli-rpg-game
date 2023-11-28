@@ -21,10 +21,15 @@ class Map;
 
 class Quest{
     int questGiverX, questGiverY;
-    QuestGiven quest;
+    QuestGiven questInfo;
     Map& map;
+    vector<Quest*> allQuests;
 public:
     Quest(Map& gameMap);
-    void displayQuest();
+    void display();
+    void addQuest(Quest* quest);
+    int getQuestGiverX();
+    int getQuestGiverY();
+    QuestGiven getQuestInfo();
 };
 #endif //GAMERPG_QUEST_H
