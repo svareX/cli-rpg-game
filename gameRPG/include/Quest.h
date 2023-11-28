@@ -11,9 +11,16 @@
 
 using namespace std;
 
+enum Status{
+    NotAccepted,
+    Pending,
+    Completed
+};
+
 struct QuestGiven{
     string task;
     float goldAmount;
+    Status status;
 };
 
 class Map;
@@ -32,5 +39,7 @@ public:
     int getQuestGiverX();
     int getQuestGiverY();
     QuestGiven getQuestInfo();
+    void setQuestStatus(enum Status Stat);
+    string getQuestStatus();
 };
 #endif //GAMERPG_QUEST_H

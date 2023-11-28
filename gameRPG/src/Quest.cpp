@@ -10,8 +10,8 @@
 const char* boldOn = "\033[1m";
 const char* boldOff = "\033[0m";
 
-QuestGiven test[2] = {{"Hello, can you please bring me my AMULET? I lost is somewhere in the forest.", 50},
-                      {"Good evening to you traveller, can you please help me find my sacred AXE? I will pay you accordingly.", 100}};
+QuestGiven test[2] = {{"Hello, can you please bring me my AMULET? I lost it somewhere in the forest.", 50, },
+                      {"Good evening, can you please help me find my sacred AXE? I will pay you accordingly.", 100}};
 
 using namespace std;
 Quest::Quest(Map& gameMap): map(gameMap){
@@ -22,6 +22,7 @@ Quest::Quest(Map& gameMap): map(gameMap){
     int arraySize = sizeof(test) / sizeof(test[0]);
     int random = rand()%arraySize;
     questInfo = test[random];
+    questInfo.status = NotAccepted;
     test[random] = test[arraySize-1];
     map.addQuestToMap(this);
 }
@@ -54,4 +55,18 @@ int Quest::getQuestGiverY(){
 
 QuestGiven Quest::getQuestInfo() {
     return questInfo;
+}
+
+void Quest::setQuestStatus(enum Status Stat) {
+    questInfo.status = Stat;
+}
+string Quest::getQuestStatus() {
+    switch(questInfo.status){
+        case 0:
+            return "Not Accepted";
+        case 1:
+            return "Pending";
+        default:
+            return "Completed";
+    }
 }

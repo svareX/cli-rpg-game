@@ -99,6 +99,7 @@ int Player::attack(int eHealth, int hStrength) {
 
 void Player::acceptQuest(Quest *quest){
     pendingQuests.push_back(quest);
+    quest->setQuestStatus(Pending);
     map.gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = '.';
 }
 
@@ -111,6 +112,7 @@ void Player::printQuestList(){
             QuestGiven info = quest->getQuestInfo();
             cout << i << ". " << "Quest:" << endl;
             cout << info.task << endl;
+            cout << "Status: " << quest->getQuestStatus() << endl;
             cout << "Gold amount: " << info.goldAmount << endl;
             cout << "---------------------------" << endl;
             i++;
