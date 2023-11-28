@@ -122,11 +122,25 @@ void Map::attackSequence() {
         while (hHealth != 0 && eHealth != 0) {
             system("cls");
             cout << "Your Health: " << hHealth << " | Enemy Health: " << eHealth << endl;
-            cout << "What do you wanna do? (A - Attack): ";
+            cout << "What do you wanna do? (1 - Attack): " << endl;
+            cout << "What do you wanna do? (2 - Defend): " << endl;
+            cout << "What do you wanna do? (3 - Dodge): " << endl;
+            cout << "What do you wanna do? (4 - Inventory): " << endl;
+            cout << "What do you wanna do? (5 - Run): ";
             cin >> choice;
-            switch (toupper(choice)) {
-                case 'A':
+            switch (choice) {
+                case '1':
                     //eHealth = attack(eHealth, hStrength);
+                    break;
+                case '2':
+                    break;
+                case '3':
+                    break;
+                case '4': 
+                    break;
+                case '5':
+                    //TODO: Matěji tady přidej zase šanci na útěk jako nahoře akorát
+                    // že ta šance bude ještě * 1/2 (poloviční), protože už jsi v boji
                     break;
             }
         }
