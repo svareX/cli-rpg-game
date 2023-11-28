@@ -3,6 +3,8 @@
 //
 #include <iostream>
 #include "../include/GameEngine.h"
+#include "../include/exceptions/BorderException.h"
+#include "../include/exceptions/EnemyException.h"
 
 using namespace std;
 GameEngine::GameEngine() {
@@ -43,7 +45,13 @@ void GameEngine::startGame() {
         this->m_map->displayMap();
         cout << "Where do you wanna move?" << endl;
         cin >> input;
-        this->m_map->movePlayer(input);
+        try {
+            this->m_map->movePlayer(input);
+        } catch (BorderException borderException){
+            cout << "Border hit";
+        } catch (EnemyException enemyException) {
+            this->m_map->attackSequence();
+        }
     } while (input != 'q');
 }
 

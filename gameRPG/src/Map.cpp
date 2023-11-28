@@ -6,6 +6,9 @@
 #include <iomanip>
 #include "../include/Map.h"
 #include "../include/Player.h"
+#include "../include/exceptions/BorderException.h"
+#include "../include/exceptions/EnemyException.h"
+
 using namespace std;
 Map::Map(){
     this->setPlayerX(1);
@@ -62,6 +65,7 @@ void Map::movePlayer(char move) {
                 setPlayerY(getPlayerY()-1);
             } else {
                 cerr << "You have reached the border!" << endl;
+                throw BorderException();
             }
             break;
         case 'A':
@@ -69,6 +73,7 @@ void Map::movePlayer(char move) {
                 setPlayerX(getPlayerX()-1);
             } else {
                 cerr << "You have reached the border!" << endl;
+                throw BorderException();
             }
             break;
         case 'S':
@@ -76,6 +81,7 @@ void Map::movePlayer(char move) {
                 setPlayerY(getPlayerY()+1);
             } else {
                 cerr << "You have reached the border!" << endl;
+                throw BorderException();
             }
             break;
         case 'D':
@@ -83,11 +89,14 @@ void Map::movePlayer(char move) {
                 setPlayerX(getPlayerX()+1);
             } else {
                 cerr << "You have reached the border!" << endl;
+                throw BorderException();
             }
             break;
     }
+    //TODO: add enemy detection - not just this static solution
     if (getPlayerX() == 4 && getPlayerY() == 0) {
-        attackSequence();
+        //attackSequence();
+        throw EnemyException();
     }
     system("CLS");
 }
@@ -100,8 +109,15 @@ void Map::attackSequence() {
     char dump;
     cout << "You have encountered an enemy. Do you wanna fight? ";
     cin >> choice;
-    if (toupper(choice) == 'Q') {
-        return;
+    //TODO: Matěji dodělej toto:
+    if (toupper(choice) == 'N') {
+        /*
+         * chance to avoid the fight:
+         * easy - 75%
+         * medium - 50%
+         * hard - 25%
+         */
+        if(rand()%3 == 1) return;
     } else {
         while (hHealth != 0 && eHealth != 0) {
             system("cls");

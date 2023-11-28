@@ -18,7 +18,9 @@ public:
     Player(Map* gameMap);
 
     int attack(int eHealth, int hStrength);
-    
+
+    void setHealth(int h);
+
     int getHealth();
     int getStrength();
 };
