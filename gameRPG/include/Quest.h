@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include "Map.h"
+#include "Item.h"
 
 using namespace std;
 
@@ -19,6 +20,7 @@ enum Status{
 
 struct QuestGiven{
     string task;
+    Item* itemRequired;
     float goldAmount;
     Status status;
 };

@@ -8,13 +8,20 @@
 #include <cstdlib>
 #include <ctime>
 
+Item* amulet = new Item();
+Item* axe = new Item();
+Item* rarePotion = new Item();
+Item* treasureChest = new Item();
+Item* beastSkin = new Item();
+
 vector <QuestGiven> quests = {
-        {"Hello, can you please bring me my amulet? I lost it somewhere in the forest.", 50},
-        {"Good evening to you traveller, can you please help me find my sacred axe? I will pay you accordingly.", 100},
-        {"Greetings, brave adventurer! I seek a rare potion. It is said to be hidden in a cave nearby.", 75},
-        {"Ahoy there! My ship was wrecked, and I need help recovering the treasure chest. Care to lend a hand?", 120},
-        {"Mysterious stranger, a dangerous beast roams the mountains. Defeat it, and I will reward you generously.", 90}
+        {"Hello, can you please bring me my amulet? I lost it somewhere in the forest.", amulet, 50},
+        {"Good evening to you traveller, can you please help me find my sacred axe? I will pay you accordingly.", axe, 100},
+        {"Greetings, brave adventurer! I seek a rare potion. It is said to be hidden in a cave nearby.", rarePotion, 75},
+        {"Ahoy there! My ship was wrecked, and I need help recovering the treasure chest. Care to lend a hand?", treasureChest, 120},
+        {"Mysterious stranger, a dangerous beast roams the mountains. Defeat it, and I will reward you generously.", beastSkin, 90}
 };
+
 
 using namespace std;
 Quest::Quest(Map& gameMap): map(gameMap){
@@ -26,7 +33,6 @@ Quest::Quest(Map& gameMap): map(gameMap){
     questInfo = quests[random];
     quests.erase(quests.begin() + random);
     questInfo.status = NotAccepted;
-
     map.addQuestToMap(this);
 }
 
