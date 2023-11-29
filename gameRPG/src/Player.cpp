@@ -98,9 +98,15 @@ int Player::attack(int eHealth, int hStrength) {
 }
 
 void Player::acceptQuest(Quest *quest){
-    QuestList.push_back(quest);
-    quest->setQuestStatus(Pending);
-    map.gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = '.';
+    if (QuestList.size() < 3){
+        QuestList.push_back(quest);
+        quest->setQuestStatus(Pending);
+        map.gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = '.';
+    }
+    else{
+        system("cls");
+        cerr << "You cannot accept more quest (Max amount: 3)" << endl;
+    }
 }
 
 void Player::printQuestList(){
