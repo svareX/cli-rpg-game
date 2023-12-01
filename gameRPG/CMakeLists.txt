@@ -15,4 +15,5 @@ add_executable(gameRPG
         src/Quest.cpp
         src/Item.cpp
         include/Merchant.h
+        src/Merchant.cpp
 )
