@@ -18,6 +18,18 @@ Map::Map(){
     gameMap[0][4] = 'X';
 }
 
+// Random objects spawn method prep
+void Map::spawnRandomObjects(int objNumber) {
+    objNumber = 3;
+    for (int i = 0; i < objNumber; ++i) {
+        int x = rand() % map_size;
+        int y = rand() % map_size;
+    }
+
+}
+
+
+
 int Map::getPlayerX() {
     return this->m_playerX;
 }

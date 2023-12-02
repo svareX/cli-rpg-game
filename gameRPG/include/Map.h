@@ -17,7 +17,7 @@ class Map {
 
 public:
     Map();
-
+    void spawnRandomObjects(int objNumber);
     int getPlayerX();
     int getPlayerY();
 
