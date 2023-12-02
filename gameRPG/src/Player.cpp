@@ -11,7 +11,7 @@ using namespace std;
 
 Player::Player() {
     m_health = 100;
-    m_strength = 2;
+    m_damage = 2;
 }
 
 void Player::attack(Enemy* enemy) {
@@ -33,4 +33,4 @@ void Player::removeHealth(int health) {
 }
 
 int Player::getHealth() { return m_health; }
-int Player::getStrength() { return m_strength; }
+int Player::getDamage() { return m_damage; }

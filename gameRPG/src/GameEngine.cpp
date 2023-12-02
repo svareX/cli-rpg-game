@@ -73,13 +73,10 @@ void GameEngine::stopGame() {
 void GameEngine::attackSequence(Enemy* enemy) {
     system("cls");
     char choice;
-    int hHealth = 10;
-    int hStrength = 2;
-    int eHealth = 10;
-    char dump;
     cout << "You have encountered an enemy. Do you wanna fight? ";
     cin >> choice;
     if (toupper(choice) == 'N') {
+        //TODO:
         /*
          * chance to avoid the fight:
          * easy - 75%
@@ -88,10 +85,11 @@ void GameEngine::attackSequence(Enemy* enemy) {
          */
         if(rand()%3 == 1) return;
     } else {
-
-        while (hHealth != 0 && eHealth != 0) {
+        int playerLast = 0;
+        int enemyLast = 0;
+        while (this->m_player->getHealth() != 0 && enemy->getHealth() != 0) {
             system("cls");
-            cout << "Your Health: " << hHealth << " | Enemy Health: " << eHealth << endl;
+            cout << "Your Health: " << this->m_player->getHealth() << " | Enemy Health: " << enemy->getHealth() << endl;
             cout << "What do you wanna do? (1 - Attack): " << endl;
             cout << "What do you wanna do? (2 - Defend): " << endl;
             cout << "What do you wanna do? (3 - Dodge): " << endl;
@@ -99,37 +97,49 @@ void GameEngine::attackSequence(Enemy* enemy) {
             cout << "What do you wanna do? (5 - Run): ";
             cin >> choice;
             int enemyMove = rand()%3;
-            switch (choice) {
-                case '1':
-                     if (enemyMove == 1) {
-                         //oba seknou => oba dostanou dmg
-                     } else if (enemyMove == 2) {
-                         //hrac sekne & enemy se brani => hrac dostane dmg
-                     } else {
-                         //hrac seka a enemy dodguje => nic
-                     }
-                    break;
-                case '2':
-                    if (enemyMove == 2) {
-                        //oba se brani => nestane se nic
-                    } else if (enemyMove == 1) {
-                        //ty se branis & enemy sekne => enemy dostane dmg
-                    } else {
-                        //hrac se brani a enemy doguje => nic
-                    }
-                    break;
-                case '3':
-                    //vzdycky nic (akorat nacist previous move)
-                    break;
-                case '4':
-                    //TODO: OPEN INVENTORY
-                    //POTREBUJU ABY FILIP UZ NECO KONECNO UDELAL
-                    break;
-                case '5':
-                    //TODO: Matěji tady přidej zase šanci na útěk jako nahoře akorát
-                    // že ta šance bude ještě * 1/2 (poloviční), protože už jsi v boji
-                    break;
+            //TODO: ADD DIFICULTY DAMAGE MULTIPLIERS
+            //TODO: ADD EQUIPPED ITEM (WEAPON, SHIELD) DAMAGE MULTIPLIERS
+            if (playerLast != int(choice)) {
+                switch (choice) {
+                    case '1':
+                        if (enemyMove == 1) {
+                            //oba seknou => oba dostanou dmg
+                            this->m_player->removeHealth(enemy->getDamage());
+                            enemy->removeHealth(this->m_player->getDamage());
+                        } else if (enemyMove == 2) {
+                            //hrac sekne & enemy se brani => hrac dostane dmg
+                            this->m_player->removeHealth(this->m_player->getDamage());
+                        } else {
+                            //hrac seka a enemy dodguje => nic
+                        }
+                        break;
+                    case '2':
+                        if (enemyMove == 2) {
+                            //oba se brani => nestane se nic
+                        } else if (enemyMove == 1) {
+                            //ty se branis & enemy sekne => enemy dostane dmg
+                            enemy->removeHealth(enemy->getDamage());
+                        } else {
+                            //hrac se brani a enemy doguje => nic
+                        }
+                        break;
+                    case '3':
+                        //vzdycky nic (akorat nacist previous move)
+                        break;
+                    case '4':
+                        //TODO: OPEN INVENTORY
+                        //POTREBUJU ABY FILIP UZ NECO KONECNO UDELAL
+                        break;
+                    case '5':
+                        //TODO: přidat zase šanci na útěk jako nahoře akorát
+                        // že ta šance bude ještě * 1/2 (poloviční), protože už jsi v boji
+                        break;
+                }
+            } else {
+                cout << endl << "You cannot choose the same thing twice in a row!";
             }
+            playerLast = int(choice);
+            enemyLast = enemyMove;
         }
         cout << "Enemy has been slained." << endl;
         //TODO: CALL this->m_map-> new method to set enemy tile as '.'

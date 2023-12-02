@@ -12,7 +12,7 @@ class Map;
 
 class Player {
 private:
-    int m_health, m_strength;
+    int m_health, m_damage;
 
 public:
     Player();
@@ -23,6 +23,6 @@ public:
     void removeHealth(int h);
 
     int getHealth();
-    int getStrength();
+    int getDamage();
 };
 #endif //GAMERPG_PLAYER_H
