@@ -20,6 +20,9 @@ public:
     void displayShop();
     void buyItem();
     void sellItem();
+
+    int getMerchantX();
+    int getMerchantY();
     // add global function addToMap to GameEngine, parameters: coordinates X&Y and an object
 };
 

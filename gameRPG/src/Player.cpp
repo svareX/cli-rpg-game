@@ -54,11 +54,15 @@ void Player::movePlayer(char move) {
         attackSequence();
     }
     if (map.gameMap[playerY][playerX] == 'Q'){
-        for(auto x : map.quests){
-            if (x->getQuestGiverX() == playerX && x->getQuestGiverY() == playerY){
-                x->display(this);
+        for(auto questGiver : map.quests){
+            if (questGiver->getQuestGiverX() == playerX && questGiver->getQuestGiverY() == playerY){
+                questGiver->display(this);
             }
         }
+    }
+
+    if (map.gameMap[playerY][playerX] == 'M'){
+        map.shop->displayShop();
     }
     system("CLS");
 }

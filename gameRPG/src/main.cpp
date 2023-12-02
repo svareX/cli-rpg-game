@@ -15,6 +15,7 @@ int main() {
     Player player(*gameMap);
     Quest* quest1 = new Quest(*gameMap);
     Quest* quest2 = new Quest(*gameMap);
+    Merchant* shop = new Merchant(*gameMap);
 
     char input;
     do{
