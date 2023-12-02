@@ -5,6 +5,7 @@
 #include "../include/GameEngine.h"
 #include "../include/exceptions/BorderException.h"
 #include "../include/exceptions/EnemyException.h"
+#include "../include/exceptions/GameOverException.h"
 
 using namespace std;
 GameEngine::GameEngine() {
@@ -50,7 +51,13 @@ void GameEngine::startGame() {
         } catch (BorderException borderException){
             cout << "Border hit";
         } catch (EnemyException enemyException) {
-            this->attackSequence();
+            try {
+                this->attackSequence(this->m_map->findEnemy(
+                        this->m_map->getPlayerX(), this->m_map->getPlayerY()
+                        ));
+            } catch (GameOverException gameOverException) {
+                //TODO: COUT SCORE OR SOMETHING
+            }
         }
     } while (input != 'q');
 }
@@ -91,22 +98,28 @@ void GameEngine::attackSequence(Enemy* enemy) {
             cout << "What do you wanna do? (4 - Inventory): " << endl;
             cout << "What do you wanna do? (5 - Run): ";
             cin >> choice;
+            int enemyMove = rand()%3;
             switch (choice) {
                 case '1':
-                     if (rand()%3 == 1) {
-                         //oba seknou
+                     if (enemyMove == 1) {
+                         //oba seknou => oba dostanou dmg
+                     } else if (enemyMove == 2) {
+                         //hrac sekne & enemy se brani => hrac dostane dmg
+                     } else {
+                         //hrac seka a enemy dodguje => nic
                      }
-                    //eHealth = attack(eHealth, hStrength);
                     break;
                 case '2':
-                    if (rand()%3 == 2) {
-                        //oba se brani
+                    if (enemyMove == 2) {
+                        //oba se brani => nestane se nic
+                    } else if (enemyMove == 1) {
+                        //ty se branis & enemy sekne => enemy dostane dmg
+                    } else {
+                        //hrac se brani a enemy doguje => nic
                     }
                     break;
                 case '3':
-                    if (rand()%3 == 3) {
-                        //oba se vyhybaji
-                    }
+                    //vzdycky nic (akorat nacist previous move)
                     break;
                 case '4':
                     //TODO: OPEN INVENTORY

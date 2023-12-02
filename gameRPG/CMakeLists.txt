@@ -21,4 +21,8 @@ add_executable(gameRPG
         include/exceptions/EnemyException.h
         src/exceptions/EnemyException.cpp
         src/Enemy.cpp
+        include/exceptions/GameOverException.h
+        src/exceptions/GameOverException.cpp
+        include/exceptions/DeadEnemyException.h
+        src/exceptions/DeadEnemyException.cpp
 )

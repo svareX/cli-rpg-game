@@ -13,10 +13,9 @@ class Map;
 class Player {
 private:
     int m_health, m_strength;
-    Map* m_map;
+
 public:
     Player();
-    Player(Map* gameMap);
 
     void attack(Enemy* enemy);
 

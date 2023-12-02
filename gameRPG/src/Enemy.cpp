@@ -2,6 +2,7 @@
 // Created by stepa on 02.12.2023.
 //
 #include "../include/Enemy.h"
+#include "../include/exceptions/DeadEnemyException.h"
 
 using namespace std;
 
@@ -23,6 +24,13 @@ Enemy::Enemy(int health, int damage) {
 
 void Enemy::setHealth(int health) {
     this->m_health = health;
+}
+void Player::removeHealth(int health) {
+    if (m_health - health > 0) {
+        this->m_health -= health;
+    } else {
+        throw DeadEnemyException();
+    }
 }
 
 int Enemy::getHealth() {
