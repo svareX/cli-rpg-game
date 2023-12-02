@@ -25,6 +25,7 @@ int main() {
         gameMap.movePlayer(input);
     } while (input != 'q');
     */
+   srand(time(0));
    GameEngine* game = new GameEngine();
    game->startMenu();
 

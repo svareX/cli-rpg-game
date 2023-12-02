@@ -6,20 +6,22 @@
 #define GAMERPG_PLAYER_H
 
 #include "Map.h"
+#include "Enemy.h"
 
 class Map;
 
 class Player {
 private:
-    int health, strength;
-    Map* map;
+    int m_health, m_strength;
+    Map* m_map;
 public:
     Player();
     Player(Map* gameMap);
 
-    int attack(int eHealth, int hStrength);
+    void attack(Enemy* enemy);
 
     void setHealth(int h);
+    void removeHealth(int h);
 
     int getHealth();
     int getStrength();

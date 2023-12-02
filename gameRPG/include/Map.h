@@ -27,7 +27,6 @@ public:
 
     void displayMap();
     void movePlayer(char move);
-    void attackSequence();
     vector<vector<char>> gameMap;
 };
 

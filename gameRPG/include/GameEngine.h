@@ -7,6 +7,7 @@
 
 #include "Player.h"
 #include "Map.h"
+#include "Enemy.h"
 
 class GameEngine{
     Player* m_player;
@@ -22,6 +23,8 @@ public:
     void menuSelection();
     //when you select play from menu
     void startGame();
+    //combat
+    void attackSequence(Enemy* enemy);
     //settings
     void startSettings();
     //when you die or something

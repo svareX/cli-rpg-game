@@ -9,21 +9,28 @@
 using namespace std;
 
 Player::Player() {
-    health = 100;
-    strength = 2;
+    m_health = 100;
+    m_strength = 2;
 }
 Player::Player(Map* gameMap): map(gameMap) {
-    health = 100;
-    strength = 2;
+    m_health = 100;
+    m_strength = 2;
 }
 
 
-int Player::attack(int eHealth, int hStrength) {
-    eHealth -= hStrength;
-    return eHealth;
+void Player::attack(Enemy* enemy) {
+    int enemyDamage = 0;
+    int playerDamage = 0;
+    this->setHealth(enemyDamage);
+    enemy->setHealth(playerDamage);
 }
 
-void Player::setHealth(int h) { health = h; }
+void Player::setHealth(int health) {
+    m_health = health;
+}
+void Player::removeHealth(int health) {
+    this->m_health -= health;
+}
 
-int Player::getHealth() { return health; }
-int Player::getStrength() { return strength; }
+int Player::getHealth() { return m_health; }
+int Player::getStrength() { return m_strength; }

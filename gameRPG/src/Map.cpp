@@ -95,57 +95,7 @@ void Map::movePlayer(char move) {
     }
     //TODO: add enemy detection - not just this static solution
     if (getPlayerX() == 4 && getPlayerY() == 0) {
-        //attackSequence();
         throw EnemyException();
     }
     system("CLS");
-}
-void Map::attackSequence() {
-    system("cls");
-    char choice;
-    int hHealth = 10;
-    int hStrength = 2;
-    int eHealth = 10;
-    char dump;
-    cout << "You have encountered an enemy. Do you wanna fight? ";
-    cin >> choice;
-    //TODO: Matěji dodělej toto:
-    if (toupper(choice) == 'N') {
-        /*
-         * chance to avoid the fight:
-         * easy - 75%
-         * medium - 50%
-         * hard - 25%
-         */
-        if(rand()%3 == 1) return;
-    } else {
-        while (hHealth != 0 && eHealth != 0) {
-            system("cls");
-            cout << "Your Health: " << hHealth << " | Enemy Health: " << eHealth << endl;
-            cout << "What do you wanna do? (1 - Attack): " << endl;
-            cout << "What do you wanna do? (2 - Defend): " << endl;
-            cout << "What do you wanna do? (3 - Dodge): " << endl;
-            cout << "What do you wanna do? (4 - Inventory): " << endl;
-            cout << "What do you wanna do? (5 - Run): ";
-            cin >> choice;
-            switch (choice) {
-                case '1':
-                    //eHealth = attack(eHealth, hStrength);
-                    break;
-                case '2':
-                    break;
-                case '3':
-                    break;
-                case '4': 
-                    break;
-                case '5':
-                    //TODO: Matěji tady přidej zase šanci na útěk jako nahoře akorát
-                    // že ta šance bude ještě * 1/2 (poloviční), protože už jsi v boji
-                    break;
-            }
-        }
-        cout << "Enemy has been slained." << endl;
-        gameMap[0][4] = '.';
-        cin.ignore();
-    }
 }
