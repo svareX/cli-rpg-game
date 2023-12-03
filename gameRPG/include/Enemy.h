@@ -18,6 +18,7 @@ private:
 public:
     Enemy(int h){
         health = h;
+        //TODO fix undeclared map_size identifier
         enemyX = rand() % map_size + 1;
         enemyY = rand() % map_size + 0;
     }

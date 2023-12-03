@@ -16,4 +16,5 @@ add_executable(gameRPG
         src/Item.cpp
         include/Weapon.h
         src/Weapon.cpp
+        src/Enemy.cpp
 )

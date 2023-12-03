@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "Player.h"
+#include "Enemy.h"
 using namespace std;
 const int map_size = 5;
 class Player;
@@ -24,11 +25,11 @@ public:
     void setPlayerX(int x);
     void setPlayerY(int y);
     void setPlayerCoordinates(int x, int y);
-
     void displayMap();
     void movePlayer(char move);
-    void attackSequence();
+    Enemy findEnemy(int x, int y);
     vector<vector<char>> gameMap;
+    vector<Enemy> m_enemies;
 };
 
 #endif //GAMERPG_MAP_H

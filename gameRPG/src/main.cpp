@@ -26,9 +26,10 @@ int main() {
         gameMap.movePlayer(input);
     } while (input != 'q');
     */
-    
+
     gameMap->changeMap(3,2,'Z');
     gameMap->changeMap(1,1,'X');
     gameMap->displayMap();
+    gameMap->findEnemy(0,4);
     return 0;
 }

@@ -43,6 +43,13 @@ void Map::changeMap(int x, int y, char z) {
 }
 
 
+Enemy Map::findEnemy(int x, int y){
+for(auto &enemy : m_enemies){
+    if (x == enemy.getEnemyX() && y == enemy.getEnemyY())
+        return enemy;
+}
+}
+
 
 int Map::getPlayerX() {
     return this->m_playerX;
@@ -112,7 +119,7 @@ void Map::movePlayer(char move) {
             break;
     }
     if (getPlayerX() == 4 && getPlayerY() == 0) {
-        attackSequence();
+        //attackSequence();
     }
     system("CLS");
 }
