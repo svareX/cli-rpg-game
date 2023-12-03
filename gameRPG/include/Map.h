@@ -20,7 +20,7 @@ public:
     void spawnRandomObjects(int objNumber);
     int getPlayerX();
     int getPlayerY();
-
+    void changeMap(int x,int y,char z);
     void setPlayerX(int x);
     void setPlayerY(int y);
     void setPlayerCoordinates(int x, int y);

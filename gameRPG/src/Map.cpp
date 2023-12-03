@@ -25,7 +25,21 @@ void Map::spawnRandomObjects(int objNumber) {
         int x = rand() % map_size;
         int y = rand() % map_size;
     }
+//TODO rest of the method
+}
 
+void Map::changeMap(int x, int y, char z) {
+    if (x >= 0 && x < map_size && y >= 0 && y < map_size) {
+        if(!(x == getPlayerX() && y == getPlayerY())){
+        gameMap[x][y] = z;
+        }
+        else{
+         cerr << "You can't put object where the player is standing";
+        }
+    }
+    else {
+        cout << "you can't change fields outside the map" << endl;
+    }
 }
 
 
@@ -101,32 +115,4 @@ void Map::movePlayer(char move) {
         attackSequence();
     }
     system("CLS");
-}
-void Map::attackSequence() {
-    system("cls");
-    char choice;
-    int hHealth = 10;
-    int hStrength = 2;
-    int eHealth = 10;
-    char dump;
-    cout << "You have encountered an enemy. Do you wanna fight? ";
-    cin >> choice;
-    if (toupper(choice) == 'Q') {
-        return;
-    } else {
-        while (hHealth != 0 && eHealth != 0) {
-            system("cls");
-            cout << "Your Health: " << hHealth << " | Enemy Health: " << eHealth << endl;
-            cout << "What do you wanna do? (A - Attack): ";
-            cin >> choice;
-            switch (toupper(choice)) {
-                case 'A':
-                    eHealth = attack(eHealth, hStrength);
-                    break;
-            }
-        }
-        cout << "Enemy has been slained." << endl;
-        map.gameMap[0][4] = '.';
-        cin.ignore();
-    }
 }

@@ -11,7 +11,10 @@
 using namespace std;
 
 int main() {
+
     Map* gameMap = new Map();
+
+    /*
     Player player(*gameMap);
     Weapon* zbran = new Weapon("Sword", 10, 10, 500);
     zbran->printInfo();
@@ -22,7 +25,10 @@ int main() {
         cin >> input;
         gameMap.movePlayer(input);
     } while (input != 'q');
-
-
+    */
+    
+    gameMap->changeMap(3,2,'Z');
+    gameMap->changeMap(1,1,'X');
+    gameMap->displayMap();
     return 0;
 }
