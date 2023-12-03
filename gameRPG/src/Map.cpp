@@ -18,14 +18,17 @@ Map::Map(){
     gameMap[0][4] = 'X';
 }
 
-// Random objects spawn method prep
 void Map::spawnRandomObjects(int objNumber) {
-    objNumber = 3;
     for (int i = 0; i < objNumber; ++i) {
         int x = rand() % map_size;
         int y = rand() % map_size;
+
+        while (gameMap[x][y] != '.' || (x == getPlayerX() && y == getPlayerX())) {
+            x = rand() % map_size;
+            y = rand() % map_size;
+        }
+        gameMap[x][y] = 'O';
     }
-//TODO rest of the method
 }
 
 void Map::changeMap(int x, int y, char z) {
