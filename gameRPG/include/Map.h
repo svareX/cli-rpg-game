@@ -27,6 +27,7 @@ public:
     void setPlayerCoordinates(int x, int y);
     void displayMap();
     void movePlayer(char move);
+    void spawnEnemies(int enemiesNumber);
     Enemy findEnemy(int x, int y);
     vector<vector<char>> gameMap;
     vector<Enemy> m_enemies;

@@ -46,6 +46,13 @@ void Map::changeMap(int x, int y, char z) {
 }
 
 
+void Map::spawnEnemies(int numEnemies) {
+//TODO
+}
+
+
+
+
 Enemy Map::findEnemy(int x, int y){
 for(auto &enemy : m_enemies){
     if (x == enemy.getEnemyX() && y == enemy.getEnemyY())
