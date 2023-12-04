@@ -10,6 +10,8 @@
 #include "Enemy.h"
 using namespace std;
 class Player;
+class Quest;
+class Merchant;
 class Enemy;
 class Map {
     int m_playerX;
@@ -29,6 +31,9 @@ public:
     Enemy findEnemy(int x, int y);
     vector<vector<char>> gameMap;
     vector<Enemy> m_enemies;
+    vector<Quest> quests;
+    vector<Merchant> shop;
+    void addQuestToMap(Quest* quest);
 };
 
 #endif //GAMERPG_MAP_H

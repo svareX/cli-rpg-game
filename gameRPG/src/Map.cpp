@@ -6,8 +6,10 @@
 #include <iomanip>
 #include "../include/Map.h"
 #include "../include/Player.h"
+#include "../include/Quest.h"
 using namespace std;
-int map_size = 5;
+int map_size = 50;
+
 Map::Map(){
     this->setPlayerX(1);
     this->setPlayerY(1);
@@ -51,9 +53,6 @@ void Map::spawnEnemies(int numEnemies) {
 
 }
 
-
-
-
 Enemy Map::findEnemy(int x, int y){
 for(auto &enemy : m_enemies){
     if (x == enemy.getEnemyX() && y == enemy.getEnemyY())
@@ -61,6 +60,10 @@ for(auto &enemy : m_enemies){
 }
 }
 
+void Map::addQuestToMap(Quest* quest){
+    //quests.push_back(quest);
+    gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = 'Q';
+}
 
 int Map::getPlayerX() {
     return this->m_playerX;

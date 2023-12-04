@@ -9,3 +9,10 @@ Quest::Quest(Map& gameMap): map(gameMap){
     questGiverY = 2; //X & Y will be random generated in future
     map.gameMap[questGiverY][questGiverX] = 'Q';
 }
+
+int Quest::getQuestGiverX(){
+    return questGiverX;
+}
+int Quest::getQuestGiverY(){
+    return questGiverY;
+}

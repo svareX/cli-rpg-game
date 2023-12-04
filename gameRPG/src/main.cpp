@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <windows.h>
 #include <iomanip>
 
 #include "../include/Map.h"

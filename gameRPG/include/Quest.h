@@ -23,5 +23,7 @@ class Quest{
     Map& map; //temporary
 public:
     Quest(Map& gameMap);
+    int getQuestGiverX();
+    int getQuestGiverY();
 };
 #endif //GAMERPG_QUEST_H
