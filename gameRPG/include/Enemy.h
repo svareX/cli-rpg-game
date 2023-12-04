@@ -7,25 +7,16 @@
 
 
 #include <iostream>
-#include "Map.h"
-
 using namespace std;
 class Enemy{
 private:
     int health;
     int enemyX, enemyY;
-
 public:
-    Enemy(int h){
-        health = h;
-        //TODO fix undeclared map_size identifier
-        enemyX = rand() % map_size + 1;
-        enemyY = rand() % map_size + 0;
-    }
-    int getHealth(){return health;}
-    int getEnemyX(){return enemyX;}
-    int getEnemyY(){return enemyY;}
-
+    Enemy(int h);
+    int getHealth();
+    int getEnemyX();
+    int getEnemyY();
 };
 
 #endif //GAMERPG_ENEMY_H

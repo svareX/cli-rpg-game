@@ -9,13 +9,11 @@
 #include "Player.h"
 #include "Enemy.h"
 using namespace std;
-const int map_size = 5;
 class Player;
-
+class Enemy;
 class Map {
     int m_playerX;
     int m_playerY;
-
 public:
     Map();
     void spawnRandomObjects(int objNumber);

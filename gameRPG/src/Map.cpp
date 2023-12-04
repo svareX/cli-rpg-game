@@ -7,6 +7,7 @@
 #include "../include/Map.h"
 #include "../include/Player.h"
 using namespace std;
+int map_size = 5;
 Map::Map(){
     this->setPlayerX(1);
     this->setPlayerY(1);
@@ -47,7 +48,7 @@ void Map::changeMap(int x, int y, char z) {
 
 
 void Map::spawnEnemies(int numEnemies) {
-//TODO
+
 }
 
 
