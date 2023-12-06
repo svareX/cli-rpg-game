@@ -20,4 +20,6 @@ add_executable(gameRPG
         src/GameEngine.cpp
         include/Inventory.h
         src/Inventory.cpp
+        include/Potion.h
+        src/Potion.cpp
 )

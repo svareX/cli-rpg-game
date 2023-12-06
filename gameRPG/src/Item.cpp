@@ -40,14 +40,14 @@ std::string Item::getQuality() {
 }
 std::string Item::getType() {
     std::string type = "";
-    if (this->m_quality == 0) {
-        quality = "Common";
-    } else if (this->m_quality == 1) {
-        quality = "Rare";
+    if (this->m_type == 0) {
+        type = "Weapon";
+    } else if (this->m_type == 1) {
+        type = "Shield";
     } else {
-        quality = "Epic";
+        type = "Quest";
     }
-    return quality;
+    return type;
 }
 
 bool Item::getIsEquipped() {

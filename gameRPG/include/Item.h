@@ -11,6 +11,7 @@ class Item{
     std::string m_name;
     bool m_is_equipped;
     int m_quality;
+    int m_type;
 
 public:
     enum Quality {
@@ -21,7 +22,7 @@ public:
     enum class ItemType {
         Weapon,
         Shield,
-        Quest
+        Potion
     };
     Item();
     Item(std::string name);
