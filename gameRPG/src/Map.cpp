@@ -91,7 +91,6 @@ void Map::movePlayer(char move) {
         attackSequence();
     }
     else if (getPlayerX() == 2 && getPlayerY() == 2) {
-        Inventory::addItem();
     }
     system("CLS");
 }
