@@ -16,6 +16,10 @@ class Inventory {
 public:
     Inventory();
     void addItem(Item*  Item);
+    void equipItem(Item* Item);
+    void equipWeapon(Weapon* weapon);
+    void equipShield(Shield* shield);
+    void equipPotion(Potion* potion);
     void getEquippedWeapon();
     void getEquippedShield();
     void getEquippedPotion();
