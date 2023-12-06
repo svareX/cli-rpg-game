@@ -25,23 +25,14 @@ bool Inventory::containsItem(Item* item) {
     return false;
 }
 void Inventory::getEquippedWeapon() {
-    for (const auto& item : ItemsInInventory) {
-        if (item->getIsEquipped() && item->getType() == Item::ItemType::Weapon) {
-            cout << "Equipped Weapon: " << item->getName() << endl;
-            return;
-        }
-    }
-    cout << "No equipped weapon found." << endl;
+
 }
 
 void Inventory::getEquippedShield() {
-    for (const auto& item : ItemsInInventory) {
-        if (item->getIsEquipped() && item->getType() == Item::ItemType::Shield) {
-            cout << "Equipped Shield: " << item->getName() << endl;
-            return;
-        }
-    }
-    cout << "No equipped shield found." << endl;
+
+}
+void Inventory::getEquippedPotion() {
+
 }
 
 

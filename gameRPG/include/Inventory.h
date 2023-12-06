@@ -7,6 +7,10 @@
 
 #include <vector>
 #include "Item.h"
+#include "Weapon.h"
+#include "Shield.h"
+#include "Potion.h"
+
 using namespace std;
 class Inventory {
 public:
@@ -14,6 +18,7 @@ public:
     void addItem(Item*  Item);
     void getEquippedWeapon();
     void getEquippedShield();
+    void getEquippedPotion();
     bool containsItem(Item* Item);
     vector<Item*> ItemsInInventory;
 };

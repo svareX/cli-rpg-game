@@ -22,4 +22,6 @@ add_executable(gameRPG
         src/Inventory.cpp
         include/Potion.h
         src/Potion.cpp
+        include/Shield.h
+        src/Shield.cpp
 )
