@@ -18,8 +18,8 @@ public:
     Player(Map* gameMap);
 
     int attack(int eHealth, int hStrength);
-    
     int getHealth();
     int getStrength();
+    void setHealth(int);
 };
 #endif //GAMERPG_PLAYER_H

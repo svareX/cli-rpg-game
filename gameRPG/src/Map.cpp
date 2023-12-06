@@ -5,6 +5,7 @@
 #include <vector>
 #include <iomanip>
 #include "../include/Map.h"
+#include "../include/Inventory.h"
 #include "../include/Player.h"
 using namespace std;
 Map::Map(){
@@ -14,8 +15,8 @@ Map::Map(){
         vector<char> row(map_size, '.');
         gameMap.push_back(row);
     }
-    gameMap[3][2] = 'G';
     gameMap[0][4] = 'X';
+    gameMap[2][2] = 'I';
 }
 
 int Map::getPlayerX() {
@@ -88,6 +89,9 @@ void Map::movePlayer(char move) {
     }
     if (getPlayerX() == 4 && getPlayerY() == 0) {
         attackSequence();
+    }
+    else if (getPlayerX() == 2 && getPlayerY() == 2) {
+        Inventory::addItem();
     }
     system("CLS");
 }

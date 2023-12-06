@@ -7,7 +7,6 @@
 
 #include <string>
 
-
 class Item{
     std::string m_name;
     bool m_is_equipped;
@@ -19,6 +18,11 @@ public:
         rare,
         epic
     };
+    enum class ItemType {
+        Weapon,
+        Shield,
+        Quest
+    };
     Item();
     Item(std::string name);
     Item(std::string name, int quality);
@@ -26,6 +30,7 @@ public:
 
     virtual std::string getName();
     virtual std::string getQuality();
+    virtual std::string getType();
     virtual bool getIsEquipped();
 
     virtual void setIsEquipped();

@@ -38,6 +38,17 @@ std::string Item::getQuality() {
     }
     return quality;
 }
+std::string Item::getType() {
+    std::string type = "";
+    if (this->m_quality == 0) {
+        quality = "Common";
+    } else if (this->m_quality == 1) {
+        quality = "Rare";
+    } else {
+        quality = "Epic";
+    }
+    return quality;
+}
 
 bool Item::getIsEquipped() {
     return m_is_equipped;

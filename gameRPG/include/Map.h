@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "Player.h"
+#include "Inventory.h"
 using namespace std;
 const int map_size = 5;
 class Player;

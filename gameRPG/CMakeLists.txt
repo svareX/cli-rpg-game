@@ -18,4 +18,6 @@ add_executable(gameRPG
         src/Weapon.cpp
         include/GameEngine.h
         src/GameEngine.cpp
+        include/Inventory.h
+        src/Inventory.cpp
 )
