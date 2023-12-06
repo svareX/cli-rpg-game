@@ -1,7 +1,3 @@
-//
-// Created by filip on 04.12.2023.
-//
-
 #ifndef GAMERPG_INVENTORY_H
 #define GAMERPG_INVENTORY_H
 
@@ -12,18 +8,26 @@
 #include "Potion.h"
 
 using namespace std;
+
 class Inventory {
 public:
     Inventory();
-    void addItem(Item*  Item);
-    void equipItem(Item* Item);
+    void addItem(Item* item);
+    void equipItem(Item* item);
+    Weapon* getEquippedWeapon();
+    Shield* getEquippedShield();
+    Potion* getEquippedPotion();
+    bool containsItem(Item* item);
+
+private:
+    vector<Item*> ItemsInInventory;
+    Weapon* equippedWeapon;
+    Shield* equippedShield;
+    Potion* equippedPotion;
+
     void equipWeapon(Weapon* weapon);
     void equipShield(Shield* shield);
     void equipPotion(Potion* potion);
-    void getEquippedWeapon();
-    void getEquippedShield();
-    void getEquippedPotion();
-    bool containsItem(Item* Item);
-    vector<Item*> ItemsInInventory;
 };
-#endif //GAMERPG_INVENTORY_H
+
+#endif // GAMERPG_INVENTORY_H

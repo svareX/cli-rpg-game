@@ -24,6 +24,7 @@ public:
         Shield,
         Potion
     };
+
     Item();
     Item(std::string name);
     Item(std::string name, int quality);
@@ -33,7 +34,6 @@ public:
     virtual std::string getQuality();
     virtual std::string getType();
     virtual bool getIsEquipped();
-
     virtual void setIsEquipped();
 };
 

@@ -44,8 +44,12 @@ std::string Item::getType() {
         type = "Weapon";
     } else if (this->m_type == 1) {
         type = "Shield";
-    } else {
-        type = "Quest";
+    }
+    else if (this->m_type == 2){
+        type = "Potion";
+    }
+    else {
+        type = "Type has not been set.";
     }
     return type;
 }

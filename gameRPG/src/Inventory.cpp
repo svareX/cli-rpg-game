@@ -1,12 +1,7 @@
-//
-// Created by temel on 23.11.2023.
-//
 #include <iostream>
-#include <vector>
-#include "../include/Map.h"
 #include "../include/Inventory.h"
-#include "../include/Item.h"
 using namespace std;
+
 void Inventory::addItem(Item* item) {
     if (!containsItem(item)) {
         ItemsInInventory.push_back(item);
@@ -24,15 +19,48 @@ bool Inventory::containsItem(Item* item) {
     }
     return false;
 }
-void Inventory::getEquippedWeapon() {
 
+void Inventory::equipItem(Item* item) {
+    if(item->getType()=="Weapon")
+    {
+        equipWeapon(dynamic_cast<Weapon*>(item));
+    }
+    else if(item->getType()=="Shield")
+    {
+        equipShield(dynamic_cast<Shield*>(item));
+    }
+    else if(item->getType()=="Potion"){
+        equipPotion(dynamic_cast<Potion*>(item));
+    }
+    else{
+        cout << "Cannot equip item of unknown type." << endl;
+    }
 }
 
-void Inventory::getEquippedShield() {
-
-}
-void Inventory::getEquippedPotion() {
-
+void Inventory::equipWeapon(Weapon* weapon) {
+    equippedWeapon = weapon;
+    weapon->setIsEquipped();
 }
 
+void Inventory::equipShield(Shield* shield) {
+    equippedShield = shield;
+    shield->setIsEquipped();
+}
+
+void Inventory::equipPotion(Potion* potion) {
+    equippedPotion = potion;
+    potion->setIsEquipped();
+}
+
+Weapon* Inventory::getEquippedWeapon() {
+    return equippedWeapon;
+}
+
+Shield* Inventory::getEquippedShield() {
+    return equippedShield;
+}
+
+Potion* Inventory::getEquippedPotion() {
+    return equippedPotion;
+}
 
