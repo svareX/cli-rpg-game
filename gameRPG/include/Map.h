@@ -9,11 +9,13 @@
 #include "Player.h"
 #include "Quest.h"
 #include "Inventory.h"
+#include "Merchant.h"
 using namespace std;
 const int map_size = 10;
 
 class Player;
 class Quest;
+class Merchant;
 
 struct ItemInfo{
     Item* item;
@@ -43,6 +45,7 @@ public:
     void attackSequence();
     vector<vector<char>> gameMap;
     vector<Quest*> quests;
+    Merchant* shop;
     void addQuestToMap(Quest* quest);
 };
 

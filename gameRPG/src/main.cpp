@@ -20,6 +20,7 @@ int main() {
     Quest* quest2 = new Quest(*gameMap);
     Weapon* zbran = new Weapon("Sword", 10, 10, 500);
     zbran->printInfo();
+    Merchant* shop = new Merchant(*gameMap);
     char input;
     do{
         gameMap->displayMap();

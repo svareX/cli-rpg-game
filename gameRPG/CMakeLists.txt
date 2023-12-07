@@ -25,4 +25,6 @@ add_executable(gameRPG
         src/Shield.cpp
         src/GameEngine.cpp
         include/Enemy.h
+        include/Merchant.h
+        src/Merchant.cpp
 )
