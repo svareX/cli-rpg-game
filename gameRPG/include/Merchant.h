@@ -10,6 +10,8 @@ struct Product{
     Item* item;
     float goldAmount;
 };
+
+
 class Merchant{
     int merchantX;
     int merchantY;
@@ -18,8 +20,8 @@ class Merchant{
 public:
     Merchant(Map& gameMap);
     void displayShop();
-    void buyItem();
-    void sellItem();
+    void buyItem(Product item);
+    void sellItem(Item* item);
 
     int getMerchantX();
     int getMerchantY();

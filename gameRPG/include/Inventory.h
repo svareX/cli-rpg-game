@@ -19,9 +19,8 @@ public:
     Shield* getEquippedShield();
     Potion* getEquippedPotion();
     bool containsItem(Item* item);
-
-private:
     vector<Item*> itemsInInventory;
+private:
     Weapon* equippedWeapon;
     Shield* equippedShield;
     Potion* equippedPotion;

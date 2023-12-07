@@ -1,7 +1,3 @@
-//
-// Created by temel on 24.11.2023.
-//
-
 #include "../include/Quest.h"
 #include "../include/Map.h"
 #include <vector>

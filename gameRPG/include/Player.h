@@ -14,6 +14,7 @@ class Map;
 class Player {
 private:
     int health, strength;
+    float goldAmount;
     Map* map;
 public:
     std::vector<Quest*> questList;
@@ -29,5 +30,7 @@ public:
     void setHealth(int h);
     int getHealth();
     int getStrength();
+    float getGoldAmount();
+    void setGoldAmount(float gold);
 };
 #endif //GAMERPG_PLAYER_H

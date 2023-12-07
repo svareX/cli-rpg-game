@@ -16,7 +16,7 @@ Player::Player() {
     strength = 2;
 }
 Player::Player(Map* gameMap): map(gameMap) {
-    Inventory* inv = new Inventory();
+    Inventory *inv = new Inventory();
     this->inventory = inv;
     health = 100;
     strength = 2;
@@ -62,6 +62,7 @@ void Player::printQuestList(){
     cin.get();
 }
 void Player::setHealth(int h) { health = h; }
-
 int Player::getHealth() { return health; }
 int Player::getStrength() { return strength; }
+float Player::getGoldAmount() { return goldAmount;}
+void Player::setGoldAmount(float gold) { goldAmount = gold;}

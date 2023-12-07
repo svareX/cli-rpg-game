@@ -1,6 +1,3 @@
-//
-// Created by temel on 23.11.2023.
-//
 #include <iostream>
 #include <vector>
 #include <iomanip>
@@ -95,7 +92,7 @@ void Map::movePlayer(char move) {
             player->inventory->printItems();
             break;
     }
-    //TODO : Create checkCollision() function instead of these if statements
+    //TODO : Create checkCollision() function instead of if statements
     if (getPlayerX() == 4 && getPlayerY() == 0) {
         attackSequence();
     }
@@ -114,6 +111,9 @@ void Map::movePlayer(char move) {
                 gameMap[getPlayerY()][getPlayerX()] = '.';
             }
         }
+    }
+    if (mapChar == 'M'){
+        shop->displayShop();
     }
     system("CLS");
 }

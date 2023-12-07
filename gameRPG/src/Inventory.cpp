@@ -83,4 +83,3 @@ Shield* Inventory::getEquippedShield() {
 Potion* Inventory::getEquippedPotion() {
     return equippedPotion;
 }
-
