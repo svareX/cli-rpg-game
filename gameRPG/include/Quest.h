@@ -23,6 +23,8 @@ struct QuestGiven{
     Item* itemRequired;
     float goldAmount;
     Status status;
+    float itemX;
+    float itemY;
 };
 
 class Map;

@@ -15,6 +15,12 @@ const int map_size = 5;
 class Player;
 class Quest;
 
+struct ItemInfo{
+    Item* item;
+    int itemX;
+    int itemY;
+};
+
 class Map {
     int m_playerX;
     int m_playerY;
@@ -24,7 +30,8 @@ public:
 
     int getPlayerX();
     int getPlayerY();
-    Player* player; //temporary solution i guess
+    Player* player; //temporary solution to quest->display() in movePlayer()
+    vector <ItemInfo> questItemsOnGround;
 
     void setPlayerX(int x);
     void setPlayerY(int y);

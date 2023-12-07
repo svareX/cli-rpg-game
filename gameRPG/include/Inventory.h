@@ -20,7 +20,7 @@ public:
     bool containsItem(Item* item);
 
 private:
-    vector<Item*> ItemsInInventory;
+    vector<Item*> itemsInInventory;
     Weapon* equippedWeapon;
     Shield* equippedShield;
     Potion* equippedPotion;

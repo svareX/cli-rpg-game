@@ -8,11 +8,11 @@
 #include <cstdlib>
 #include <ctime>
 
-Item* amulet = new Item();
-Item* axe = new Item();
-Item* rarePotion = new Item();
-Item* treasureChest = new Item();
-Item* beastSkin = new Item();
+Item* amulet = new Item("Amulet", 50);
+Item* axe = new Item("Axe", 100);
+Item* rarePotion = new Item("Rare Potion", 75);
+Item* treasureChest = new Item("Treasure Chest", 120);
+Item* beastSkin = new Item("Beast Skin", 90);
 
 vector <QuestGiven> quests = {
         {"Hello, can you please bring me my amulet? I lost it somewhere in the forest.", amulet, 50},
@@ -45,7 +45,7 @@ void Quest::display(Player* player){
     switch(toupper(input)){
         case 'A':
             cout << "Added." << endl;
-
+            player->acceptQuest(this);
             break;
         case 'N':
             cout << "Ignored." << endl;
@@ -69,6 +69,7 @@ QuestGiven Quest::getQuestInfo() {
 void Quest::setQuestStatus(enum Status Stat) {
     questInfo.status = Stat;
 }
+
 string Quest::getQuestStatus() {
     switch(questInfo.status){
         case 0:

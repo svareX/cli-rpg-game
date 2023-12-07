@@ -2,9 +2,10 @@
 #include "../include/Inventory.h"
 using namespace std;
 
+Inventory::Inventory(){}
 void Inventory::addItem(Item* item) {
     if (!containsItem(item)) {
-        ItemsInInventory.push_back(item);
+        itemsInInventory.push_back(item);
         cout << "Added " << item->getName() << " to the inventory." << endl;
     } else {
         cout << item->getName() << " is already in the inventory." << endl;
@@ -12,7 +13,7 @@ void Inventory::addItem(Item* item) {
 }
 
 bool Inventory::containsItem(Item* item) {
-    for (const auto& inventoryItem : ItemsInInventory) {
+    for (const auto& inventoryItem : itemsInInventory) {
         if (inventoryItem->getName() == item->getName()) {
             return true;
         }

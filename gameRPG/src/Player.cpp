@@ -10,10 +10,14 @@
 class Quest;
 
 Player::Player() {
+    Inventory* inv = new Inventory();
+    this->inventory = inv;
     health = 100;
     strength = 2;
 }
 Player::Player(Map* gameMap): map(gameMap) {
+    Inventory* inv = new Inventory();
+    this->inventory = inv;
     health = 100;
     strength = 2;
 }
@@ -26,7 +30,7 @@ void Player::acceptQuest(Quest *quest){
     if (QuestList.size() < 3){
         QuestList.push_back(quest);
         quest->setQuestStatus(Pending);
-        map->gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = '.';
+        map->gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = 'q';
     }
     else{
         system("cls");

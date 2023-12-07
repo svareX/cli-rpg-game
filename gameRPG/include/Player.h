@@ -6,6 +6,7 @@
 #define GAMERPG_PLAYER_H
 
 #include "Map.h"
+#include "Inventory.h"
 
 class Quest;
 class Map;
@@ -16,10 +17,10 @@ private:
     Map* map;
 public:
     std::vector<Quest*> QuestList;
+    Inventory* inventory;
     Player();
     Player(Map* gameMap);
     void movePlayer(char move);
-    void attackSequence();
     int attack(int eHealth, int hStrength);
     void acceptQuest(Quest* quest);
     void printQuestList();

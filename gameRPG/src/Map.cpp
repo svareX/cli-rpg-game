@@ -9,14 +9,13 @@
 #include "../include/Player.h"
 using namespace std;
 Map::Map(){
-    this->setPlayerX(1);
-    this->setPlayerY(1);
+    this->setPlayerX(0);
+    this->setPlayerY(0);
     for(int i = 0; i < map_size; i++){
         vector<char> row(map_size, '.');
         gameMap.push_back(row);
     }
     gameMap[0][4] = 'X';
-    gameMap[2][2] = 'I';
 }
 
 int Map::getPlayerX() {
@@ -89,7 +88,11 @@ void Map::movePlayer(char move) {
                 cerr << "You have reached the border!" << endl;
             }
             break;
+        case 'L':
+            player->printQuestList();
+            break;
     }
+    //TODO : Create checkCollision() function instead of these if statements
     if (getPlayerX() == 4 && getPlayerY() == 0) {
         attackSequence();
     }
