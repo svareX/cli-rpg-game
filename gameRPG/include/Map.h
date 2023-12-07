@@ -10,7 +10,7 @@
 #include "Quest.h"
 #include "Inventory.h"
 using namespace std;
-const int map_size = 5;
+const int map_size = 10;
 
 class Player;
 class Quest;
@@ -31,7 +31,7 @@ public:
     int getPlayerX();
     int getPlayerY();
     Player* player; //temporary solution to quest->display() in movePlayer()
-    vector <ItemInfo> questItemsOnGround;
+    vector <ItemInfo> questItems;
 
     void setPlayerX(int x);
     void setPlayerY(int y);

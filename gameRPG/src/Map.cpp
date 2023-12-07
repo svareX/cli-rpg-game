@@ -91,15 +91,27 @@ void Map::movePlayer(char move) {
         case 'L':
             player->printQuestList();
             break;
+        case 'I':
+            player->inventory->printItems();
+            break;
     }
     //TODO : Create checkCollision() function instead of these if statements
     if (getPlayerX() == 4 && getPlayerY() == 0) {
         attackSequence();
     }
-    if (gameMap[getPlayerY()][getPlayerX()] == 'Q'){
+    char mapChar = gameMap[getPlayerY()][getPlayerX()];
+    if (mapChar == 'Q' || mapChar == 'q'){
         for (auto quest : quests){
             if (quest->getQuestGiverX() == getPlayerX() && quest->getQuestGiverY() == getPlayerY()){
                 quest->display(player);
+            }
+        }
+    }
+    if (mapChar == 'I'){
+        for (auto itemInfo : questItems){
+            if (itemInfo.itemX == getPlayerX() && itemInfo.itemY == getPlayerY()){
+                player->inventory->addItem(itemInfo.item);
+                gameMap[getPlayerY()][getPlayerX()] = '.';
             }
         }
     }

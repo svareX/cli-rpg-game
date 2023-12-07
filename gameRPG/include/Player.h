@@ -16,7 +16,7 @@ private:
     int health, strength;
     Map* map;
 public:
-    std::vector<Quest*> QuestList;
+    std::vector<Quest*> questList;
     Inventory* inventory;
     Player();
     Player(Map* gameMap);

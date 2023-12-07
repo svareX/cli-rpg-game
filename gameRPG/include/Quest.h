@@ -37,6 +37,8 @@ class Quest{
     Map& map;
     vector<Quest*> allQuests;
 public:
+    void spawnQuestItem();
+    void completeQuest();
     Quest(Map& gameMap);
     void display(Player* player);
     void addQuest(Quest* quest);

@@ -12,6 +12,7 @@ using namespace std;
 class Inventory {
 public:
     Inventory();
+    void printItems();
     void addItem(Item* item);
     void equipItem(Item* item);
     Weapon* getEquippedWeapon();

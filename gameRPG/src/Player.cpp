@@ -27,8 +27,8 @@ int Player::attack(int eHealth, int hStrength) {
     return eHealth;
 }
 void Player::acceptQuest(Quest *quest){
-    if (QuestList.size() < 3){
-        QuestList.push_back(quest);
+    if (questList.size() < 3){
+        questList.push_back(quest);
         quest->setQuestStatus(Pending);
         map->gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = 'q';
     }
@@ -41,14 +41,15 @@ void Player::acceptQuest(Quest *quest){
 void Player::printQuestList(){
     system("CLS");
     int i = 1;
-    if (!QuestList.empty()){
-        for (auto quest : QuestList)
+    if (!questList.empty()){
+        for (auto quest : questList)
         {
             QuestGiven info = quest->getQuestInfo();
             cout << i << ". " << "Quest:" << endl;
             cout << info.task << endl;
             cout << "Status: " << quest->getQuestStatus() << endl;
             cout << "Gold amount: " << info.goldAmount << endl;
+            cout << "Quest Item can be found on " << info.itemY << " | " << info.itemX << endl;
             cout << "---------------------------" << endl;
             i++;
         }

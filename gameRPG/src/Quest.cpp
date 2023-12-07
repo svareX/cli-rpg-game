@@ -7,6 +7,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <algorithm>
 
 Item* amulet = new Item("Amulet", 50);
 Item* axe = new Item("Axe", 100);
@@ -39,17 +40,25 @@ Quest::Quest(Map& gameMap): map(gameMap){
 void Quest::display(Player* player){
     system("cls");
     char input;
-    cout << questInfo.task << endl << "Reward: " << questInfo.goldAmount << " gold" << endl;
-    cout << "Do you wanna add this quest to quest list? " << endl;
-    cin >> input;
-    switch(toupper(input)){
-        case 'A':
-            cout << "Added." << endl;
-            player->acceptQuest(this);
-            break;
-        case 'N':
-            cout << "Ignored." << endl;
-            break;
+    if (this->getQuestStatus() == "Not Accepted"){
+        cout << questInfo.task << endl << "Reward: " << questInfo.goldAmount << " gold" << endl;
+        cout << "Do you wanna add this quest to quest list? " << endl;
+        cin >> input;
+        switch(toupper(input)){
+            case 'A':
+                cout << "Added." << endl;
+                player->acceptQuest(this);
+                spawnQuestItem();
+                break;
+            case 'N':
+                cout << "Ignored." << endl;
+                break;
+        }
+    }
+    else{
+        if (player->inventory->containsItem(questInfo.itemRequired)){
+            completeQuest();
+        }
     }
     cout << "Press ENTER to continue..." << endl;
     cin.ignore();
@@ -79,4 +88,23 @@ string Quest::getQuestStatus() {
         default:
             return "Completed";
     }
+}
+void Quest::spawnQuestItem() {
+    int rndX = rand()% map_size;
+    int rndY = rand()% map_size;
+    this->questInfo.itemX = rndX;
+    this->questInfo.itemY = rndY;
+    map.questItems.push_back({this->questInfo.itemRequired, rndX, rndY});
+    map.gameMap[rndY][rndX] = 'I';
+}
+void Quest::completeQuest(){
+    system("CLS");
+    auto x = find(map.quests.begin(), map.quests.end(), this);
+    map.quests.erase(x);
+    x = find(map.player->questList.begin(), map.player->questList.end(), this);
+    map.player->questList.erase(x);
+    map.gameMap[this->getQuestGiverY()][this->getQuestGiverX()] = '.';
+    cout << "You handed over: " << this->questInfo.itemRequired->getName() << endl;
+    cout << "Thank you for your help." << endl;
+    // TODO: Add gold to totalGold of Player/Increase total score
 }
