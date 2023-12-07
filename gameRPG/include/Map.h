@@ -7,11 +7,8 @@
 
 #include <vector>
 #include "Player.h"
-<<<<<<< HEAD
 #include "Quest.h"
-=======
 #include "Inventory.h"
->>>>>>> origin/inventory
 using namespace std;
 const int map_size = 5;
 
@@ -27,6 +24,7 @@ public:
 
     int getPlayerX();
     int getPlayerY();
+    Player* player; //temporary solution i guess
 
     void setPlayerX(int x);
     void setPlayerY(int y);
@@ -34,6 +32,7 @@ public:
 
     void displayMap();
     void movePlayer(char move);
+    void setPlayer(Player* player);
     void attackSequence();
     vector<vector<char>> gameMap;
     vector<Quest*> quests;

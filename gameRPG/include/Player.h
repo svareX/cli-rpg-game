@@ -15,29 +15,18 @@ private:
     int health, strength;
     Map* map;
 public:
-<<<<<<< HEAD
     std::vector<Quest*> QuestList;
-    Player(Map& gameMap);
+    Player();
+    Player(Map* gameMap);
     void movePlayer(char move);
     void attackSequence();
     int attack(int eHealth, int hStrength);
     void acceptQuest(Quest* quest);
     void printQuestList();
-
     void setPlayerX(int x);
     void setPlayerY(int y);
     void setHealth(int h);
-
-    int getPlayerX();
-    int getPlayerY();
-=======
-    Player();
-    Player(Map* gameMap);
-
-    int attack(int eHealth, int hStrength);
->>>>>>> origin/inventory
     int getHealth();
     int getStrength();
-    void setHealth(int);
 };
 #endif //GAMERPG_PLAYER_H

@@ -55,13 +55,10 @@ void Map::displayMap(){
         cout << endl;
     }
 }
-<<<<<<< HEAD
 void Map::addQuestToMap(Quest* quest){
     quests.push_back(quest);
     gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = 'Q';
 }
-=======
-
 void Map::movePlayer(char move) {
     switch (toupper(move)) {
         case 'W':
@@ -96,7 +93,12 @@ void Map::movePlayer(char move) {
     if (getPlayerX() == 4 && getPlayerY() == 0) {
         attackSequence();
     }
-    else if (getPlayerX() == 2 && getPlayerY() == 2) {
+    if (gameMap[getPlayerY()][getPlayerX()] == 'Q'){
+        for (auto quest : quests){
+            if (quest->getQuestGiverX() == getPlayerX() && quest->getQuestGiverY() == getPlayerY()){
+                quest->display(player);
+            }
+        }
     }
     system("CLS");
 }
@@ -128,4 +130,7 @@ void Map::attackSequence() {
         cin.ignore();
     }
 }
->>>>>>> origin/inventory
+
+void Map::setPlayer(Player* player){
+    this->player = player;
+}

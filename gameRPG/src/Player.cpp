@@ -18,96 +18,15 @@ Player::Player(Map* gameMap): map(gameMap) {
     strength = 2;
 }
 
-<<<<<<< HEAD
-void Player::movePlayer(char move) {
-    switch (toupper(move)) {
-        case 'W':
-            if (playerY > 0) {
-                playerY--;
-            } else {
-                cerr << "You have reached the border!" << endl;
-            }
-            break;
-        case 'A':
-            if (playerX > 0) {
-                playerX--;
-            } else {
-                cerr << "You have reached the border!" << endl;
-            }
-            break;
-        case 'S':
-            if (playerY < map_size - 1) {
-                playerY++;
-            } else {
-                cerr << "You have reached the border!" << endl;
-            }
-            break;
-        case 'D':
-            if (playerX < map_size - 1) {
-                playerX++;
-            } else {
-                cerr << "You have reached the border!" << endl;
-            }
-            break;
-        case 'L':
-            printQuestList();
-            break;
-    }
-    if (playerX == 4 && playerY == 0) {
-        attackSequence();
-    }
-    if (map.gameMap[playerY][playerX] == 'Q'){
-        for(auto x : map.quests){
-            if (x->getQuestGiverX() == playerX && x->getQuestGiverY() == playerY){
-                x->display(this);
-            }
-        }
-    }
-    system("CLS");
-}
-
-void Player::attackSequence() {
-    system("cls");
-    char choice;
-    int hHealth = 10;
-    int hStrength = 2;
-    int eHealth = 10;
-    char dump;
-    cout << "You have encountered an enemy. Do you wanna fight? ";
-    cin >> choice;
-    if (toupper(choice) == 'Q') {
-        return;
-    } else {
-        while (hHealth != 0 && eHealth != 0) {
-            system("cls");
-            cout << "Your Health: " << hHealth << " | Enemy Health: " << eHealth << endl;
-            cout << "What do you wanna do? (A - Attack): ";
-            cin >> choice;
-            switch (toupper(choice)) {
-                case 'A':
-                    eHealth = attack(eHealth, hStrength);
-                    break;
-            }
-        }
-        cout << "Enemy has been slained." << endl;
-        map.gameMap[0][4] = '.';
-        cin.ignore();
-    }
-}
-=======
->>>>>>> origin/inventory
-
 int Player::attack(int eHealth, int hStrength) {
     eHealth -= hStrength;
     return eHealth;
 }
-
-<<<<<<< HEAD
 void Player::acceptQuest(Quest *quest){
     if (QuestList.size() < 3){
         QuestList.push_back(quest);
         quest->setQuestStatus(Pending);
-        map.gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = '.';
+        map->gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = '.';
     }
     else{
         system("cls");
@@ -137,11 +56,6 @@ void Player::printQuestList(){
     cin.ignore();
     cin.get();
 }
-
-void Player::setPlayerX(int x) { playerX = x; }
-void Player::setPlayerY(int y) { playerY = y; }
-=======
->>>>>>> origin/inventory
 void Player::setHealth(int h) { health = h; }
 
 int Player::getHealth() { return health; }

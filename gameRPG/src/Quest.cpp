@@ -45,7 +45,7 @@ void Quest::display(Player* player){
     switch(toupper(input)){
         case 'A':
             cout << "Added." << endl;
-            player->acceptQuest(this);
+
             break;
         case 'N':
             cout << "Ignored." << endl;

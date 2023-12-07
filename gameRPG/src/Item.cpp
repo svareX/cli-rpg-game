@@ -1,16 +1,5 @@
-//
-<<<<<<< HEAD
-// Created by temel on 27.11.2023.
-//
-
 #include "../include/Item.h"
-
-Item::Item(){}
-=======
-// Created by stepa on 27.11.2023.
-//
 #include <string>
-#include "../include/Item.h"
 
 using namespace std;
 
@@ -69,4 +58,3 @@ bool Item::getIsEquipped() {
 void Item::setIsEquipped() {
     this->m_is_equipped = true;
 }
->>>>>>> origin/inventory

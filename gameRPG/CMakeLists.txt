@@ -14,17 +14,15 @@ add_executable(gameRPG
         include/Item.h
         src/Quest.cpp
         src/Item.cpp
-<<<<<<< HEAD
-=======
         include/Weapon.h
         src/Weapon.cpp
         include/GameEngine.h
-        src/GameEngine.cpp
         include/Inventory.h
         src/Inventory.cpp
         include/Potion.h
         src/Potion.cpp
         include/Shield.h
         src/Shield.cpp
->>>>>>> origin/inventory
+        src/GameEngine.cpp
+        include/Enemy.h
 )
