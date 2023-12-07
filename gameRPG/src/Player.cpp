@@ -9,13 +9,16 @@
 
 class Quest;
 
-Player::Player(Map& gameMap): map(gameMap) {
+Player::Player() {
     health = 100;
     strength = 2;
-    playerX = 0;
-    playerY = 0;
+}
+Player::Player(Map* gameMap): map(gameMap) {
+    health = 100;
+    strength = 2;
 }
 
+<<<<<<< HEAD
 void Player::movePlayer(char move) {
     switch (toupper(move)) {
         case 'W':
@@ -91,12 +94,15 @@ void Player::attackSequence() {
         cin.ignore();
     }
 }
+=======
+>>>>>>> origin/inventory
 
 int Player::attack(int eHealth, int hStrength) {
     eHealth -= hStrength;
     return eHealth;
 }
 
+<<<<<<< HEAD
 void Player::acceptQuest(Quest *quest){
     if (QuestList.size() < 3){
         QuestList.push_back(quest);
@@ -134,9 +140,9 @@ void Player::printQuestList(){
 
 void Player::setPlayerX(int x) { playerX = x; }
 void Player::setPlayerY(int y) { playerY = y; }
+=======
+>>>>>>> origin/inventory
 void Player::setHealth(int h) { health = h; }
 
-int Player::getPlayerX() { return playerX; }
-int Player::getPlayerY() { return playerY; }
 int Player::getHealth() { return health; }
 int Player::getStrength() { return strength; }

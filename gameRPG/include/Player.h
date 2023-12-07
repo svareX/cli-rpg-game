@@ -13,9 +13,9 @@ class Map;
 class Player {
 private:
     int health, strength;
-    int playerX, playerY;
-    Map& map;
+    Map* map;
 public:
+<<<<<<< HEAD
     std::vector<Quest*> QuestList;
     Player(Map& gameMap);
     void movePlayer(char move);
@@ -30,7 +30,14 @@ public:
 
     int getPlayerX();
     int getPlayerY();
+=======
+    Player();
+    Player(Map* gameMap);
+
+    int attack(int eHealth, int hStrength);
+>>>>>>> origin/inventory
     int getHealth();
     int getStrength();
+    void setHealth(int);
 };
 #endif //GAMERPG_PLAYER_H
