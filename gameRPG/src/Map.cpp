@@ -50,8 +50,18 @@ void Map::changeMap(int x, int y, char z) {
 
 
 void Map::spawnEnemies(int numEnemies) {
+    for (int i = 0; i < numEnemies; ++i) {
+        int x = rand() % map_size;
+        int y = rand() % map_size;
 
+        while (gameMap[x][y] != '.' || (x == getPlayerX() && y == getPlayerX())) {
+            x = rand() % map_size;
+            y = rand() % map_size;
+        }
+        gameMap[x][y] = 'X';
+    }
 }
+
 
 Enemy Map::findEnemy(int x, int y){
 for(auto &enemy : m_enemies){

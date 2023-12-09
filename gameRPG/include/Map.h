@@ -32,7 +32,7 @@ public:
     vector<vector<char>> gameMap;
     vector<Enemy> m_enemies;
     vector<Quest> quests;
-    vector<Merchant> shop;
+    //Merchant shop;
     void addQuestToMap(Quest* quest);
 };
 
