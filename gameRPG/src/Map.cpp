@@ -8,6 +8,7 @@
 #include "../include/Player.h"
 #include "../include/Quest.h"
 #include "../include/Enemy.h"
+
 using namespace std;
 int map_size = 5;
 
@@ -52,6 +53,8 @@ void Map::changeMap(int x, int y, char z) {
 }
 
 
+
+
 void Map::spawnEnemies(int numEnemies) {
     for (int i = 0; i < numEnemies; i++) {
         std::srand(std::time(0));
@@ -75,7 +78,7 @@ for(auto &enemy : m_enemies){
 }
 
 void Map::addQuestToMap(Quest* quest){
-    //quests.push_back(quest);
+    quests.push_back(quest);
     gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = 'Q';
 }
 

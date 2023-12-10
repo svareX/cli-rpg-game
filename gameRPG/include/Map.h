@@ -27,11 +27,12 @@ public:
     void displayMap();
     void movePlayer(char move);
     void spawnEnemies(int enemiesNumber);
+    void checkCollision();
     Enemy findEnemy(int x, int y);
     vector<vector<char>> gameMap;
     vector<Enemy> m_enemies;
-    vector<Quest> quests;
-    //Merchant shop;
+    vector<Quest*> quests;
+    Merchant* shop;
     void addQuestToMap(Quest* quest);
 };
 
