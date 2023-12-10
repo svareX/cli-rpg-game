@@ -52,6 +52,30 @@ void Map::changeMap(int x, int y, char z) {
     }
 }
 
+/*
+void checkCollision(){
+    char mapChar = gameMap[getPlayerY()][getPlayerX()];
+    if (mapChar == 'Q' || mapChar == 'q'){
+        for (auto quest : quests){
+            if (quest->getQuestGiverX() == getPlayerX() && quest->getQuestGiverY() == getPlayerY()){
+                quest->display(player);
+            }
+        }
+    }
+    if (mapChar == 'I'){
+        for (auto itemInfo : questItems){
+            if (itemInfo.itemX == getPlayerX() && itemInfo.itemY == getPlayerY()){
+                player->inventory->addItem(itemInfo.item);
+                gameMap[getPlayerY()][getPlayerX()] = '.';
+            }
+        }
+    }
+    if (mapChar == 'M'){
+        shop->displayShop();
+    }
+    system("CLS");
+}
+*/
 
 
 
