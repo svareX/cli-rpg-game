@@ -12,7 +12,6 @@ using namespace std;
 class Player;
 class Quest;
 class Merchant;
-class Enemy;
 class Map {
     int m_playerX;
     int m_playerY;

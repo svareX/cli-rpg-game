@@ -33,6 +33,7 @@ int main() {
     gameMap->findEnemy(0,4);
      */
     gameMap->spawnRandomObjects(5);
+    gameMap->spawnEnemies(3);
     gameMap->displayMap();
     return 0;
 }

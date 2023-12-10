@@ -7,8 +7,11 @@
 #include "../include/Map.h"
 #include "../include/Player.h"
 #include "../include/Quest.h"
+#include "../include/Enemy.h"
 using namespace std;
-int map_size = 50;
+int map_size = 5;
+
+
 
 Map::Map(){
     this->setPlayerX(1);
@@ -50,18 +53,19 @@ void Map::changeMap(int x, int y, char z) {
 
 
 void Map::spawnEnemies(int numEnemies) {
-    for (int i = 0; i < numEnemies; ++i) {
-        int x = rand() % map_size;
-        int y = rand() % map_size;
+    for (int i = 0; i < numEnemies; i++) {
+        std::srand(std::time(0));
+        int x, y;
+        do {
+            x = std::rand() % map_size;
+            y = std::rand() % map_size;
+        } while (gameMap[x][y] != '.');
 
-        while (gameMap[x][y] != '.' || (x == getPlayerX() && y == getPlayerX())) {
-            x = rand() % map_size;
-            y = rand() % map_size;
-        }
-        gameMap[x][y] = 'X';
+        Enemy enemy(x, y);
+        m_enemies.push_back(enemy);
+        gameMap[x][y] = 'E';
     }
 }
-
 
 Enemy Map::findEnemy(int x, int y){
 for(auto &enemy : m_enemies){

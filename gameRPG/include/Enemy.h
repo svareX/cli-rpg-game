@@ -13,7 +13,9 @@ private:
     int health;
     int enemyX, enemyY;
 public:
-    Enemy(int h);
+    Enemy(int health);
+    Enemy(int enemyX,int enemyY);
+    Enemy(int enemyX,int enemyY,int health);
     int getHealth();
     int getEnemyX();
     int getEnemyY();

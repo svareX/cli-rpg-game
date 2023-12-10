@@ -5,6 +5,12 @@
 Enemy::Enemy(int h) {
 
 }
+Enemy::Enemy(int enemyX, int enemyY) {
+
+}
+Enemy::Enemy(int enemyX, int enemyY, int health) {
+
+}
 int Enemy::getHealth()
 {
     return health;
