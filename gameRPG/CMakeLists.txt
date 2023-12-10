@@ -17,5 +17,14 @@ add_executable(gameRPG
         include/Weapon.h
         src/Weapon.cpp
         include/GameEngine.h
+        include/Inventory.h
+        src/Inventory.cpp
+        include/Potion.h
+        src/Potion.cpp
+        include/Shield.h
+        src/Shield.cpp
         src/GameEngine.cpp
+        include/Enemy.h
+        include/Merchant.h
+        src/Merchant.cpp
 )

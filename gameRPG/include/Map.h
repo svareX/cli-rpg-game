@@ -7,9 +7,21 @@
 
 #include <vector>
 #include "Player.h"
+#include "Quest.h"
+#include "Inventory.h"
+#include "Merchant.h"
 using namespace std;
-const int map_size = 5;
+const int map_size = 10;
+
 class Player;
+class Quest;
+class Merchant;
+
+struct ItemInfo{
+    Item* item;
+    int itemX;
+    int itemY;
+};
 
 class Map {
     int m_playerX;
@@ -20,6 +32,8 @@ public:
 
     int getPlayerX();
     int getPlayerY();
+    Player* player; //temporary solution to quest->display() in movePlayer()
+    vector <ItemInfo> questItems;
 
     void setPlayerX(int x);
     void setPlayerY(int y);
@@ -27,8 +41,12 @@ public:
 
     void displayMap();
     void movePlayer(char move);
+    void setPlayer(Player* player);
     void attackSequence();
     vector<vector<char>> gameMap;
+    vector<Quest*> quests;
+    Merchant* shop;
+    void addQuestToMap(Quest* quest);
 };
 
 #endif //GAMERPG_MAP_H

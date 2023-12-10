@@ -1,8 +1,5 @@
-//
-// Created by stepa on 27.11.2023.
-//
-#include <string>
 #include "../include/Item.h"
+#include <string>
 
 using namespace std;
 
@@ -37,6 +34,21 @@ std::string Item::getQuality() {
         quality = "Epic";
     }
     return quality;
+}
+std::string Item::getType() {
+    std::string type = "";
+    if (this->m_type == 0) {
+        type = "Weapon";
+    } else if (this->m_type == 1) {
+        type = "Shield";
+    }
+    else if (this->m_type == 2){
+        type = "Potion";
+    }
+    else {
+        type = "Type has not been set.";
+    }
+    return type;
 }
 
 bool Item::getIsEquipped() {

@@ -1,20 +1,17 @@
-//
-// Created by temel on 23.11.2023.
-//
 #include <iostream>
 #include <vector>
 #include <iomanip>
 #include "../include/Map.h"
+#include "../include/Inventory.h"
 #include "../include/Player.h"
 using namespace std;
 Map::Map(){
-    this->setPlayerX(1);
-    this->setPlayerY(1);
+    this->setPlayerX(0);
+    this->setPlayerY(0);
     for(int i = 0; i < map_size; i++){
         vector<char> row(map_size, '.');
         gameMap.push_back(row);
     }
-    gameMap[3][2] = 'G';
     gameMap[0][4] = 'X';
 }
 
@@ -54,7 +51,10 @@ void Map::displayMap(){
         cout << endl;
     }
 }
-
+void Map::addQuestToMap(Quest* quest){
+    quests.push_back(quest);
+    gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = 'Q';
+}
 void Map::movePlayer(char move) {
     switch (toupper(move)) {
         case 'W':
@@ -85,9 +85,35 @@ void Map::movePlayer(char move) {
                 cerr << "You have reached the border!" << endl;
             }
             break;
+        case 'L':
+            player->printQuestList();
+            break;
+        case 'I':
+            player->inventory->printItems();
+            break;
     }
+    //TODO : Create checkCollision() function instead of if statements
     if (getPlayerX() == 4 && getPlayerY() == 0) {
         attackSequence();
+    }
+    char mapChar = gameMap[getPlayerY()][getPlayerX()];
+    if (mapChar == 'Q' || mapChar == 'q'){
+        for (auto quest : quests){
+            if (quest->getQuestGiverX() == getPlayerX() && quest->getQuestGiverY() == getPlayerY()){
+                quest->display(player);
+            }
+        }
+    }
+    if (mapChar == 'I'){
+        for (auto itemInfo : questItems){
+            if (itemInfo.itemX == getPlayerX() && itemInfo.itemY == getPlayerY()){
+                player->inventory->addItem(itemInfo.item);
+                gameMap[getPlayerY()][getPlayerX()] = '.';
+            }
+        }
+    }
+    if (mapChar == 'M'){
+        shop->displayShop();
     }
     system("CLS");
 }
@@ -118,4 +144,8 @@ void Map::attackSequence() {
         gameMap[0][4] = '.';
         cin.ignore();
     }
+}
+
+void Map::setPlayer(Player* player){
+    this->player = player;
 }

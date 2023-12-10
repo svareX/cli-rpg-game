@@ -7,21 +7,45 @@
 
 #include <iostream>
 #include <vector>
-#include "Item.h"
 #include "Map.h"
+#include "Item.h"
+
 using namespace std;
 
+enum Status{
+    NotAccepted,
+    Pending,
+    Completed
+};
+
 struct QuestGiven{
-    std::string task;
+    string task;
     Item* itemRequired;
     float goldAmount;
+    Status status;
+    float itemX;
+    float itemY;
 };
+
+class Map;
+class Player;
+
 
 class Quest{
     int questGiverX, questGiverY;
-    QuestGiven quest;
-    Map& map; //temporary
+    QuestGiven questInfo;
+    Map& map;
+    vector<Quest*> allQuests;
 public:
+    void spawnQuestItem();
+    void completeQuest();
     Quest(Map& gameMap);
+    void display(Player* player);
+    void addQuest(Quest* quest);
+    int getQuestGiverX();
+    int getQuestGiverY();
+    QuestGiven getQuestInfo();
+    void setQuestStatus(enum Status Stat);
+    string getQuestStatus();
 };
 #endif //GAMERPG_QUEST_H
