@@ -75,3 +75,7 @@ void Player::removeHealth(int health) {
     }
     this->m_health -= health;
 }
+
+void Player::setMap(Map* gameMap){
+    this->m_map = gameMap;
+}

@@ -96,6 +96,9 @@ void Map::checkCollision(){
     if (mapChar == 'M'){
         m_shop->displayShop();
     }
+    if (mapChar == 'E'){
+        throw EnemyException();
+    }
     system("CLS");
 }
 
@@ -143,7 +146,6 @@ void Map::displayMap(){
 }
 
 void Map::movePlayer(char move) {
-    checkCollision();
     switch (toupper(move)) {
         case 'W':
             if (getPlayerY() > 0) {
@@ -180,41 +182,9 @@ void Map::movePlayer(char move) {
             getPlayer()->inventory->printItems();
             break;
     }
-    if (getPlayerX() == 4 && getPlayerY() == 0) {
-        //attackSequence();
-    }
+    checkCollision();
     system("CLS");
 }
-/*
-void Map::attackSequence() {
-    system("cls");
-    char choice;
-    int hHealth = 10;
-    int hStrength = 2;
-    int eHealth = 10;
-    char dump;
-    cout << "You have encountered an enemy. Do you wanna fight? ";
-    cin >> choice;
-    if (toupper(choice) == 'Q') {
-        return;
-    } else {
-        while (hHealth != 0 && eHealth != 0) {
-            system("cls");
-            cout << "Your Health: " << hHealth << " | Enemy Health: " << eHealth << endl;
-            cout << "What do you wanna do? (A - Attack): ";
-            cin >> choice;
-            switch (toupper(choice)) {
-                case 'A':
-                    //eHealth = attack(eHealth, hStrength);
-                    break;
-            }
-        }
-        cout << "Enemy has been slained." << endl;
-        m_gameMap[0][4] = '.';
-        cin.ignore();
-    }
-}
- */
 int Map::getSize() {
     return m_size;
 }

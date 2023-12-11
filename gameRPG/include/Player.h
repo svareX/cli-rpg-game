@@ -34,5 +34,6 @@ public:
     int getDamage();
     float getGoldAmount();
     void setGoldAmount(float gold);
+    void setMap(Map* gameMap);
 };
 #endif //GAMERPG_PLAYER_H

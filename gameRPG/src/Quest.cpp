@@ -38,17 +38,19 @@ void Quest::display(Player* player){
     char input;
     if (this->getQuestStatus() == "Not Accepted"){
         cout << m_questInfo.task << endl << "Reward: " << m_questInfo.goldAmount << " gold" << endl;
-        cout << "Do you wanna add this quest to quest list? " << endl;
+        cout << "Do you wanna add this quest to quest list? (Y - Yes | N - No)" << endl;
         cin >> input;
         switch(toupper(input)){
-            case 'A':
-                cout << "Added." << endl;
+            case 'Y':
+                cout << "Quest was added to Quest List." << endl;
                 player->acceptQuest(this);
                 spawnQuestItem();
                 break;
             case 'N':
-                cout << "Ignored." << endl;
+                cout << "Quest was ignored." << endl;
                 break;
+            default:
+                return;
         }
     }
     else{
@@ -104,4 +106,3 @@ void Quest::completeQuest(){
     cout << "Thank you for your help." << endl;
     // TODO: Add gold to totalGold of Player/Increase total score
 }
-

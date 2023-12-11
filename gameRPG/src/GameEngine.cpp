@@ -66,6 +66,7 @@ void GameEngine::startGame() {
     this->m_map = new Map();
     this->m_map->setPlayer(this->m_player);
     this->m_totalScore = 0;
+    this->m_player->setMap(m_map);
 
     //generate quests
     Quest *quest1 = new Quest(this->m_map);
