@@ -9,7 +9,7 @@
 
 class Score {
 private:
-    int totalScore;
+    int m_totalScore;
 
 public:
     Score();
@@ -21,3 +21,4 @@ public:
 };
 
 #endif //GAMERPG_SCORE_H
+

@@ -12,7 +12,7 @@
 class GameEngine{
     Player* m_player;
     Map* m_map;
-    int difficulty;
+    int m_difficulty;
     //TODO: add setings + scores
 
 public:

@@ -3,13 +3,13 @@
 //
 #include "../include/Score.h"
 
-Score::Score() : totalScore(0) {}
+Score::Score() : m_totalScore(0) {}
 
 void Score::updateScore(Enemy* enemy, GameEngine* gameEngine) {
     int enemyScore = (enemy->getHealth() + enemy->getDamage()) * gameEngine->getDifficulty();
-    totalScore += enemyScore;
+    m_totalScore += enemyScore;
 }
 
 int Score::getScore() {
-    return totalScore;
+    return m_totalScore;
 }

@@ -13,10 +13,10 @@ GameEngine::GameEngine() {
     this->m_player = nullptr;
 }
 void GameEngine::setDifficulty(int newDifficulty) {
-    difficulty = newDifficulty;
+    m_difficulty = newDifficulty;
 }
 int GameEngine::getDifficulty() {
-    return difficulty;
+    return m_difficulty;
 }
 void GameEngine::startMenu() {
     cout << endl << "*************************" << endl;
@@ -45,7 +45,7 @@ void GameEngine::menuSelection() {
 void GameEngine::startGame() {
     //create player according to settings
     this->m_player = new Player();
-    //TODO: Change the starting gold amount according to difficulty
+    //TODO: Change the starting gold amount according to m_difficulty
     this->m_player->setGoldAmount(500);
     this->m_map = new Map();
     this->m_map->setPlayer(this->m_player);
