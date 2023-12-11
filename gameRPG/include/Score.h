@@ -5,7 +5,9 @@
 #ifndef GAMERPG_SCORE_H
 #define GAMERPG_SCORE_H
 
-#include "GameEngine.h"
+
+#include "Enemy.h"
+#include "Quest.h"
 
 class Score {
 private:
@@ -14,8 +16,8 @@ private:
 public:
     Score();
 
-    void addScore(Enemy* enemy, GameEngine* gameEngine);
-    void addScore(Quest* quest, GameEngine* gameEngine);
+    void addScore(Enemy* enemy, int multiplier);
+    void addScore(Quest* quest, int multiplier);
 
     int getScore();
 

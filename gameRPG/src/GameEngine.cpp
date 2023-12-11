@@ -6,11 +6,13 @@
 #include "../include/exceptions/BorderException.h"
 #include "../include/exceptions/EnemyException.h"
 #include "../include/exceptions/GameOverException.h"
+#include "../include/exceptions/DeadEnemyException.h"
 
 using namespace std;
 GameEngine::GameEngine() {
     this->m_map = nullptr;
     this->m_player = nullptr;
+    this->m_score = nullptr;
 }
 void GameEngine::setDifficulty(int newDifficulty) {
     m_difficulty = newDifficulty;
@@ -123,11 +125,23 @@ void GameEngine::attackSequence(Enemy* enemy) {
                     case '1':
                         if (enemyMove == 1) {
                             //oba seknou => oba dostanou dmg
-                            this->m_player->removeHealth(enemy->getDamage());
-                            enemy->removeHealth(this->m_player->getDamage());
+                            try {
+                                this->m_player->removeHealth(enemy->getDamage());
+                            } catch (GameOverException) {
+                                //PLAYER DIED
+                            }
+                            try {
+                                enemy->removeHealth(this->m_player->getDamage());
+                            } catch (DeadEnemyException) {
+                                //ENEMY DIED
+                            }
                         } else if (enemyMove == 2) {
                             //hrac sekne & enemy se brani => hrac dostane dmg
-                            this->m_player->removeHealth(this->m_player->getDamage());
+                            try {
+                                this->m_player->removeHealth(this->m_player->getDamage());
+                        } catch (GameOverException) {
+                                //PLAYER DIED
+                            }
                         } else {
                             //hrac seka a enemy dodguje => nic
                         }
@@ -137,7 +151,11 @@ void GameEngine::attackSequence(Enemy* enemy) {
                             //oba se brani => nestane se nic
                         } else if (enemyMove == 1) {
                             //ty se branis & enemy sekne => enemy dostane dmg
-                            enemy->removeHealth(enemy->getDamage());
+                            try {
+                                enemy->removeHealth(enemy->getDamage());
+                            } catch (DeadEnemyException) {
+                                //ENEMY DIED
+                            }
                         } else {
                             //hrac se brani a enemy doguje => nic
                         }
@@ -163,7 +181,7 @@ void GameEngine::attackSequence(Enemy* enemy) {
         if (m_player->getHealth() > 0) {
             cout << "Enemy has been slain." << endl;
             this->m_map->changeMap(enemy->getEnemyX(), enemy->getEnemyY(), '.');
-            this->m_score->addScore(enemy, this);
+            this->m_score->addScore(enemy, this->getDifficulty());
         } else {
 
         }

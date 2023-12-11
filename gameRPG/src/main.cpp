@@ -12,9 +12,9 @@ using namespace std;
 
 int main() {
 
-    srand(time(0));
-    GameEngine* game = new GameEngine();
-    game->startMenu();
+    Weapon* zbran = new Weapon("Test", 10, 50, 10);
+    cout << zbran->getQuality();
+    
     /*
     srand(time(0));
     Map* gameMap = new Map();
