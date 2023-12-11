@@ -14,8 +14,9 @@ private:
     int m_enemyX, m_enemyY;
 
 public:
-    Enemy();
-    Enemy(int health, int damage);
+    //Enemy();
+    //Enemy(int health, int damage);
+    Enemy(int health, int damage, int x, int y);
 
     void setHealth(int health);
     void removeHealth(int health);

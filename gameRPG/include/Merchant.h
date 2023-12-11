@@ -16,9 +16,9 @@ class Merchant{
     int m_merchantX;
     int m_merchantY;
     std::vector <Product> m_items;
-    Map& m_map; //merchant associated with map
+    Map* m_map; //merchant associated with map
 public:
-    Merchant(Map& gameMap);
+    Merchant(Map* gameMap);
     void displayShop();
     void buyItem(Product item);
     void sellItem(Item* item);

@@ -34,12 +34,12 @@ class Player;
 class Quest{
     int m_questGiverX, m_questGiverY;
     QuestGiven m_questInfo;
-    Map& m_map;
+    Map* m_map;
     vector<Quest*> m_allQuests;
 public:
     void spawnQuestItem();
     void completeQuest();
-    Quest(Map& gameMap);
+    Quest(Map* gameMap);
     void display(Player* player);
     void addQuest(Quest* quest);
     int getQuestGiverX();

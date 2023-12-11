@@ -85,17 +85,18 @@ void Map::spawnEnemies(int numEnemies) {
             y = std::rand() % m_size;
         } while (gameMap[x][y] != '.');
 
-        Enemy enemy(x, y);
+        Enemy* enemy = new Enemy(10, 10, x, y);
         m_enemies.push_back(enemy);
         gameMap[x][y] = 'E';
     }
 }
 
-Enemy Map::findEnemy(int x, int y){
-for(auto &enemy : m_enemies){
-    if (x == enemy.getEnemyX() && y == enemy.getEnemyY())
-        return enemy;
-}
+Enemy* Map::findEnemy(int x, int y){
+    for(Enemy* enemy : m_enemies){
+        if (x == enemy->getEnemyX() && y == enemy->getEnemyY())
+            return enemy;
+    }
+    return nullptr;
 }
 
 void Map::addQuestToMap(Quest* quest){
@@ -139,10 +140,7 @@ void Map::displayMap(){
         cout << endl;
     }
 }
-void Map::addQuestToMap(Quest* quest){
-    quests.push_back(quest);
-    gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = 'Q';
-}
+
 void Map::movePlayer(char move) {
     switch (toupper(move)) {
         case 'W':
@@ -212,4 +210,8 @@ int Map::getSize() {
 
 Player* Map::getPlayer() {
     return m_player;
+}
+
+void Map::setPlayer(Player* player) {
+    this->m_player = player;
 }

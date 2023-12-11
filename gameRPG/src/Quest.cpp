@@ -21,16 +21,16 @@ vector <QuestGiven> quests = {
 
 
 using namespace std;
-Quest::Quest(Map& gameMap): m_map(gameMap){
-    int rndX = rand()% m_map.getSize();
-    int rndY = rand()% m_map.getSize();
+Quest::Quest(Map* gameMap): m_map(gameMap){
+    int rndX = rand()% m_map->getSize();
+    int rndY = rand()% m_map->getSize();
     int random = rand()%quests.size();
     m_questGiverX = rndX;
     m_questGiverY = rndY;
     m_questInfo = quests[random];
     quests.erase(quests.begin() + random);
     m_questInfo.status = NotAccepted;
-    m_map.addQuestToMap(this);
+    m_map->addQuestToMap(this);
 }
 
 void Quest::display(Player* player){
@@ -86,28 +86,22 @@ string Quest::getQuestStatus() {
     }
 }
 void Quest::spawnQuestItem() {
-    int rndX = rand()% m_map.getSize();
-    int rndY = rand()% m_map.getSize();
+    int rndX = rand()% m_map->getSize();
+    int rndY = rand()% m_map->getSize();
     this->m_questInfo.itemX = rndX;
     this->m_questInfo.itemY = rndY;
-    m_map.questItems.push_back({this->m_questInfo.itemRequired, rndX, rndY});
-    m_map.gameMap[rndY][rndX] = 'I';
+    m_map->m_questItems.push_back({this->m_questInfo.itemRequired, rndX, rndY});
+    m_map->gameMap[rndY][rndX] = 'I';
 }
 void Quest::completeQuest(){
     system("CLS");
-    auto x = find(m_map.quests.begin(), m_map.quests.end(), this);
-    m_map.quests.erase(x);
-    x = find(m_map.getPlayer()->questList.begin(), m_map.getPlayer()->questList.end(), this);
-    m_map.getPlayer()->questList.erase(x);
-    m_map.gameMap[this->getQuestGiverY()][this->getQuestGiverX()] = '.';
+    auto x = find(m_map->quests.begin(), m_map->quests.end(), this);
+    m_map->quests.erase(x);
+    x = find(m_map->getPlayer()->questList.begin(), m_map->getPlayer()->questList.end(), this);
+    m_map->getPlayer()->questList.erase(x);
+    m_map->gameMap[this->getQuestGiverY()][this->getQuestGiverX()] = '.';
     cout << "You handed over: " << this->m_questInfo.itemRequired->getName() << endl;
     cout << "Thank you for your help." << endl;
     // TODO: Add gold to totalGold of Player/Increase total score
 }
 
-int Quest::getQuestGiverX(){
-    return m_questGiverX;
-}
-int Quest::getQuestGiverY(){
-    return m_questGiverY;
-}

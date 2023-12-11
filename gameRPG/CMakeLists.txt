@@ -18,4 +18,6 @@ add_executable(gameRPG
         src/Weapon.cpp
         include/Merchant.h
         src/Merchant.cpp
+        src/GameEngine.cpp
+        src/Enemy.cpp
 )

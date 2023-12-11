@@ -26,7 +26,7 @@ class Map {
     int m_playerY;
     int m_size;
     Player* m_player;
-    vector <ItemInfo> m_questItems;
+
 public:
     Map();
     void spawnRandomObjects(int objNumber);
@@ -40,14 +40,16 @@ public:
     void movePlayer(char move);
     void spawnEnemies(int enemiesNumber);
     void checkCollision();
-    Enemy findEnemy(int x, int y);
+    Enemy* findEnemy(int x, int y);
     vector<vector<char>> gameMap;
-    vector<Enemy> m_enemies;
+    vector<Enemy*> m_enemies;
     vector<Quest*> quests;
+    vector <ItemInfo> m_questItems;
     Merchant* shop;
     void addQuestToMap(Quest* quest);
     int getSize();
     Player* getPlayer();
+    void setPlayer(Player* player);
 
 };
 

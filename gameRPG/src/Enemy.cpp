@@ -6,6 +6,7 @@
 
 using namespace std;
 
+/*
 Enemy::Enemy() {
     //HEALTH <80, 120>
     //DAMAGE <5,15>
@@ -21,11 +22,19 @@ Enemy::Enemy(int health, int damage) {
     m_enemyX = rand() % map_size + 1;
     m_enemyY = rand() % map_size + 0;
 }
+*/
+
+Enemy::Enemy(int health, int damage, int x, int y) {
+    m_health = health;
+    m_damage = damage;
+    m_enemyX = x;
+    m_enemyY = y;
+}
 
 void Enemy::setHealth(int health) {
     this->m_health = health;
 }
-void Player::removeHealth(int health) {
+void Enemy::removeHealth(int health) {
     if (m_health - health > 0) {
         this->m_health -= health;
     } else {

@@ -40,7 +40,16 @@ void GameEngine::menuSelection() {
 void GameEngine::startGame() {
     //create player according to settings
     this->m_player = new Player();
+    //TODO: Change the starting gold amount according to difficulty
+    this->m_player->setGoldAmount(500);
     this->m_map = new Map();
+    this->m_map->setPlayer(this->m_player);
+
+    //generate quests
+    Quest* quest1 = new Quest(this->m_map);
+    Quest* quest2 = new Quest(this->m_map);
+    Merchant* shop = new Merchant(this->m_map);
+
     char input;
     do{
         this->m_map->displayMap();
@@ -144,9 +153,8 @@ void GameEngine::attackSequence(Enemy* enemy) {
             playerLast = int(choice);
             enemyLast = enemyMove;
         }
-        cout << "Enemy has been slained." << endl;
-        //TODO: CALL this->m_map-> new method to set enemy tile as '.'
-        //MATEJ MUSI PRVNE NECO UDELAT
+        cout << "Enemy has been slain." << endl;
+        this->m_map->changeMap(enemy->getEnemyX(), enemy->getEnemyY(), '.');
         cin.ignore();
     }
 }
