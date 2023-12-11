@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Quest.h"
+#include "Inventory.h"
 #include "Merchant.h"
 using namespace std;
 class Player;
@@ -50,7 +51,7 @@ public:
     int getSize();
     Player* getPlayer();
     void setPlayer(Player* player);
-
+    vector <ItemInfo> questItems;
 };
 
 #endif //GAMERPG_MAP_H
