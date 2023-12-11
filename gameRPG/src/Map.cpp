@@ -52,28 +52,6 @@ void Map::changeMap(int x, int y, char z) {
 }
 
 
-void Map::checkCollision(){
-    char mapChar = gameMap[getPlayerY()][getPlayerX()];
-    if (mapChar == 'Q' || mapChar == 'q'){
-        for (auto quest : quests){
-            if (quest->getQuestGiverX() == getPlayerX() && quest->getQuestGiverY() == getPlayerY()){
-                quest->display(m_player);
-            }
-        }
-    }
-    if (mapChar == 'I'){
-        for (auto itemInfo : questItems){
-            if (itemInfo.itemX == getPlayerX() && itemInfo.itemY == getPlayerY()){
-                m_player->inventory->addItem(itemInfo.item);
-                gameMap[getPlayerY()][getPlayerX()] = '.';
-            }
-        }
-    }
-    if (mapChar == 'M'){
-        shop->displayShop();
-    }
-    system("CLS");
-}
 
 
 void Map::spawnEnemies(int numEnemies) {
@@ -97,6 +75,30 @@ Enemy* Map::findEnemy(int x, int y){
     }
     return nullptr;
 }
+
+void Map::checkCollision(){
+    char mapChar = gameMap[getPlayerY()][getPlayerX()];
+    if (mapChar == 'Q' || mapChar == 'q'){
+        for (auto quest : quests){
+            if (quest->getQuestGiverX() == getPlayerX() && quest->getQuestGiverY() == getPlayerY()){
+                quest->display(m_player);
+            }
+        }
+    }
+    if (mapChar == 'I'){
+        for (auto itemInfo : questItems){
+            if (itemInfo.itemX == getPlayerX() && itemInfo.itemY == getPlayerY()){
+                m_player->inventory->addItem(itemInfo.item);
+                gameMap[getPlayerY()][getPlayerX()] = '.';
+            }
+        }
+    }
+    if (mapChar == 'M'){
+        shop->displayShop();
+    }
+    system("CLS");
+}
+
 
 void Map::addQuestToMap(Quest* quest){
     quests.push_back(quest);
