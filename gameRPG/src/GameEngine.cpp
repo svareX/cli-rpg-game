@@ -13,6 +13,7 @@ GameEngine::GameEngine() {
     this->m_map = nullptr;
     this->m_player = nullptr;
     this->m_score = nullptr;
+    this->m_difficulty = 1;
 }
 void GameEngine::setDifficulty(int newDifficulty) {
     m_difficulty = newDifficulty;
@@ -37,7 +38,7 @@ void GameEngine::menuSelection() {
     } else if (input == '2') {
         startSettings();
     } else if (input == '3') {
-        abort();
+        return;
     } else {
         cout << endl << "Please choose one of the options above!" << endl;
         menuSelection();
@@ -81,7 +82,26 @@ void GameEngine::startGame() {
 }
 
 void GameEngine::startSettings() {
+    cout << endl << "*************************" << endl;
+    cout << "Difficulty: " << endl;
+    cout << "Easy (1)" << endl;
+    cout << "Medium (2)" << endl;
+    cout << "Hard (3)";
+    cout << endl << "*************************" << endl;
+    settingsSelection();
+}
 
+void GameEngine::settingsSelection() {
+    char input;
+    cin>>input;
+    if (input == '1') {
+        this->setDifficulty(1);
+    } else if (input == '2') {
+        this->setDifficulty(2);
+    } else if (input == '3') {
+        this->setDifficulty(3);
+    }
+    startMenu();
 }
 
 void GameEngine::stopGame() {
