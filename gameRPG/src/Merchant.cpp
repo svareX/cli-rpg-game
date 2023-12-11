@@ -17,30 +17,30 @@ vector <Product> products = {
         {eSword, 150},
 };
 
-Merchant::Merchant(Map& map): map(map){
+Merchant::Merchant(Map& map): m_map(map){
     int rndX = rand()% map.getSize();
     int rndY = rand()% map.getSize();
     map.gameMap[rndY][rndX] = 'M'; //temporary
     map.shop = this;
-    items.insert(items.end(), products.begin(), products.end());
+    m_items.insert(m_items.end(), products.begin(), products.end());
 }
 void Merchant::displayShop(){
     system("cls");
-    vector <Item*> playerInventory = map.player->inventory->itemsInInventory;
+    vector <Item*> playerInventory = m_map.player->inventory->itemsInInventory;
     char choice;
-    if (!items.empty() || !playerInventory.empty()){
+    if (!m_items.empty() || !playerInventory.empty()){
         cout << "Hello, do you wanna buy some items? (B - Buy | S - Sell)" << endl;
         cin >> choice;
         switch (toupper(choice)){
             case 'B':
                 char input;
-                for (auto item : items){
+                for (auto item : m_items){
                     cout << "Name: " << item.item->getName() << endl;
                     cout << "Price: " << item.goldAmount << endl;
                     cout << "-----------------------" << endl;
                 }
                 cin >> input;
-                buyItem(items[(input - '0')-1]);
+                buyItem(m_items[(input - '0')-1]);
                 break;
             case 'S':
                 for (auto item: playerInventory){
@@ -62,14 +62,14 @@ void Merchant::displayShop(){
 }
 
 void Merchant::buyItem(Product product){
-    if (map.player->getGoldAmount() >= product.goldAmount){
-        map.player->inventory->addItem(product.item);
+    if (m_map.player->getGoldAmount() >= product.goldAmount){
+        m_map.player->inventory->addItem(product.item);
         auto boughtItem = [product](const Product& otherProduct) {
             return otherProduct.item == product.item;
         };
-        auto x = find_if(items.begin(), items.end(), boughtItem);
-        items.erase(x);
-        map.player->setGoldAmount(map.player->getGoldAmount() - product.goldAmount);
+        auto x = find_if(m_items.begin(), m_items.end(), boughtItem);
+        m_items.erase(x);
+        m_map.player->setGoldAmount(m_map.player->getGoldAmount() - product.goldAmount);
         cout << "Successfully purchased item: " << product.item->getName() << endl;
     }
     else{
@@ -80,9 +80,9 @@ void Merchant::buyItem(Product product){
 void Merchant::sellItem(Item* item){
     //TODO: Add "equation" for selling stuff (total_price = item.quality*10+item.stats+50) once quality for weapons is done
     system("CLS");
-    map.player->setGoldAmount(map.player->getGoldAmount() + 50);
-    auto x = find(map.player->inventory->itemsInInventory.begin(), map.player->inventory->itemsInInventory.end(), item);
-    map.player->inventory->itemsInInventory.erase(x);
+    m_map.player->setGoldAmount(m_map.player->getGoldAmount() + 50);
+    auto x = find(m_map.player->inventory->itemsInInventory.begin(), m_map.player->inventory->itemsInInventory.end(), item);
+    m_map.player->inventory->itemsInInventory.erase(x);
     cout << "Item has been successfully sold." << endl;
     cout << "Press ENTER to continue..." << endl;
     cin.ignore();
@@ -90,9 +90,9 @@ void Merchant::sellItem(Item* item){
 }
 
 int Merchant::getMerchantX(){
-    return merchantX;
+    return m_merchantX;
 }
 
 int Merchant::getMerchantY(){
-    return merchantY;
+    return m_merchantY;
 }
