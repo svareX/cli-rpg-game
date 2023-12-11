@@ -21,8 +21,8 @@ void GameEngine::setDifficulty(int newDifficulty) {
 int GameEngine::getDifficulty() {
     return m_difficulty;
 }
-void GameEngine::updateScore(Enemy* enemy, GameEngine* gameEngine) {
-    int enemyScore = (enemy->getHealth() + enemy->getDamage()) * gameEngine->getDifficulty();
+void GameEngine::addScore(Enemy* enemy) {
+    int enemyScore = (enemy->getHealth() + enemy->getDamage()) * this->getDifficulty();
     m_totalScore += enemyScore;
 }
 
@@ -60,8 +60,7 @@ void GameEngine::startGame() {
     this->m_player->setGoldAmount(500);
     this->m_map = new Map();
     this->m_map->setPlayer(this->m_player);
-
-    this->m_score = new Score();
+    this->m_totalScore = 0;
 
     //generate quests
     Quest* quest1 = new Quest(this->m_map);
@@ -209,7 +208,7 @@ void GameEngine::attackSequence(Enemy* enemy) {
         if (m_player->getHealth() > 0) {
             cout << "Enemy has been slain." << endl;
             this->m_map->changeMap(enemy->getEnemyX(), enemy->getEnemyY(), '.');
-            this->m_score->addScore(enemy, this->getDifficulty());
+            this->addScore(enemy);
         } else {
 
         }

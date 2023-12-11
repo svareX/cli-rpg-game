@@ -35,7 +35,7 @@ public:
     void stopGame();
     void setDifficulty(int newDifficulty);
     int getDifficulty();
-    void updateScore(Enemy* enemy, GameEngine* gameEngine);
+    void addScore(Enemy* enemy);
     int getScore();
     ~GameEngine();
 };
