@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <windows.h>
 #include <iomanip>
 
 #include "../include/Map.h"
@@ -22,6 +21,13 @@ int main() {
     Quest* quest2 = new Quest(*gameMap);
     Merchant* shop = new Merchant(*gameMap);
 
+
+    Map* gameMap = new Map();
+
+    /*
+    Player player(*gameMap);
+    Weapon* zbran = new Weapon("Sword", 10, 10, 500);
+    zbran->printInfo();
     char input;
     do{
         gameMap->displayMap();
@@ -34,5 +40,15 @@ int main() {
    GameEngine* game = new GameEngine();
    game->startMenu();
 
+
+    /*
+    gameMap->changeMap(3,2,'Z');
+    gameMap->changeMap(1,1,'X');
+    gameMap->displayMap();
+    gameMap->findEnemy(0,4);
+     */
+    gameMap->spawnRandomObjects(5);
+    gameMap->spawnEnemies(3);
+    gameMap->displayMap();
     return 0;
 }

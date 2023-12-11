@@ -7,41 +7,32 @@
 
 #include <vector>
 #include "Player.h"
+#include "Enemy.h"
 #include "Quest.h"
-#include "Inventory.h"
 #include "Merchant.h"
 using namespace std;
-const int map_size = 10;
-
 class Player;
 class Quest;
 class Merchant;
-
-struct ItemInfo{
-    Item* item;
-    int itemX;
-    int itemY;
-};
-
 class Map {
     int m_playerX;
     int m_playerY;
-
 public:
     Map();
-
+    void spawnRandomObjects(int objNumber);
     int getPlayerX();
     int getPlayerY();
-    Player* player; //temporary solution to quest->display() in movePlayer()
-    vector <ItemInfo> questItems;
-
+    void changeMap(int x,int y,char z);
     void setPlayerX(int x);
     void setPlayerY(int y);
     void setPlayerCoordinates(int x, int y);
-
     void displayMap();
     void movePlayer(char move);
+    void spawnEnemies(int enemiesNumber);
+    void checkCollision();
+    Enemy findEnemy(int x, int y);
     vector<vector<char>> gameMap;
+    vector<Enemy> m_enemies;
     vector<Quest*> quests;
     Merchant* shop;
     void addQuestToMap(Quest* quest);

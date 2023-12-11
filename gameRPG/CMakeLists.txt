@@ -16,6 +16,7 @@ add_executable(gameRPG
         src/Item.cpp
         include/Weapon.h
         src/Weapon.cpp
+<<<<<<< HEAD
         include/GameEngine.h
         include/Inventory.h
         src/Inventory.cpp
@@ -27,4 +28,7 @@ add_executable(gameRPG
         include/Enemy.h
         include/Merchant.h
         src/Merchant.cpp
+=======
+        src/Enemy.cpp
+>>>>>>> Map
 )

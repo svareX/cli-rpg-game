@@ -104,3 +104,10 @@ void Quest::completeQuest(){
     cout << "Thank you for your help." << endl;
     // TODO: Add gold to totalGold of Player/Increase total score
 }
+
+int Quest::getQuestGiverX(){
+    return questGiverX;
+}
+int Quest::getQuestGiverY(){
+    return questGiverY;
+}

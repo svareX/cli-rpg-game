@@ -4,7 +4,14 @@
 #include "../include/Map.h"
 #include "../include/Inventory.h"
 #include "../include/Player.h"
+#include "../include/Quest.h"
+#include "../include/Enemy.h"
+
 using namespace std;
+int map_size = 5;
+
+
+
 Map::Map(){
     this->setPlayerX(0);
     this->setPlayerY(0);
@@ -13,6 +20,87 @@ Map::Map(){
         gameMap.push_back(row);
     }
     gameMap[0][4] = 'X';
+}
+
+void Map::spawnRandomObjects(int objNumber) {
+    for (int i = 0; i < objNumber; ++i) {
+        int x = rand() % map_size;
+        int y = rand() % map_size;
+
+        while (gameMap[x][y] != '.' || (x == getPlayerX() && y == getPlayerX())) {
+            x = rand() % map_size;
+            y = rand() % map_size;
+        }
+        gameMap[x][y] = 'O';
+    }
+}
+
+void Map::changeMap(int x, int y, char z) {
+    if (x >= 0 && x < map_size && y >= 0 && y < map_size) {
+        if(!(x == getPlayerX() && y == getPlayerY())){
+        gameMap[x][y] = z;
+        }
+        else{
+         cerr << "You can't put object where the player is standing";
+        }
+    }
+    else {
+        cout << "you can't change fields outside the map" << endl;
+    }
+}
+
+/*
+void checkCollision(){
+    char mapChar = gameMap[getPlayerY()][getPlayerX()];
+    if (mapChar == 'Q' || mapChar == 'q'){
+        for (auto quest : quests){
+            if (quest->getQuestGiverX() == getPlayerX() && quest->getQuestGiverY() == getPlayerY()){
+                quest->display(player);
+            }
+        }
+    }
+    if (mapChar == 'I'){
+        for (auto itemInfo : questItems){
+            if (itemInfo.itemX == getPlayerX() && itemInfo.itemY == getPlayerY()){
+                player->inventory->addItem(itemInfo.item);
+                gameMap[getPlayerY()][getPlayerX()] = '.';
+            }
+        }
+    }
+    if (mapChar == 'M'){
+        shop->displayShop();
+    }
+    system("CLS");
+}
+*/
+
+
+
+void Map::spawnEnemies(int numEnemies) {
+    for (int i = 0; i < numEnemies; i++) {
+        std::srand(std::time(0));
+        int x, y;
+        do {
+            x = std::rand() % map_size;
+            y = std::rand() % map_size;
+        } while (gameMap[x][y] != '.');
+
+        Enemy enemy(x, y);
+        m_enemies.push_back(enemy);
+        gameMap[x][y] = 'E';
+    }
+}
+
+Enemy Map::findEnemy(int x, int y){
+for(auto &enemy : m_enemies){
+    if (x == enemy.getEnemyX() && y == enemy.getEnemyY())
+        return enemy;
+}
+}
+
+void Map::addQuestToMap(Quest* quest){
+    quests.push_back(quest);
+    gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = 'Q';
 }
 
 int Map::getPlayerX() {
@@ -94,7 +182,7 @@ void Map::movePlayer(char move) {
     }
     //TODO : Create checkCollision() function instead of if statements
     if (getPlayerX() == 4 && getPlayerY() == 0) {
-        attackSequence();
+        //attackSequence();
     }
     char mapChar = gameMap[getPlayerY()][getPlayerX()];
     if (mapChar == 'Q' || mapChar == 'q'){
@@ -116,36 +204,4 @@ void Map::movePlayer(char move) {
         shop->displayShop();
     }
     system("CLS");
-}
-void Map::attackSequence() {
-    system("cls");
-    char choice;
-    int hHealth = 10;
-    int hStrength = 2;
-    int eHealth = 10;
-    char dump;
-    cout << "You have encountered an enemy. Do you wanna fight? ";
-    cin >> choice;
-    if (toupper(choice) == 'Q') {
-        return;
-    } else {
-        while (hHealth != 0 && eHealth != 0) {
-            system("cls");
-            cout << "Your Health: " << hHealth << " | Enemy Health: " << eHealth << endl;
-            cout << "What do you wanna do? (A - Attack): ";
-            cin >> choice;
-            switch (toupper(choice)) {
-                case 'A':
-                    //eHealth = attack(eHealth, hStrength);
-                    break;
-            }
-        }
-        cout << "Enemy has been slained." << endl;
-        gameMap[0][4] = '.';
-        cin.ignore();
-    }
-}
-
-void Map::setPlayer(Player* player){
-    this->player = player;
 }
