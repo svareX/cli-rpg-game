@@ -14,10 +14,19 @@ using namespace std;
 class Player;
 class Quest;
 class Merchant;
+
+struct ItemInfo {
+    Item* item;
+    int itemX;
+    int itemY;
+};
+
 class Map {
     int m_playerX;
     int m_playerY;
     int m_size;
+    Player* m_player;
+    vector <ItemInfo> m_questItems;
 public:
     Map();
     void spawnRandomObjects(int objNumber);
@@ -38,6 +47,8 @@ public:
     Merchant* shop;
     void addQuestToMap(Quest* quest);
     int getSize();
+    Player* getPlayer();
+
 };
 
 #endif //GAMERPG_MAP_H

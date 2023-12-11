@@ -174,10 +174,10 @@ void Map::movePlayer(char move) {
             }
             break;
         case 'L':
-            player->printQuestList();
+            getPlayer()->printQuestList();
             break;
         case 'I':
-            player->inventory->printItems();
+            getPlayer()->inventory->printItems();
             break;
     }
     //TODO : Create checkCollision() function instead of if statements
@@ -188,14 +188,14 @@ void Map::movePlayer(char move) {
     if (mapChar == 'Q' || mapChar == 'q'){
         for (auto quest : quests){
             if (quest->getQuestGiverX() == getPlayerX() && quest->getQuestGiverY() == getPlayerY()){
-                quest->display(player);
+                quest->display(getPlayer());
             }
         }
     }
     if (mapChar == 'I'){
-        for (auto itemInfo : questItems){
+        for (auto itemInfo : m_questItems){
             if (itemInfo.itemX == getPlayerX() && itemInfo.itemY == getPlayerY()){
-                player->inventory->addItem(itemInfo.item);
+                getPlayer()->inventory->addItem(itemInfo.item);
                 gameMap[getPlayerY()][getPlayerX()] = '.';
             }
         }
@@ -208,4 +208,8 @@ void Map::movePlayer(char move) {
 
 int Map::getSize() {
     return m_size;
+}
+
+Player* Map::getPlayer() {
+    return m_player;
 }

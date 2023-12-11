@@ -97,10 +97,10 @@ void Quest::completeQuest(){
     system("CLS");
     auto x = find(m_map.quests.begin(), m_map.quests.end(), this);
     m_map.quests.erase(x);
-    x = find(m_map.player->questList.begin(), m_map.player->questList.end(), this);
-    m_map.player->questList.erase(x);
+    x = find(m_map.getPlayer()->questList.begin(), m_map.getPlayer()->questList.end(), this);
+    m_map.getPlayer()->questList.erase(x);
     m_map.gameMap[this->getQuestGiverY()][this->getQuestGiverX()] = '.';
-    cout << "You handed over: " << this->questInfo.itemRequired->getName() << endl;
+    cout << "You handed over: " << this->m_questInfo.itemRequired->getName() << endl;
     cout << "Thank you for your help." << endl;
     // TODO: Add gold to totalGold of Player/Increase total score
 }
