@@ -41,6 +41,7 @@ public:
     void movePlayer(char move);
     void spawnEnemies(int enemiesNumber);
     void checkCollision();
+    void attackSequence();
     Enemy* findEnemy(int x, int y);
     vector<vector<char>> gameMap;
     vector<Enemy*> m_enemies;

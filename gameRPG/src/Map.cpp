@@ -141,6 +141,7 @@ void Map::displayMap(){
 }
 
 void Map::movePlayer(char move) {
+    checkCollision();
     switch (toupper(move)) {
         case 'W':
             if (getPlayerY() > 0) {
@@ -177,32 +178,41 @@ void Map::movePlayer(char move) {
             getPlayer()->inventory->printItems();
             break;
     }
-    //TODO : Create checkCollision() function instead of if statements
-    char mapChar = gameMap[getPlayerY()][getPlayerX()];
-    if (mapChar == 'Q' || mapChar == 'q'){
-        for (auto quest : quests){
-            if (quest->getQuestGiverX() == getPlayerX() && quest->getQuestGiverY() == getPlayerY()){
-                quest->display(getPlayer());
-            }
-        }
-    }
-    if (mapChar == 'I'){
-        for (auto itemInfo : m_questItems){
-            if (itemInfo.itemX == getPlayerX() && itemInfo.itemY == getPlayerY()){
-                getPlayer()->inventory->addItem(itemInfo.item);
-                gameMap[getPlayerY()][getPlayerX()] = '.';
-            }
-        }
-    }
-    if (mapChar == 'E'){
-        throw EnemyException();
-    }
-    if (mapChar == 'M'){
-        shop->displayShop();
+    if (getPlayerX() == 4 && getPlayerY() == 0) {
+        //attackSequence();
     }
     system("CLS");
 }
-
+/*
+void Map::attackSequence() {
+    system("cls");
+    char choice;
+    int hHealth = 10;
+    int hStrength = 2;
+    int eHealth = 10;
+    char dump;
+    cout << "You have encountered an enemy. Do you wanna fight? ";
+    cin >> choice;
+    if (toupper(choice) == 'Q') {
+        return;
+    } else {
+        while (hHealth != 0 && eHealth != 0) {
+            system("cls");
+            cout << "Your Health: " << hHealth << " | Enemy Health: " << eHealth << endl;
+            cout << "What do you wanna do? (A - Attack): ";
+            cin >> choice;
+            switch (toupper(choice)) {
+                case 'A':
+                    //eHealth = attack(eHealth, hStrength);
+                    break;
+            }
+        }
+        cout << "Enemy has been slained." << endl;
+        gameMap[0][4] = '.';
+        cin.ignore();
+    }
+}
+ */
 int Map::getSize() {
     return m_size;
 }
