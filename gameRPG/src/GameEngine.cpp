@@ -157,8 +157,6 @@ void GameEngine::attackSequence(Enemy *enemy) {
             enemyMove = rand() % 3;
         }
         cout << endl << "E:" <<enemyMove << endl;
-        //TODO: ADD DIFICULTY DAMAGE MULTIPLIERS - only on the enemy damage + shield amounts
-        //TODO: ADD EQUIPPED ITEM (WEAPON, SHIELD) DAMAGE MULTIPLIERS
         if (playerLast != int(choice)) {
             switch (choice) {
                 case '1':
