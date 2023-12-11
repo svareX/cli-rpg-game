@@ -5,9 +5,12 @@
 
 Score::Score() : m_totalScore(0) {}
 
-void Score::updateScore(Enemy* enemy, GameEngine* gameEngine) {
+void Score::addScore(Enemy* enemy, GameEngine* gameEngine) {
     int enemyScore = (enemy->getHealth() + enemy->getDamage()) * gameEngine->getDifficulty();
     m_totalScore += enemyScore;
+}
+void Score::addScore(Quest* quest, GameEngine* gameEngine) {
+    m_totalScore += 50 * gameEngine->getDifficulty();
 }
 
 int Score::getScore() {

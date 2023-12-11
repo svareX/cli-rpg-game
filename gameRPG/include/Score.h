@@ -14,7 +14,8 @@ private:
 public:
     Score();
 
-    void updateScore(Enemy* enemy, GameEngine* gameEngine);
+    void addScore(Enemy* enemy, GameEngine* gameEngine);
+    void addScore(Quest* quest, GameEngine* gameEngine);
 
     int getScore();
 
