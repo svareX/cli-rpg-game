@@ -3,6 +3,7 @@
 //
 #include "../include/Player.h"
 #include "../include/Quest.h"
+#include "../include/exceptions/GameOverException.h"
 
 #include <iostream>
 #include <vector>
@@ -62,3 +63,11 @@ int Player::getHealth() { return m_health; }
 int Player::getDamage() { return m_strength; }
 float Player::getGoldAmount() { return m_goldAmount;}
 void Player::setGoldAmount(float gold) { m_goldAmount = gold;}
+
+void Player::removeHealth(int health) {
+    if (m_health - health > 0) {
+        this->m_health -= health;
+    } else {
+        throw GameOverException();
+    }
+}
