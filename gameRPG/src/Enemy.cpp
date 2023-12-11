@@ -38,10 +38,10 @@ int Enemy::getHealth() {
 };
 int Enemy::getDamage() {
     return m_damage;
-}
+};
 int Enemy::getEnemyX() {
     return m_enemyX;
 };
 int Enemy::getEnemyY() {
-    return m_enemyY
+    return m_enemyY;
 };

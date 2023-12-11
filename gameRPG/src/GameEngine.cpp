@@ -97,6 +97,9 @@ void GameEngine::attackSequence(Enemy* enemy) {
             cout << "What do you wanna do? (5 - Run): ";
             cin >> choice;
             int enemyMove = rand()%3;
+            while (enemyMove != enemyLast) {
+                enemyMove = rand()%3;
+            }
             //TODO: ADD DIFICULTY DAMAGE MULTIPLIERS
             //TODO: ADD EQUIPPED ITEM (WEAPON, SHIELD) DAMAGE MULTIPLIERS
             if (playerLast != int(choice)) {
