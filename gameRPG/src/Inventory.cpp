@@ -2,7 +2,11 @@
 #include "../include/Inventory.h"
 using namespace std;
 
-Inventory::Inventory(){}
+Inventory::Inventory(){
+    this->equippedWeapon = nullptr;
+    this->equippedShield = nullptr;
+    this->equippedPotion = nullptr;
+}
 void Inventory::addItem(Item* item) {
     system("CLS");
     if (!containsItem(item)) {

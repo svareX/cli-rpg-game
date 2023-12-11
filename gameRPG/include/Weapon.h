@@ -16,6 +16,7 @@ class Weapon : public Item {
 public:
     Weapon();
     Weapon(std::string name, float damage, float critical_chance, int durability);
+    Weapon(std::string name, float damage, float critical_chance, int durability, int quality);
 
     float getDamage();
     float getCriticalChance();

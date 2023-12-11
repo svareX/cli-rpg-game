@@ -14,7 +14,7 @@ Player::Player() {
     Inventory* inv = new Inventory();
     this->inventory = inv;
     m_health = 100;
-    m_strength = 2;
+    m_strength = 10;
 }
 Player::Player(Map* gameMap): m_map(gameMap) {
     Inventory *inv = new Inventory();
@@ -60,14 +60,18 @@ void Player::printQuestList(){
 }
 void Player::setHealth(int h) { m_health = h; }
 int Player::getHealth() { return m_health; }
-int Player::getDamage() { return m_strength; }
+int Player::getDamage() {
+    if (this->inventory->getEquippedWeapon() != nullptr) {
+        return m_strength + this->inventory->getEquippedWeapon()->getDamage();
+    }
+    return m_strength;
+}
 float Player::getGoldAmount() { return m_goldAmount;}
 void Player::setGoldAmount(float gold) { m_goldAmount = gold;}
 
 void Player::removeHealth(int health) {
-    if (m_health - health > 0) {
-        this->m_health -= health;
-    } else {
-        throw GameOverException();
+    if (this->inventory->getEquippedShield() != nullptr) {
+        health -= this->inventory->getEquippedShield()->getDamage();
     }
+    this->m_health -= health;
 }

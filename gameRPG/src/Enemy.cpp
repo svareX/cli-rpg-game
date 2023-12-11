@@ -6,6 +6,8 @@
 
 using namespace std;
 
+//TODO: ADD ENEMY INVENTORY => EQUIPPED ITEMS, QUEST ITEMS
+
 /*
 Enemy::Enemy() {
     //HEALTH <80, 120>
@@ -35,11 +37,7 @@ void Enemy::setHealth(int health) {
     this->m_health = health;
 }
 void Enemy::removeHealth(int health) {
-    if (m_health - health > 0) {
-        this->m_health -= health;
-    } else {
-        throw DeadEnemyException();
-    }
+    this->m_health -= health;
 }
 
 int Enemy::getHealth() {
