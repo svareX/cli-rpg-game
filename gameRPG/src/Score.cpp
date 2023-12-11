@@ -3,7 +3,9 @@
 //
 #include "../include/Score.h"
 
-Score::Score() : m_totalScore(0) {}
+Score::Score() {
+    this->m_totalScore = 0;
+}
 
 void Score::addScore(Enemy* enemy, GameEngine* gameEngine) {
     int enemyScore = (enemy->getHealth() + enemy->getDamage()) * gameEngine->getDifficulty();

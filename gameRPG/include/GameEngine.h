@@ -8,11 +8,13 @@
 #include "Player.h"
 #include "Map.h"
 #include "Enemy.h"
+#include "Score.h"
 
 class GameEngine{
     Player* m_player;
     Map* m_map;
     int m_difficulty;
+    Score* m_score;
     //TODO: add setings + scores
 
 public:

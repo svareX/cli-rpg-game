@@ -50,6 +50,8 @@ void GameEngine::startGame() {
     this->m_map = new Map();
     this->m_map->setPlayer(this->m_player);
 
+    this->m_score = new Score();
+
     //generate quests
     Quest* quest1 = new Quest(this->m_map);
     Quest* quest2 = new Quest(this->m_map);
@@ -158,8 +160,13 @@ void GameEngine::attackSequence(Enemy* enemy) {
             playerLast = int(choice);
             enemyLast = enemyMove;
         }
-        cout << "Enemy has been slain." << endl;
-        this->m_map->changeMap(enemy->getEnemyX(), enemy->getEnemyY(), '.');
+        if (m_player->getHealth() > 0) {
+            cout << "Enemy has been slain." << endl;
+            this->m_map->changeMap(enemy->getEnemyX(), enemy->getEnemyY(), '.');
+            this->m_score->addScore(enemy, this);
+        } else {
+
+        }
         cin.ignore();
     }
 }
