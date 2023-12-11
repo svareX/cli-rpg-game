@@ -86,7 +86,7 @@ void Map::spawnEnemies(int numEnemies) {
             y = std::rand() % m_size;
         } while (gameMap[x][y] != '.');
 
-        Enemy* enemy = new Enemy(50, 10, x, y);
+        Enemy* enemy = new Enemy(rand()%11+40, rand()%11+5, x, y);
         m_enemies.push_back(enemy);
         gameMap[x][y] = 'E';
     }
