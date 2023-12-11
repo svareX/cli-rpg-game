@@ -6,6 +6,7 @@
 #include "../include/Player.h"
 #include "../include/Quest.h"
 #include "../include/Enemy.h"
+#include "../include/exceptions/EnemyException.h"
 
 using namespace std;
 
@@ -19,7 +20,8 @@ Map::Map(){
         vector<char> row(m_size, '.');
         gameMap.push_back(row);
     }
-    gameMap[0][4] = 'X';
+    this->spawnRandomObjects(5);
+    this->spawnEnemies(3);
 }
 
 void Map::spawnRandomObjects(int objNumber) {
@@ -31,7 +33,7 @@ void Map::spawnRandomObjects(int objNumber) {
             x = rand() % m_size;
             y = rand() % m_size;
         }
-        gameMap[x][y] = 'O';
+        gameMap[x][y] = '|';
     }
 }
 
@@ -78,22 +80,21 @@ void checkCollision(){
 
 void Map::spawnEnemies(int numEnemies) {
     for (int i = 0; i < numEnemies; i++) {
-        std::srand(std::time(0));
         int x, y;
         do {
             x = std::rand() % m_size;
             y = std::rand() % m_size;
         } while (gameMap[x][y] != '.');
 
-        Enemy* enemy = new Enemy(10, 10, x, y);
+        Enemy* enemy = new Enemy(50, 10, x, y);
         m_enemies.push_back(enemy);
         gameMap[x][y] = 'E';
     }
 }
 
 Enemy* Map::findEnemy(int x, int y){
-    for(Enemy* enemy : m_enemies){
-        if (x == enemy->getEnemyX() && y == enemy->getEnemyY())
+    for(auto enemy : m_enemies){
+        if (x == enemy->getEnemyY() && y == enemy->getEnemyX())
             return enemy;
     }
     return nullptr;
@@ -179,9 +180,6 @@ void Map::movePlayer(char move) {
             break;
     }
     //TODO : Create checkCollision() function instead of if statements
-    if (getPlayerX() == 4 && getPlayerY() == 0) {
-        //attackSequence();
-    }
     char mapChar = gameMap[getPlayerY()][getPlayerX()];
     if (mapChar == 'Q' || mapChar == 'q'){
         for (auto quest : quests){
@@ -197,6 +195,9 @@ void Map::movePlayer(char move) {
                 gameMap[getPlayerY()][getPlayerX()] = '.';
             }
         }
+    }
+    if (mapChar == 'E'){
+        throw EnemyException();
     }
     if (mapChar == 'M'){
         shop->displayShop();
