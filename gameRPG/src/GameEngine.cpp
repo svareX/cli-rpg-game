@@ -121,6 +121,7 @@ void GameEngine::stopGame() {
 }
 
 void GameEngine::attackSequence(Enemy *enemy) {
+    srand(time(0));
     system("cls");
     char choice;
     cout << "You have encountered an enemy. Do you wanna fight? ";
@@ -143,9 +144,7 @@ void GameEngine::attackSequence(Enemy *enemy) {
 
     int playerLast = 0;
     int enemyLast = 0;
-    cout << "P:" << this->m_player->getHealth() << "E:" << enemy->getHealth() << endl;
     while (this->m_player->getHealth() > 0 && enemy->getHealth() > 0) {
-        system("cls");
         cout << "Your Health: " << this->m_player->getHealth() << " | Enemy Health: " << enemy->getHealth() << endl;
         cout << "What do you wanna do? (1 - Attack): " << endl;
         cout << "What do you wanna do? (2 - Defend): " << endl;
@@ -154,31 +153,47 @@ void GameEngine::attackSequence(Enemy *enemy) {
         cout << "What do you wanna do? (5 - Run): ";
         cin >> choice;
         int enemyMove = rand() % 3;
-        while (enemyMove != enemyLast) {
+        while (enemyMove == enemyLast) {
             enemyMove = rand() % 3;
         }
-        //TODO: ADD DIFICULTY DAMAGE MULTIPLIERS
+        //TODO: ADD DIFICULTY DAMAGE MULTIPLIERS - only on the enemy damage + shield amounts
         //TODO: ADD EQUIPPED ITEM (WEAPON, SHIELD) DAMAGE MULTIPLIERS
         if (playerLast != int(choice)) {
             switch (choice) {
                 case '1':
-                    if (enemyMove == 1) {
+                    if (enemyMove == 0) {
                         //oba seknou => oba dostanou dmg
-                        this->m_player->removeHealth(enemy->getDamage());
-                        enemy->removeHealth(this->m_player->getDamage());
-                    } else if (enemyMove == 2) {
+                        try {
+                            this->m_player->removeHealth(enemy->getDamage());
+                        } catch (GameOverException) {
+                            break;
+                        }
+                        try {
+                            enemy->removeHealth(this->m_player->getDamage());
+                        } catch (DeadEnemyException) {
+                            break;
+                        }
+                    } else if (enemyMove == 1) {
                         //hrac sekne & enemy se brani => hrac dostane dmg
-                        this->m_player->removeHealth(this->m_player->getDamage());
+                        try {
+                            this->m_player->removeHealth(this->m_player->getDamage());
+                        } catch (GameOverException) {
+                            break;
+                        }
                     } else {
                         //hrac seka a enemy dodguje => nic
                     }
                     break;
                 case '2':
-                    if (enemyMove == 2) {
+                    if (enemyMove == 1) {
                         //oba se brani => nestane se nic
-                    } else if (enemyMove == 1) {
+                    } else if (enemyMove == 0) {
                         //ty se branis & enemy sekne => enemy dostane dmg
-                        enemy->removeHealth(enemy->getDamage());
+                        try {
+                            enemy->removeHealth(enemy->getDamage());
+                        } catch (DeadEnemyException) {
+                            break;
+                        }
                     } else {
                         //hrac se brani a enemy doguje => nic
                     }
@@ -204,9 +219,12 @@ void GameEngine::attackSequence(Enemy *enemy) {
                         if (rand() % 10 == 0) return;
                     }
                     break;
+                default:
+                    cout << "Incorrect option chosen!";
+                    break;
             }
         } else {
-            cout << endl << "You cannot choose the same thing twice in a row!";
+            cout << endl << "You cannot choose the same thing twice in a row!" << endl;
         }
         playerLast = int(choice);
         enemyLast = enemyMove;
@@ -216,9 +234,9 @@ void GameEngine::attackSequence(Enemy *enemy) {
         this->m_map->changeMap(enemy->getEnemyX(), enemy->getEnemyY(), '.');
         this->addScore(enemy);
     } else {
-
+        cout << "You have died." << endl;
+        cout << "Your final score: " << this->getScore();
     }
-    cin.ignore();
 }
 
 GameEngine::~GameEngine() {

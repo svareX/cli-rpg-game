@@ -14,7 +14,7 @@ Player::Player() {
     Inventory* inv = new Inventory();
     this->inventory = inv;
     m_health = 100;
-    m_strength = 2;
+    m_strength = 10;
 }
 Player::Player(Map* gameMap): m_map(gameMap) {
     Inventory *inv = new Inventory();

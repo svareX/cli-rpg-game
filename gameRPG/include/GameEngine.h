@@ -14,7 +14,6 @@ class GameEngine{
     Map* m_map;
     int m_difficulty;
     int m_totalScore;
-    //TODO: add setings + scores
 
 public:
     GameEngine();
