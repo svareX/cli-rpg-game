@@ -24,7 +24,7 @@ std::string Item::getName() {
     return this->m_name;
 }
 
-std::string Item::getQuality() {
+std::string Item::getQualityName() {
     std::string quality = "";
     if (this->m_quality == 0) {
         quality = "Common";
@@ -34,6 +34,9 @@ std::string Item::getQuality() {
         quality = "Epic";
     }
     return quality;
+}
+int Item::getQuality() {
+    return m_quality;
 }
 std::string Item::getType() {
     std::string type = "";

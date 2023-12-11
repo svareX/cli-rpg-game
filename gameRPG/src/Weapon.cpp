@@ -15,6 +15,11 @@ Weapon::Weapon(std::string name, float damage, float critical_chance, int durabi
     this->m_damage = damage;
     this->m_critical_chance = critical_chance;
 }
+Weapon::Weapon(std::string name, float damage, float critical_chance, int durability, int quality) : Item(name, quality) {
+    this->m_damage = damage;
+    this->m_critical_chance = critical_chance;
+    this->setQuality(quality);
+}
 
 float Weapon::getDamage() {
     return m_damage;
