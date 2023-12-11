@@ -29,6 +29,8 @@ public:
     void attackSequence(Enemy* enemy);
     //settings
     void startSettings();
+    //selecting options from menu
+    void settingsSelection();
     //when you die or something
     void stopGame();
     void setDifficulty(int newDifficulty);
