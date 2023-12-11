@@ -7,29 +7,33 @@
 
 #include "Map.h"
 #include "Inventory.h"
+#include "Enemy.h"
 
 class Quest;
 class Map;
 
 class Player {
 private:
-    int health, strength;
-    float goldAmount;
-    Map* map;
+    int m_health, m_strength;
+    float m_goldAmount;
+    Map* m_map;
 public:
     std::vector<Quest*> questList;
     Inventory* inventory;
     Player();
+    
     Player(Map* gameMap);
     void movePlayer(char move);
-    int attack(int eHealth, int hStrength);
+    void attack(Enemy* enemy);
+    void setHealth(int h);
+    void removeHealth(int h);
     void acceptQuest(Quest* quest);
     void printQuestList();
     void setPlayerX(int x);
     void setPlayerY(int y);
     void setHealth(int h);
     int getHealth();
-    int getStrength();
+    int getDamage();
     float getGoldAmount();
     void setGoldAmount(float gold);
 };

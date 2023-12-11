@@ -12,18 +12,20 @@
 using namespace std;
 class Enemy{
 private:
-    int health;
-    int enemyX, enemyY;
+    int m_health, m_damage;
+    int m_enemyX, m_enemyY;
 
 public:
-    Enemy(int h){
-        health = h;
-        enemyX = rand() % map_size + 1;
-        enemyY = rand() % map_size + 0;
-    }
-    int getHealth(){return health;}
-    int getEnemyX(){return enemyX;}
-    int getEnemyY(){return enemyY;}
+    Enemy();
+    Enemy(int health, int damage);
+
+    void setHealth(int health);
+    void removeHealth(int health);
+
+    int getHealth();
+    int getDamage();
+    int getEnemyX();
+    int getEnemyY();
 
 };
 

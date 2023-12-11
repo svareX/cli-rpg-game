@@ -12,6 +12,7 @@
 using namespace std;
 
 int main() {
+    /*
     srand(time(0));
     Map* gameMap = new Map();
     Player* player = new Player(gameMap);
@@ -28,5 +29,10 @@ int main() {
         cin >> input;
         gameMap->movePlayer(input);
     } while (input != 'q');
+    */
+   srand(time(0));
+   GameEngine* game = new GameEngine();
+   game->startMenu();
+
     return 0;
 }

@@ -41,8 +41,6 @@ public:
 
     void displayMap();
     void movePlayer(char move);
-    void setPlayer(Player* player);
-    void attackSequence();
     vector<vector<char>> gameMap;
     vector<Quest*> quests;
     Merchant* shop;
