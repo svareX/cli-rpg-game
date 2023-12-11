@@ -8,15 +8,15 @@
 #include "../include/Enemy.h"
 
 using namespace std;
-int map_size = 5;
 
 
 
 Map::Map(){
+    this->m_size = 10;
     this->setPlayerX(0);
     this->setPlayerY(0);
-    for(int i = 0; i < map_size; i++){
-        vector<char> row(map_size, '.');
+    for(int i = 0; i < m_size; i++){
+        vector<char> row(m_size, '.');
         gameMap.push_back(row);
     }
     gameMap[0][4] = 'X';
@@ -24,19 +24,19 @@ Map::Map(){
 
 void Map::spawnRandomObjects(int objNumber) {
     for (int i = 0; i < objNumber; ++i) {
-        int x = rand() % map_size;
-        int y = rand() % map_size;
+        int x = rand() % m_size;
+        int y = rand() % m_size;
 
         while (gameMap[x][y] != '.' || (x == getPlayerX() && y == getPlayerX())) {
-            x = rand() % map_size;
-            y = rand() % map_size;
+            x = rand() % m_size;
+            y = rand() % m_size;
         }
         gameMap[x][y] = 'O';
     }
 }
 
 void Map::changeMap(int x, int y, char z) {
-    if (x >= 0 && x < map_size && y >= 0 && y < map_size) {
+    if (x >= 0 && x < m_size && y >= 0 && y < m_size) {
         if(!(x == getPlayerX() && y == getPlayerY())){
         gameMap[x][y] = z;
         }
@@ -81,8 +81,8 @@ void Map::spawnEnemies(int numEnemies) {
         std::srand(std::time(0));
         int x, y;
         do {
-            x = std::rand() % map_size;
-            y = std::rand() % map_size;
+            x = std::rand() % m_size;
+            y = std::rand() % m_size;
         } while (gameMap[x][y] != '.');
 
         Enemy enemy(x, y);
@@ -127,8 +127,8 @@ void Map::setPlayerCoordinates(int x, int y) {
 void Map::displayMap(){
     system("cls");
     cout << getPlayerY() << " | " << getPlayerX() << endl;
-    for (int i = 0; i < map_size; i++){
-        for (int j = 0; j < map_size; j++){
+    for (int i = 0; i < m_size; i++){
+        for (int j = 0; j < m_size; j++){
             if (i == getPlayerY() && j == getPlayerX()){
                 cout << setw(2) << 'P';
             }
@@ -160,14 +160,14 @@ void Map::movePlayer(char move) {
             }
             break;
         case 'S':
-            if (getPlayerY() < map_size - 1) {
+            if (getPlayerY() < m_size - 1) {
                 setPlayerY(getPlayerY()+1);
             } else {
                 cerr << "You have reached the border!" << endl;
             }
             break;
         case 'D':
-            if (getPlayerX() < map_size - 1) {
+            if (getPlayerX() < m_size - 1) {
                 setPlayerX(getPlayerX()+1);
             } else {
                 cerr << "You have reached the border!" << endl;
@@ -204,4 +204,8 @@ void Map::movePlayer(char move) {
         shop->displayShop();
     }
     system("CLS");
+}
+
+int Map::getSize() {
+    return m_size;
 }

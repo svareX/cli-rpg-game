@@ -17,6 +17,7 @@ class Merchant;
 class Map {
     int m_playerX;
     int m_playerY;
+    int m_size;
 public:
     Map();
     void spawnRandomObjects(int objNumber);
@@ -36,6 +37,7 @@ public:
     vector<Quest*> quests;
     Merchant* shop;
     void addQuestToMap(Quest* quest);
+    int getSize();
 };
 
 #endif //GAMERPG_MAP_H

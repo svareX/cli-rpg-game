@@ -18,8 +18,8 @@ vector <Product> products = {
 };
 
 Merchant::Merchant(Map& map): map(map){
-    int rndX = rand()%map_size;
-    int rndY = rand()%map_size;
+    int rndX = rand()% map.getSize();
+    int rndY = rand()% map.getSize();
     map.gameMap[rndY][rndX] = 'M'; //temporary
     map.shop = this;
     items.insert(items.end(), products.begin(), products.end());

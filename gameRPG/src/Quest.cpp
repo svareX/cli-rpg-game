@@ -21,23 +21,23 @@ vector <QuestGiven> quests = {
 
 
 using namespace std;
-Quest::Quest(Map& gameMap): map(gameMap){
-    int rndX = rand()% map_size;
-    int rndY = rand()% map_size;
+Quest::Quest(Map& gameMap): m_map(gameMap){
+    int rndX = rand()% m_map.getSize();
+    int rndY = rand()% m_map.getSize();
     int random = rand()%quests.size();
-    questGiverX = rndX;
-    questGiverY = rndY;
-    questInfo = quests[random];
+    m_questGiverX = rndX;
+    m_questGiverY = rndY;
+    m_questInfo = quests[random];
     quests.erase(quests.begin() + random);
-    questInfo.status = NotAccepted;
-    map.addQuestToMap(this);
+    m_questInfo.status = NotAccepted;
+    m_map.addQuestToMap(this);
 }
 
 void Quest::display(Player* player){
     system("cls");
     char input;
     if (this->getQuestStatus() == "Not Accepted"){
-        cout << questInfo.task << endl << "Reward: " << questInfo.goldAmount << " gold" << endl;
+        cout << m_questInfo.task << endl << "Reward: " << m_questInfo.goldAmount << " gold" << endl;
         cout << "Do you wanna add this quest to quest list? " << endl;
         cin >> input;
         switch(toupper(input)){
@@ -52,7 +52,7 @@ void Quest::display(Player* player){
         }
     }
     else{
-        if (player->inventory->containsItem(questInfo.itemRequired)){
+        if (player->inventory->containsItem(m_questInfo.itemRequired)){
             completeQuest();
         }
     }
@@ -61,22 +61,22 @@ void Quest::display(Player* player){
     cin.get();
 }
 int Quest::getQuestGiverX(){
-    return questGiverX;
+    return m_questGiverX;
 }
 int Quest::getQuestGiverY(){
-    return questGiverY;
+    return m_questGiverY;
 }
 
 QuestGiven Quest::getQuestInfo() {
-    return questInfo;
+    return m_questInfo;
 }
 
 void Quest::setQuestStatus(enum Status Stat) {
-    questInfo.status = Stat;
+    m_questInfo.status = Stat;
 }
 
 string Quest::getQuestStatus() {
-    switch(questInfo.status){
+    switch(m_questInfo.status){
         case 0:
             return "Not Accepted";
         case 1:
@@ -86,28 +86,28 @@ string Quest::getQuestStatus() {
     }
 }
 void Quest::spawnQuestItem() {
-    int rndX = rand()% map_size;
-    int rndY = rand()% map_size;
-    this->questInfo.itemX = rndX;
-    this->questInfo.itemY = rndY;
-    map.questItems.push_back({this->questInfo.itemRequired, rndX, rndY});
-    map.gameMap[rndY][rndX] = 'I';
+    int rndX = rand()% m_map.getSize();
+    int rndY = rand()% m_map.getSize();
+    this->m_questInfo.itemX = rndX;
+    this->m_questInfo.itemY = rndY;
+    m_map.questItems.push_back({this->m_questInfo.itemRequired, rndX, rndY});
+    m_map.gameMap[rndY][rndX] = 'I';
 }
 void Quest::completeQuest(){
     system("CLS");
-    auto x = find(map.quests.begin(), map.quests.end(), this);
-    map.quests.erase(x);
-    x = find(map.player->questList.begin(), map.player->questList.end(), this);
-    map.player->questList.erase(x);
-    map.gameMap[this->getQuestGiverY()][this->getQuestGiverX()] = '.';
+    auto x = find(m_map.quests.begin(), m_map.quests.end(), this);
+    m_map.quests.erase(x);
+    x = find(m_map.player->questList.begin(), m_map.player->questList.end(), this);
+    m_map.player->questList.erase(x);
+    m_map.gameMap[this->getQuestGiverY()][this->getQuestGiverX()] = '.';
     cout << "You handed over: " << this->questInfo.itemRequired->getName() << endl;
     cout << "Thank you for your help." << endl;
     // TODO: Add gold to totalGold of Player/Increase total score
 }
 
 int Quest::getQuestGiverX(){
-    return questGiverX;
+    return m_questGiverX;
 }
 int Quest::getQuestGiverY(){
-    return questGiverY;
+    return m_questGiverY;
 }
