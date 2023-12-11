@@ -12,25 +12,21 @@ class Quest;
 Player::Player() {
     Inventory* inv = new Inventory();
     this->inventory = inv;
-    health = 100;
-    strength = 2;
+    m_health = 100;
+    m_strength = 2;
 }
-Player::Player(Map* gameMap): map(gameMap) {
+Player::Player(Map* gameMap): m_map(gameMap) {
     Inventory *inv = new Inventory();
     this->inventory = inv;
-    health = 100;
-    strength = 2;
+    m_health = 100;
+    m_strength = 2;
 }
 
-int Player::attack(int eHealth, int hStrength) {
-    eHealth -= hStrength;
-    return eHealth;
-}
 void Player::acceptQuest(Quest *quest){
     if (questList.size() < 3){
         questList.push_back(quest);
         quest->setQuestStatus(Pending);
-        map->gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = 'q';
+        m_map->gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = 'q';
     }
     else{
         system("cls");
@@ -61,8 +57,8 @@ void Player::printQuestList(){
     cin.ignore();
     cin.get();
 }
-void Player::setHealth(int h) { health = h; }
-int Player::getHealth() { return health; }
-int Player::getStrength() { return strength; }
-float Player::getGoldAmount() { return goldAmount;}
-void Player::setGoldAmount(float gold) { goldAmount = gold;}
+void Player::setHealth(int h) { m_health = h; }
+int Player::getHealth() { return m_health; }
+int Player::getDamage() { return m_strength; }
+float Player::getGoldAmount() { return m_goldAmount;}
+void Player::setGoldAmount(float gold) { m_goldAmount = gold;}

@@ -24,14 +24,12 @@ public:
     
     Player(Map* gameMap);
     void movePlayer(char move);
-    void attack(Enemy* enemy);
     void setHealth(int h);
     void removeHealth(int h);
     void acceptQuest(Quest* quest);
     void printQuestList();
     void setPlayerX(int x);
     void setPlayerY(int y);
-    void setHealth(int h);
     int getHealth();
     int getDamage();
     float getGoldAmount();
