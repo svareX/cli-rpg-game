@@ -27,7 +27,7 @@ void Player::acceptQuest(Quest *quest){
     if (questList.size() < 3){
         questList.push_back(quest);
         quest->setQuestStatus(Pending);
-        m_map->gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = 'q';
+        m_map->m_gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = 'q';
     }
     else{
         system("cls");

@@ -39,19 +39,19 @@ int Item::getQuality() {
     return m_quality;
 }
 std::string Item::getType() {
-    std::string type = "";
+    std::string m_type = "";
     if (this->m_type == 0) {
-        type = "Weapon";
+        m_type = "Weapon";
     } else if (this->m_type == 1) {
-        type = "Shield";
+        m_type = "Shield";
     }
     else if (this->m_type == 2){
-        type = "Potion";
+        m_type = "Potion";
     }
     else {
-        type = "Type has not been set.";
+        m_type = "Type has not been set.";
     }
-    return type;
+    return m_type;
 }
 
 bool Item::getIsEquipped() {

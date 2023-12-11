@@ -20,8 +20,8 @@ vector <Item*> items = {
 Merchant::Merchant(Map* map): m_map(map){
     int rndX = rand()% map->getSize();
     int rndY = rand()% map->getSize();
-    map->gameMap[rndY][rndX] = 'M'; //temporary
-    map->shop = this;
+    map->m_gameMap[rndY][rndX] = 'M'; //temporary
+    map->m_shop = this;
     m_items.insert(m_items.end(), items.begin(), items.end());
 }
 void Merchant::displayShop(){
@@ -83,7 +83,7 @@ void Merchant::sellItem(Item* item){
     system("CLS");
     m_map->getPlayer()->setGoldAmount(m_map->getPlayer()->getGoldAmount() + m_totalPrice);
     auto x = find(m_map->getPlayer()->inventory->itemsInInventory.begin(), m_map->getPlayer()->inventory->itemsInInventory.end(), item);
-    m_map->shop->m_items.push_back(item);
+    m_map->m_shop->m_items.push_back(item);
     m_map->getPlayer()->inventory->itemsInInventory.erase(x);
     cout << "Item has been successfully sold." << endl;
     cout << "Press ENTER to continue..." << endl;

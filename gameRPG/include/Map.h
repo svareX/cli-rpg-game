@@ -17,9 +17,9 @@ class Quest;
 class Merchant;
 
 struct ItemInfo {
-    Item* item;
-    int itemX;
-    int itemY;
+    Item* m_item;
+    int m_itemX;
+    int m_itemY;
 };
 
 class Map {
@@ -43,16 +43,15 @@ public:
     void checkCollision();
     void attackSequence();
     Enemy* findEnemy(int x, int y);
-    vector<vector<char>> gameMap;
+    vector<vector<char>> m_gameMap;
     vector<Enemy*> m_enemies;
-    vector<Quest*> quests;
+    vector<Quest*> m_quests;
     vector <ItemInfo> m_questItems;
-    Merchant* shop;
+    Merchant* m_shop;
     void addQuestToMap(Quest* quest);
     int getSize();
     Player* getPlayer();
     void setPlayer(Player* player);
-    vector <ItemInfo> questItems;
 };
 
 #endif //GAMERPG_MAP_H

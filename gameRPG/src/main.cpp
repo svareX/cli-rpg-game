@@ -13,7 +13,7 @@ using namespace std;
 int main() {
 
     srand(time(0));
-    GameEngine* game = new GameEngine();
-    game->startMenu();
+    GameEngine* m_game = new GameEngine();
+    m_game->startMenu();
     return 0;
 }

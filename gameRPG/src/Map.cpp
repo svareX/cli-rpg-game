@@ -18,7 +18,7 @@ Map::Map(){
     this->setPlayerY(0);
     for(int i = 0; i < m_size; i++){
         vector<char> row(m_size, '.');
-        gameMap.push_back(row);
+        m_gameMap.push_back(row);
     }
     this->spawnRandomObjects(5);
     this->spawnEnemies(3);
@@ -29,18 +29,18 @@ void Map::spawnRandomObjects(int objNumber) {
         int x = rand() % m_size;
         int y = rand() % m_size;
 
-        while (gameMap[x][y] != '.' || (x == getPlayerX() && y == getPlayerX())) {
+        while (m_gameMap[x][y] != '.' || (x == getPlayerX() && y == getPlayerX())) {
             x = rand() % m_size;
             y = rand() % m_size;
         }
-        gameMap[x][y] = '|';
+        m_gameMap[x][y] = '|';
     }
 }
 
 void Map::changeMap(int x, int y, char z) {
     if (x >= 0 && x < m_size && y >= 0 && y < m_size) {
         if(!(x == getPlayerX() && y == getPlayerY())){
-        gameMap[x][y] = z;
+            m_gameMap[x][y] = z;
         }
         else{
          cerr << "You can't put object where the player is standing";
@@ -60,11 +60,11 @@ void Map::spawnEnemies(int numEnemies) {
         do {
             x = std::rand() % m_size;
             y = std::rand() % m_size;
-        } while (gameMap[x][y] != '.');
+        } while (m_gameMap[x][y] != '.');
 
         Enemy* enemy = new Enemy(rand()%11+40, rand()%11+5, x, y);
         m_enemies.push_back(enemy);
-        gameMap[x][y] = 'E';
+        m_gameMap[x][y] = 'E';
     }
 }
 
@@ -77,32 +77,32 @@ Enemy* Map::findEnemy(int x, int y){
 }
 
 void Map::checkCollision(){
-    char mapChar = gameMap[getPlayerY()][getPlayerX()];
+    char mapChar = m_gameMap[getPlayerY()][getPlayerX()];
     if (mapChar == 'Q' || mapChar == 'q'){
-        for (auto quest : quests){
+        for (auto quest : m_quests){
             if (quest->getQuestGiverX() == getPlayerX() && quest->getQuestGiverY() == getPlayerY()){
                 quest->display(m_player);
             }
         }
     }
     if (mapChar == 'I'){
-        for (auto itemInfo : questItems){
-            if (itemInfo.itemX == getPlayerX() && itemInfo.itemY == getPlayerY()){
-                m_player->inventory->addItem(itemInfo.item);
-                gameMap[getPlayerY()][getPlayerX()] = '.';
+        for (auto itemInfo : m_questItems){
+            if (itemInfo.m_itemX == getPlayerX() && itemInfo.m_itemY == getPlayerY()){
+                m_player->inventory->addItem(itemInfo.m_item);
+                m_gameMap[getPlayerY()][getPlayerX()] = '.';
             }
         }
     }
     if (mapChar == 'M'){
-        shop->displayShop();
+        m_shop->displayShop();
     }
     system("CLS");
 }
 
 
 void Map::addQuestToMap(Quest* quest){
-    quests.push_back(quest);
-    gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = 'Q';
+    m_quests.push_back(quest);
+    m_gameMap[quest->getQuestGiverY()][quest->getQuestGiverX()] = 'Q';
 }
 
 int Map::getPlayerX() {
@@ -135,7 +135,7 @@ void Map::displayMap(){
                 cout << setw(2) << 'P';
             }
             else{
-                cout << setw(2) << gameMap[i][j];
+                cout << setw(2) << m_gameMap[i][j];
             }
         }
         cout << endl;
@@ -210,7 +210,7 @@ void Map::attackSequence() {
             }
         }
         cout << "Enemy has been slained." << endl;
-        gameMap[0][4] = '.';
+        m_gameMap[0][4] = '.';
         cin.ignore();
     }
 }

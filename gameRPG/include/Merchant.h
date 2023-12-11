@@ -7,8 +7,8 @@
 using namespace std;
 
 struct Product{
-    Item* item;
-    float goldAmount;
+    Item* m_item;
+    float m_goldAmount;
 };
 
 
