@@ -20,6 +20,4 @@ add_executable(gameRPG
         src/Merchant.cpp
         src/GameEngine.cpp
         src/Enemy.cpp
-        include/Score.h
-        src/Score.cpp
 )

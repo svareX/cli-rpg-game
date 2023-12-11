@@ -11,12 +11,21 @@ using namespace std;
 GameEngine::GameEngine() {
     this->m_map = nullptr;
     this->m_player = nullptr;
+    m_totalScore = 0;
 }
 void GameEngine::setDifficulty(int newDifficulty) {
     m_difficulty = newDifficulty;
 }
 int GameEngine::getDifficulty() {
     return m_difficulty;
+}
+void GameEngine::updateScore(Enemy* enemy, GameEngine* gameEngine) {
+    int enemyScore = (enemy->getHealth() + enemy->getDamage()) * gameEngine->getDifficulty();
+    m_totalScore += enemyScore;
+}
+
+int GameEngine::getScore() {
+    return m_totalScore;
 }
 void GameEngine::startMenu() {
     cout << endl << "*************************" << endl;

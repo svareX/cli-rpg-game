@@ -13,6 +13,7 @@ class GameEngine{
     Player* m_player;
     Map* m_map;
     int m_difficulty;
+    int m_totalScore;
     //TODO: add setings + scores
 
 public:
@@ -32,6 +33,8 @@ public:
     void stopGame();
     void setDifficulty(int newDifficulty);
     int getDifficulty();
+    void updateScore(Enemy* enemy, GameEngine* gameEngine);
+    int getScore();
     ~GameEngine();
 };
 
