@@ -58,3 +58,9 @@ bool Item::getIsEquipped() {
 void Item::setIsEquipped() {
     this->m_is_equipped = true;
 }
+
+void Item::setQuality(int quality) {
+    if (quality >= 0 && quality <= 2) {
+        this->m_quality = quality;
+    }
+}

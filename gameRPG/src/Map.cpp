@@ -9,8 +9,6 @@
 
 using namespace std;
 
-
-
 Map::Map(){
     this->m_size = 10;
     this->setPlayerX(0);
@@ -19,7 +17,8 @@ Map::Map(){
         vector<char> row(m_size, '.');
         gameMap.push_back(row);
     }
-    gameMap[0][4] = 'X';
+    this->spawnRandomObjects(5);
+    this->spawnEnemies(3);
 }
 
 void Map::spawnRandomObjects(int objNumber) {
@@ -31,7 +30,7 @@ void Map::spawnRandomObjects(int objNumber) {
             x = rand() % m_size;
             y = rand() % m_size;
         }
-        gameMap[x][y] = 'O';
+        gameMap[x][y] = '|';
     }
 }
 
@@ -179,9 +178,6 @@ void Map::movePlayer(char move) {
             break;
     }
     //TODO : Create checkCollision() function instead of if statements
-    if (getPlayerX() == 4 && getPlayerY() == 0) {
-        //attackSequence();
-    }
     char mapChar = gameMap[getPlayerY()][getPlayerX()];
     if (mapChar == 'Q' || mapChar == 'q'){
         for (auto quest : quests){

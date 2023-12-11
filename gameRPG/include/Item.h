@@ -30,6 +30,8 @@ public:
     Item(std::string name, int quality);
     Item(std::string name, Quality quality);
 
+    virtual void setQuality(int quality);
+
     virtual std::string getName();
     virtual std::string getQuality();
     virtual std::string getType();

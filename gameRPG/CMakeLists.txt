@@ -22,4 +22,5 @@ add_executable(gameRPG
         src/Enemy.cpp
         include/Score.h
         src/Score.cpp
+        src/Inventory.cpp
 )
