@@ -12,6 +12,7 @@
 class GameEngine{
     Player* m_player;
     Map* m_map;
+    int difficulty;
     //TODO: add setings + scores
 
 public:
@@ -29,7 +30,8 @@ public:
     void startSettings();
     //when you die or something
     void stopGame();
-
+    void setDifficulty(int newDifficulty);
+    int getDifficulty();
     ~GameEngine();
 };
 

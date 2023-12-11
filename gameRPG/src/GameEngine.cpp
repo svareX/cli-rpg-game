@@ -12,7 +12,12 @@ GameEngine::GameEngine() {
     this->m_map = nullptr;
     this->m_player = nullptr;
 }
-
+void GameEngine::setDifficulty(int newDifficulty) {
+    difficulty = newDifficulty;
+}
+int GameEngine::getDifficulty() {
+    return difficulty;
+}
 void GameEngine::startMenu() {
     cout << endl << "*************************" << endl;
     cout << "Play (1)" << endl;
