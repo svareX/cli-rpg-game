@@ -156,6 +156,7 @@ void GameEngine::attackSequence(Enemy *enemy) {
         while (enemyMove == enemyLast) {
             enemyMove = rand() % 3;
         }
+        cout << endl << "E:" <<enemyMove << endl;
         //TODO: ADD DIFICULTY DAMAGE MULTIPLIERS - only on the enemy damage + shield amounts
         //TODO: ADD EQUIPPED ITEM (WEAPON, SHIELD) DAMAGE MULTIPLIERS
         if (playerLast != int(choice)) {
@@ -163,23 +164,11 @@ void GameEngine::attackSequence(Enemy *enemy) {
                 case '1':
                     if (enemyMove == 0) {
                         //oba seknou => oba dostanou dmg
-                        try {
-                            this->m_player->removeHealth(enemy->getDamage());
-                        } catch (GameOverException) {
-                            break;
-                        }
-                        try {
-                            enemy->removeHealth(this->m_player->getDamage());
-                        } catch (DeadEnemyException) {
-                            break;
-                        }
+                        this->m_player->removeHealth(enemy->getDamage() * this->getDifficulty());
+                        enemy->removeHealth(this->m_player->getDamage());
                     } else if (enemyMove == 1) {
                         //hrac sekne & enemy se brani => hrac dostane dmg
-                        try {
-                            this->m_player->removeHealth(this->m_player->getDamage());
-                        } catch (GameOverException) {
-                            break;
-                        }
+                        this->m_player->removeHealth(this->m_player->getDamage() * this->getDifficulty());
                     } else {
                         //hrac seka a enemy dodguje => nic
                     }
@@ -189,11 +178,7 @@ void GameEngine::attackSequence(Enemy *enemy) {
                         //oba se brani => nestane se nic
                     } else if (enemyMove == 0) {
                         //ty se branis & enemy sekne => enemy dostane dmg
-                        try {
-                            enemy->removeHealth(enemy->getDamage());
-                        } catch (DeadEnemyException) {
-                            break;
-                        }
+                        enemy->removeHealth(enemy->getDamage());
                     } else {
                         //hrac se brani a enemy doguje => nic
                     }
@@ -202,6 +187,7 @@ void GameEngine::attackSequence(Enemy *enemy) {
                     //vzdycky nic (akorat nacist previous move)
                     break;
                 case '4':
+                    //TODO: Add inventory selection options (use potion, ...)
                     this->m_player->inventory->printItems();
                     break;
                 case '5':
