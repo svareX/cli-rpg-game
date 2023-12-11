@@ -15,12 +15,12 @@ struct Product{
 class Merchant{
     int m_merchantX;
     int m_merchantY;
-    std::vector <Product> m_items;
+    std::vector <Item*> m_items;
     Map* m_map; //merchant associated with map
 public:
     Merchant(Map* gameMap);
     void displayShop();
-    void buyItem(Product item);
+    void buyItem(Item* product);
     void sellItem(Item* item);
 
     int getMerchantX();

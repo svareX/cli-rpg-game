@@ -33,7 +33,8 @@ public:
     virtual void setQuality(int quality);
 
     virtual std::string getName();
-    virtual std::string getQuality();
+    virtual std::string getQualityName();
+    virtual int getQuality();
     virtual std::string getType();
     virtual bool getIsEquipped();
     virtual void setIsEquipped();
