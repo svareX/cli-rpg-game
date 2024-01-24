@@ -79,3 +79,6 @@ void Player::removeHealth(int health) {
 void Player::setMap(Map* gameMap){
     this->m_map = gameMap;
 }
+
+int Player::getScore(){ return m_score; }
+void Player::setScore(int amount){ m_score += amount; }

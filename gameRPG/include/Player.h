@@ -14,7 +14,7 @@ class Map;
 
 class Player {
 private:
-    int m_health, m_strength;
+    int m_health, m_strength, m_score;
     float m_goldAmount;
     Map* m_map;
 public:
@@ -35,5 +35,7 @@ public:
     float getGoldAmount();
     void setGoldAmount(float gold);
     void setMap(Map* gameMap);
+    int getScore();
+    void setScore(int amount);
 };
 #endif //GAMERPG_PLAYER_H
