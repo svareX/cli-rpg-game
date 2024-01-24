@@ -28,6 +28,8 @@ void Merchant::displayShop(){
     system("cls");
     vector <Item*> playerInventory = m_map->getPlayer()->inventory->itemsInInventory;
     char choice;
+    bool isValidInput = false;
+    int index = 1;
     if (!m_items.empty() || !playerInventory.empty()){
         cout << "Hello, do you wanna buy some items? (B - Buy | S - Sell)" << endl;
         cin >> choice;
@@ -36,20 +38,41 @@ void Merchant::displayShop(){
                 char input;
                 for (auto item : m_items){
                     float m_price = item->getQuality()*10+50;
+                    cout << index << ". Item: " << endl;
                     cout << "Name: " << item->getName() << endl;
                     cout << "Price: " << m_price << endl;
                     cout << "Quality: " << item->getQualityName() << endl;
                     cout << "-----------------------" << endl;
+                    index++;
                 }
                 cout << "Balance: " << m_map->getPlayer()->getGoldAmount() << endl;
+                cout << "What item do you want to buy? (Input number): " << endl;
                 cin >> input;
+                while (!isValidInput) {
+                    if (isdigit(input) && (input - '0') <= m_items.size() && input != '0') {
+                        isValidInput = true;
+                    } else {
+                        cout << "Invalid input. Please enter a valid number from the list." << endl;
+                        cout << "What item do you want to buy? (Input number): " << endl;
+                        cin >> input;
+                    }
+                }
                 buyItem(m_items[(input - '0')-1]);
                 break;
             case 'S':
                 for (auto item: playerInventory){
-                    cout << "Name: " << item->getName() << endl << "--------------------" << endl;
+                    cout << index << ". Item name: " << item->getName() << endl << "--------------------" << endl;
                 }
                 cin >> input;
+                while (!isValidInput) {
+                    if (isdigit(input) && (input - '0') <= m_items.size() && input != '0') {
+                        isValidInput = true;
+                    } else {
+                        cout << "Invalid input. Please enter a valid number from the list." << endl;
+                        cout << "What item do you want to sell? (Input number): " << endl;
+                        cin >> input;
+                    }
+                }
                 sellItem(playerInventory[(input - '0')-1]);
                 break;
             default:

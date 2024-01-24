@@ -19,7 +19,6 @@ vector <QuestGiven> quests = {
         {"Mysterious stranger, a dangerous beast roams the mountains. Defeat it, and I will reward you generously.", beastSkin, 90}
 };
 
-
 using namespace std;
 Quest::Quest(Map* gameMap): m_map(gameMap){
     int rndX = rand()% m_map->getSize();
@@ -56,6 +55,9 @@ void Quest::display(Player* player){
     else{
         if (player->inventory->containsItem(m_questInfo.itemRequired)){
             completeQuest();
+        }
+        else{
+            cout << "You still don't have the required item in your inventory." << endl;
         }
     }
     cout << "Press ENTER to continue..." << endl;
