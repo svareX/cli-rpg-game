@@ -30,7 +30,7 @@ void Merchant::displayShop(){
     char choice;
     bool isValidInput = false;
     int index = 1;
-    if (!m_items.empty() || !playerInventory.empty()){
+    if (!m_items.empty()){
         cout << "Hello, do you wanna buy some items? (B - Buy | S - Sell)" << endl;
         cin >> choice;
         switch (toupper(choice)){
@@ -60,20 +60,28 @@ void Merchant::displayShop(){
                 buyItem(m_items[(input - '0')-1]);
                 break;
             case 'S':
-                for (auto item: playerInventory){
-                    cout << index << ". Item name: " << item->getName() << endl << "--------------------" << endl;
+                if (empty(playerInventory)){
+                    cout << "Your inventory is empty. You can't sell anything.";
+                    cout << "Press ENTER to continue..." << endl;
+                    cin.ignore();
+                    cin.get();
                 }
-                cin >> input;
-                while (!isValidInput) {
-                    if (isdigit(input) && (input - '0') <= m_items.size() && input != '0') {
-                        isValidInput = true;
-                    } else {
-                        cout << "Invalid input. Please enter a valid number from the list." << endl;
-                        cout << "What item do you want to sell? (Input number): " << endl;
-                        cin >> input;
+                else{
+                    for (auto item: playerInventory){
+                        cout << index << ". Item name: " << item->getName() << endl << "--------------------" << endl;
                     }
+                    cin >> input;
+                    while (!isValidInput) {
+                        if (isdigit(input) && (input - '0') <= m_items.size() && input != '0') {
+                            isValidInput = true;
+                        } else {
+                            cout << "Invalid input. Please enter a valid number from the list." << endl;
+                            cout << "What item do you want to sell? (Input number): " << endl;
+                            cin >> input;
+                        }
+                    }
+                    sellItem(playerInventory[(input - '0')-1]);
                 }
-                sellItem(playerInventory[(input - '0')-1]);
                 break;
             default:
                 return;

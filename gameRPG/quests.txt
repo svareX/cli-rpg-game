@@ -1,0 +1,25 @@
+Hello, can you please bring me my amulet? I lost it somewhere in the forest.;Amulet;50
+Good evening to you traveller, can you please help me find my sacred axe? I will pay you accordingly.;Axe;100
+Greetings, brave adventurer! I seek a rare potion. It is said to be hidden in a cave nearby.;Rare Potion;75
+Mysterious stranger, a dangerous beast roams the mountains. Defeat it, and I will reward you generously.;beastSkin;90
+Ahoy there! My ship was wrecked, and I need help recovering the treasure chest. Care to lend a hand?;Treasure Chest;120
+Salutations, kind soul! My prized journal was left behind in a haunted mansion. Could you retrieve it for me?;Enchanted Journal;60
+Hey, traveler! I accidentally dropped my crystal ball in the enchanted lake. Retrieve it, and I'll share a secret prophecy with you.;Crystal Ball;80
+Greetings, adventurer! A mischievous imp stole my family heirloom and hid it in the deep caverns. Can you retrieve it?;Family Heirloom;70
+Good day! My favorite quill has gone missing in the bustling marketplace. Help me find it, and I'll reward you handsomely.;Quill;45
+Ho there! An ancient map was taken by a group of bandits. Retrieve it from their hideout, and you'll be well compensated.;Ancient Map;110
+Excuse me, friend! I left my lucky charm in the sunken temple. Bring it back, and luck will surely favor you.;Lucky Charm;55
+Well met, adventurer! I misplaced my musical instrument in the enchanted grove. Find it, and a melody of gratitude shall be yours.;Musical Instrument;65
+Greetings, kind soul! My rare flower collection was scattered by a gust of wind. Gather them, and I'll reward your efforts.;Rare Flowers;50
+Hello, brave one! A group of mischievous sprites stole my magical staff. Retrieve it from their hideout in the magical glade.;Magical Staff;95
+Hey, traveler! I was picnicking by the river, and my favorite picnic blanket was carried away by the current. Retrieve it for me, won't you?;Picnic Blanket;40
+Salutations, adventurer! I lost my ornate mask during the masquerade ball. Find it, and I'll share the secrets of the masked society.;Ornate Mask;75
+Greetings, good soul! A rare gemstone was taken by a thieving raven. Track it down in the mountain peaks and bring it back to me.;Gemstone;85
+Good morrow! My antique pocket watch was stolen by a mischievous gnome. Track down the gnome's hideout and retrieve it for me.;Pocket Watch;55
+Ahoy, matey! I dropped my treasure map on the deserted island. Help me find it, and we'll split the treasure's bounty.;Treasure Map;100
+Hail, adventurer! A mischievous poltergeist hid my enchanted mirror in the haunted mansion. Retrieve it, and I'll grant you a glimpse of your destiny.;Enchanted Mirror;90
+Well met, kind-hearted one! My collection of rare feathers was scattered by a sudden gust of wind. Can you gather them for me?;Rare Feathers;50
+Greetings, brave soul! I left my telescope on the mountain summit. Retrieve it, and you'll be able to stargaze with unparalleled clarity.;Telescope;70
+Salutations, traveler! A rare herb grows in the heart of the mystical forest. Bring it to me, and I'll brew a potion of great fortune for you.;Rare Herb;65
+Good day! My magical crystal ball was taken by a mischievous sprite. Retrieve it from their hideout in the ancient ruins.;Magical Crystal Ball;80
+Greetings, kind adventurer! I accidentally dropped my enchanted necklace in the labyrinth. Navigate through its twists and turns to retrieve it, and I'll reward you handsomely.;Enchanted Necklace;95

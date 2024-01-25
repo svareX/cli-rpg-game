@@ -3,31 +3,45 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 #include <algorithm>
-
-Item* amulet = new Item("Amulet", 50);
-Item* axe = new Item("Axe", 100);
-Item* rarePotion = new Item("Rare Potion", 75);
-Item* treasureChest = new Item("Treasure Chest", 120);
-Item* beastSkin = new Item("Beast Skin", 90);
-
-vector <QuestGiven> quests = {
-        {"Hello, can you please bring me my amulet? I lost it somewhere in the forest.", amulet, 50},
-        {"Good evening to you traveller, can you please help me find my sacred axe? I will pay you accordingly.", axe, 100},
-        {"Greetings, brave adventurer! I seek a rare potion. It is said to be hidden in a cave nearby.", rarePotion, 75},
-        {"Ahoy there! My ship was wrecked, and I need help recovering the treasure chest. Care to lend a hand?", treasureChest, 120},
-        {"Mysterious stranger, a dangerous beast roams the mountains. Defeat it, and I will reward you generously.", beastSkin, 90}
-};
+#include <sstream>
 
 using namespace std;
+
+QuestGiven getQuestFromFile(){
+    QuestGiven qg;
+    ifstream file("../quests.txt");
+
+    string lines[25];
+    int count = 0;
+    while (getline(file, lines[count])) {
+        count++;
+    }
+    int randomNum = rand() % count;
+    string task; string itemName; int gold;
+    file.close();
+    stringstream lineStream(lines[randomNum]);
+    getline(lineStream, task, ';');
+    getline(lineStream, itemName, ';');
+    lineStream >> gold;
+
+    qg.task = task;
+    Item* item = new Item(itemName);
+    qg.itemRequired = item;
+    qg.goldAmount = gold;
+    return qg;
+}
 Quest::Quest(Map* gameMap): m_map(gameMap){
     int rndX = rand()% m_map->getSize();
     int rndY = rand()% m_map->getSize();
-    int random = rand()%quests.size();
+//    int random = rand()%quests.size();
     m_questGiverX = rndX;
     m_questGiverY = rndY;
-    m_questInfo = quests[random];
-    quests.erase(quests.begin() + random);
+    ifstream file("../quests.txt");
+    m_questInfo = getQuestFromFile();
+//    m_questInfo = quests[random];
+//    quests.erase(quests.begin() + random);
     m_questInfo.status = NotAccepted;
     m_map->addQuestToMap(this);
 }
@@ -108,6 +122,7 @@ void Quest::completeQuest(){
     player->setScore(player->getScore()+1);
     cout << "You handed over: " << this->m_questInfo.itemRequired->getName() << endl;
     auto questItem = find(m_map->getPlayer()->inventory->itemsInInventory.begin(), m_map->getPlayer()->inventory->itemsInInventory.end(), m_questInfo.itemRequired);
-    m_map->getPlayer()->inventory->itemsInInventory.erase(questItem);
+    player->inventory->itemsInInventory.erase(questItem);
+    player->setGoldAmount(player->getGoldAmount()+this->m_questInfo.goldAmount);
     cout << "Thank you for your help." << endl;
 }
