@@ -23,12 +23,13 @@ Map::Map(){
         m_gameMap.push_back(row);
     }
     this->spawnRandomObjects(5);
-    this->spawnEnemies(3);
+    this->spawnEnemies(1);
 }
 
 void Map::resetMap() {
     m_gameMap.clear();
     m_enemies.clear();
+    m_quests.clear();
     //TODO need to redo this to avoid code duplication
     for (int i = 0; i < m_size; i++) {
         vector<char> row(m_size, '.');
@@ -37,7 +38,19 @@ void Map::resetMap() {
     setPlayerX(0);
     setPlayerY(0);
     spawnRandomObjects(5);
-    spawnEnemies(3 * currentLevel);
+    spawnEnemies(2 * currentLevel);
+    //TODO fix err 139
+    //spawnQuests(currentLevel);
+}
+
+
+//TODO fix this
+void Map::spawnQuests(int level) {
+    for (int i = 0; i < 2 * level; i++) {
+        Quest* newQuest = new Quest(this);
+        m_gameMap[newQuest->getQuestGiverY()][newQuest->getQuestGiverX()] = 'Q';
+        m_quests.push_back(newQuest);
+    }
 }
 
 void Map::nextLevel() {
