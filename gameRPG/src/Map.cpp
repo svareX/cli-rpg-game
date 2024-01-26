@@ -50,6 +50,15 @@ void Map::nextLevel() {
     }
 }
 
+void Map::checkLevelCompletion() {
+    if (m_enemies.empty() && !levelCompleted) {
+        levelCompleted = true;
+        //TODO try to find a better way to do this
+        m_gameMap[m_size - 1][m_size - 1] = 'L';
+    }
+}
+
+
 void Map::spawnRandomObjects(int objNumber) {
     for (int i = 0; i < objNumber; ++i) {
         int x = rand() % m_size;
