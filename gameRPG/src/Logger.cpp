@@ -1,6 +1,6 @@
 #include "../include/Logger.h"
 
-Logger Logger::m_instance;  // Static instance initialization
+Logger Logger::m_instance;
 
 Logger::Logger() {
     m_logFile.open("../log.txt", std::ios::out | std::ios::trunc);

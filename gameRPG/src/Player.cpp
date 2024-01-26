@@ -66,7 +66,7 @@ int Player::getDamage() {
     }
     return m_strength;
 }
-float Player::getGoldAmount() { return m_goldAmount;}
+int Player::getGoldAmount() { return m_goldAmount;}
 void Player::setGoldAmount(float gold) { m_goldAmount = gold;}
 
 void Player::removeHealth(int health) {

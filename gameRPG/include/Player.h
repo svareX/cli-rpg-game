@@ -32,7 +32,7 @@ public:
     void setPlayerY(int y);
     int getHealth();
     int getDamage();
-    float getGoldAmount();
+    int getGoldAmount();
     void setGoldAmount(float gold);
     void setMap(Map* gameMap);
     int getScore();

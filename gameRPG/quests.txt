@@ -1,7 +1,7 @@
 Hello, can you please bring me my amulet? I lost it somewhere in the forest.;Amulet;50
 Good evening to you traveller, can you please help me find my sacred axe? I will pay you accordingly.;Axe;100
 Greetings, brave adventurer! I seek a rare potion. It is said to be hidden in a cave nearby.;Rare Potion;75
-Mysterious stranger, a dangerous beast roams the mountains. Defeat it, and I will reward you generously.;beastSkin;90
+Mysterious stranger, a dangerous beast roams the mountains. Defeat it, and I will reward you generously.;Beast Skin;90
 Ahoy there! My ship was wrecked, and I need help recovering the treasure chest. Care to lend a hand?;Treasure Chest;120
 Salutations, kind soul! My prized journal was left behind in a haunted mansion. Could you retrieve it for me?;Enchanted Journal;60
 Hey, traveler! I accidentally dropped my crystal ball in the enchanted lake. Retrieve it, and I'll share a secret prophecy with you.;Crystal Ball;80
