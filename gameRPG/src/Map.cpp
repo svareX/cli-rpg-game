@@ -26,6 +26,21 @@ Map::Map(){
     this->spawnEnemies(3);
 }
 
+void Map::resetMap() {
+    m_gameMap.clear();
+    m_enemies.clear();
+    //TODO need to redo this to avoid code duplication
+    for (int i = 0; i < m_size; i++) {
+        vector<char> row(m_size, '.');
+        m_gameMap.push_back(row);
+    }
+    setPlayerX(0);
+    setPlayerY(0);
+    spawnRandomObjects(5);
+    spawnEnemies(3 * currentLevel);
+}
+
+
 void Map::spawnRandomObjects(int objNumber) {
     for (int i = 0; i < objNumber; ++i) {
         int x = rand() % m_size;
