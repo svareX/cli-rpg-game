@@ -41,6 +41,7 @@ public:
     void resetMap();
     void nextLevel();
     void checkLevelCompletion();
+    void attemptLevelTransition(int x, int y);
     void setPlayerCoordinates(int x, int y);
     void displayMap();
     void movePlayer(char move);

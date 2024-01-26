@@ -58,6 +58,12 @@ void Map::checkLevelCompletion() {
     }
 }
 
+void Map::attemptLevelTransition(int x, int y) {
+    if (levelCompleted && x == m_size - 1 && y == m_size - 1) {
+        nextLevel();
+    }
+}
+
 
 void Map::spawnRandomObjects(int objNumber) {
     for (int i = 0; i < objNumber; ++i) {
