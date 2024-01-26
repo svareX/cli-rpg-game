@@ -15,7 +15,7 @@ using namespace std;
 Map::Map(){
     currentLevel = 1;
     levelCompleted = false;
-    this->m_size = 10;
+    this->m_size = 5;
     this->setPlayerX(0);
     this->setPlayerY(0);
     for(int i = 0; i < m_size; i++){
@@ -50,12 +50,23 @@ void Map::nextLevel() {
     }
 }
 
+void Map::removeDefeatedEnemies() {
+    m_enemies.erase(std::remove_if(m_enemies.begin(), m_enemies.end(),
+   [](Enemy* enemy) { return enemy->getHealth() <= 0; }),
+    m_enemies.end());
+}
+
 void Map::checkLevelCompletion() {
+    removeDefeatedEnemies();
     if (m_enemies.empty() && !levelCompleted) {
         levelCompleted = true;
         //TODO try to find a better way to do this
         m_gameMap[m_size - 1][m_size - 1] = 'L';
+    } else {
+        cout << "Enemies remaining: " << m_enemies.size() << endl;
     }
+
+    displayMap();
 }
 
 void Map::attemptLevelTransition(int x, int y) {
@@ -187,6 +198,7 @@ void Map::displayMap(){
 }
 
 void Map::movePlayer(char move) {
+    if(!(getPlayer()->getHealth() <= 0)){
     switch (toupper(move)) {
         case 'W':
             if (getPlayerY() > 0) {
@@ -222,6 +234,11 @@ void Map::movePlayer(char move) {
         case 'I':
             getPlayer()->inventory->printItems();
             break;
+    }
+    }
+    else{
+        std::cerr << "Player is dead, you can't move while you are dead" << std::endl;
+        //TODO break the program when this happens
     }
     checkCollision();
     checkLevelCompletion();

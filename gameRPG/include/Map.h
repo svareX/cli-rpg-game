@@ -42,6 +42,7 @@ public:
     void nextLevel();
     void checkLevelCompletion();
     void attemptLevelTransition(int x, int y);
+    void removeDefeatedEnemies();
     void setPlayerCoordinates(int x, int y);
     void displayMap();
     void movePlayer(char move);
