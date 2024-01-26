@@ -224,6 +224,8 @@ void Map::movePlayer(char move) {
             break;
     }
     checkCollision();
+    checkLevelCompletion();
+    attemptLevelTransition(getPlayerX(), getPlayerY());
     system("CLS");
 }
 int Map::getSize() {
