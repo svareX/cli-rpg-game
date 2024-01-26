@@ -13,6 +13,8 @@ using namespace std;
 
 
 Map::Map(){
+    currentLevel = 1;
+    levelCompleted = false;
     this->m_size = 10;
     this->setPlayerX(0);
     this->setPlayerY(0);

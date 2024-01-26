@@ -27,7 +27,9 @@ class Map {
     int m_playerY;
     int m_size;
     Player* m_player;
-
+    int currentLevel;
+    const int totalLevels = 3;
+    bool levelCompleted;
 public:
     Map();
     void spawnRandomObjects(int objNumber);
