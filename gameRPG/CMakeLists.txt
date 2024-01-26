@@ -22,4 +22,6 @@ add_executable(gameRPG
         src/Enemy.cpp
         src/Inventory.cpp
         src/Shield.cpp
+        include/Logger.h
+        src/Logger.cpp
 )

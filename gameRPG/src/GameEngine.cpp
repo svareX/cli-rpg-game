@@ -7,6 +7,7 @@
 #include "../include/exceptions/EnemyException.h"
 #include "../include/exceptions/GameOverException.h"
 #include "../include/exceptions/DeadEnemyException.h"
+#include "../include/Logger.h"
 
 using namespace std;
 
@@ -82,6 +83,7 @@ void GameEngine::startGame() {
             this->m_map->movePlayer(input);
         } catch (BorderException borderException) {
             cout << "Border hit";
+            Logger::getInstance().log("[ERROR] You hit the map border.");
         } catch (EnemyException enemyException) {
             try {
                 this->attackSequence(this->m_map->findEnemy(
@@ -126,6 +128,7 @@ void GameEngine::attackSequence(Enemy *enemy) {
     system("cls");
     char choice;
     cout << "You have encountered an enemy. Do you wanna fight? ";
+    Logger::getInstance().log("[COMBAT START] You have encountered an enemy. PLAYER HEALTH: " + to_string(this->m_player->getHealth()) + " | ENEMY HEALTH: " + to_string(enemy->getHealth()));
     cin >> choice;
     if (toupper(choice) == 'N') {
         /*
@@ -165,21 +168,27 @@ void GameEngine::attackSequence(Enemy *enemy) {
                         //oba seknou => oba dostanou dmg
                         this->m_player->removeHealth(enemy->getDamage() * this->getDifficulty());
                         enemy->removeHealth(this->m_player->getDamage());
+                        Logger::getInstance().log("[COMBAT] You and enemy attacked each other. PLAYER HEALTH: " + to_string(this->m_player->getHealth()) + " | ENEMY HEALTH: " + to_string(enemy->getHealth()));
                     } else if (enemyMove == 1) {
                         //hrac sekne & enemy se brani => hrac dostane dmg
                         this->m_player->removeHealth(this->m_player->getDamage() * this->getDifficulty());
+                        Logger::getInstance().log("[COMBAT] Enemy reflected your attack. PLAYER HEALTH: " + to_string(this->m_player->getHealth()));
                     } else {
                         //hrac seka a enemy dodguje => nic
+                        Logger::getInstance().log("[COMBAT] Player attacked, enemy dodged, nothing happened.");
                     }
                     break;
                 case '2':
                     if (enemyMove == 1) {
+                        Logger::getInstance().log("[COMBAT] Player and enemy blocked, nothing happened.");
                         //oba se brani => nestane se nic
                     } else if (enemyMove == 0) {
                         //ty se branis & enemy sekne => enemy dostane dmg
                         enemy->removeHealth(enemy->getDamage());
+                        Logger::getInstance().log("[COMBAT] Player reflected enemy's attack. ENEMY HEALTH: " + to_string(enemy->getHealth()));
                     } else {
                         //hrac se brani a enemy doguje => nic
+                        Logger::getInstance().log("[COMBAT] Player blocked, enemy dodged, nothing happened.");
                     }
                     break;
                 case '3':
@@ -197,11 +206,11 @@ void GameEngine::attackSequence(Enemy *enemy) {
                      * hard - 10%
                      */
                     if (this->getDifficulty() == 1) {
-                        if (rand() % 10 == 0 || rand() % 10 == 1 || rand() % 10 == 2) return;
+                        if (rand() % 10 == 0 || rand() % 10 == 1 || rand() % 10 == 2) Logger::getInstance().log("[COMBAT END] Player escaped the combat."); return;
                     } else if (this->getDifficulty() == 2) {
-                        if (rand() % 10 == 0 || rand() % 10 == 1) return;
+                        if (rand() % 10 == 0 || rand() % 10 == 1) Logger::getInstance().log("[COMBAT END] Player escaped the combat."); return;
                     } else {
-                        if (rand() % 10 == 0) return;
+                        if (rand() % 10 == 0) Logger::getInstance().log("[COMBAT END] Player escaped the combat."); return;
                     }
                     break;
                 default:
@@ -216,10 +225,13 @@ void GameEngine::attackSequence(Enemy *enemy) {
     }
     if (m_player->getHealth() > 0) {
         cout << "Enemy has been slain." << endl;
+        Logger::getInstance().log("[COMBAT END] Enemy has been slain.");
         this->m_map->changeMap(enemy->getEnemyX(), enemy->getEnemyY(), '.');
         this->addScore(enemy);
     } else {
         cout << "You have died." << endl;
+        Logger::getInstance().log("[COMBAT END] You have died.");
+        Logger::getInstance().log("[GAME OVER] FINAL SCORE: " + to_string(m_player->getScore()));
         cout << "Your final score: " << this->getScore();
     }
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../include/Inventory.h"
+#include "../include/Logger.h"
 using namespace std;
 
 Inventory::Inventory(){
@@ -12,6 +13,7 @@ void Inventory::addItem(Item* item) {
     if (!containsItem(item)) {
         itemsInInventory.push_back(item);
         cout << "Added " << item->getName() << " to the inventory." << endl;
+        Logger::getInstance().log("[ITEM] You picked up an item: " + item->getName());
     } else {
         cout << item->getName() << " is already in the inventory." << endl;
     }

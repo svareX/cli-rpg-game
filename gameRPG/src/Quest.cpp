@@ -1,5 +1,6 @@
 #include "../include/Quest.h"
 #include "../include/Map.h"
+#include "../include/Logger.h"
 #include <vector>
 #include <cstdlib>
 #include <ctime>
@@ -125,4 +126,5 @@ void Quest::completeQuest(){
     player->inventory->itemsInInventory.erase(questItem);
     player->setGoldAmount(player->getGoldAmount()+this->m_questInfo.goldAmount);
     cout << "Thank you for your help." << endl;
+    Logger::getInstance().log("[QUEST] You completed a quest!");
 }
