@@ -39,6 +39,7 @@ public:
     void setPlayerX(int x);
     void setPlayerY(int y);
     void resetMap();
+    void nextLevel();
     void setPlayerCoordinates(int x, int y);
     void displayMap();
     void movePlayer(char move);

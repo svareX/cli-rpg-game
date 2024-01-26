@@ -40,6 +40,15 @@ void Map::resetMap() {
     spawnEnemies(3 * currentLevel);
 }
 
+void Map::nextLevel() {
+    if (currentLevel < totalLevels) {
+        currentLevel++;
+        resetMap();
+        levelCompleted = false;
+    } else {
+        cout << "You finished all levels, congratulations!" << endl;
+    }
+}
 
 void Map::spawnRandomObjects(int objNumber) {
     for (int i = 0; i < objNumber; ++i) {
