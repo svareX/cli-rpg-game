@@ -1,6 +1,9 @@
 #include <iostream>
+#include <map>
 #include "../include/Inventory.h"
 #include "../include/Logger.h"
+#include "../include/Player.h"
+#include "../include/Item.h"
 using namespace std;
 
 Inventory::Inventory(){
@@ -51,8 +54,10 @@ void Inventory::equipItem(Item* item) {
 void Inventory::printItems(){
     system("CLS");
     if (!itemsInInventory.empty()){
+        int itemNumber = 1;
         for (auto item : itemsInInventory){
-            cout << item->getName() << endl;
+            cout << itemNumber << ". " << item->getName() << endl;
+            itemNumber++;
         }
     }
     else{
@@ -63,19 +68,50 @@ void Inventory::printItems(){
     cin.get();
 }
 
+
 void Inventory::equipWeapon(Weapon* weapon) {
-    equippedWeapon = weapon;
-    weapon->setIsEquipped();
+    if (equippedWeapon != nullptr) {
+        if (weapon->getQuality() > equippedWeapon->getQuality()) {
+            itemsInInventory.push_back(equippedWeapon);
+            equippedWeapon->setIsEquipped(false);
+            equippedWeapon = weapon;
+            equippedWeapon->setIsEquipped(true);
+        } else {
+            itemsInInventory.push_back(weapon);
+        }
+    } else {
+        equippedWeapon = weapon;
+        equippedWeapon->setIsEquipped(true);
+    }
 }
 
+
 void Inventory::equipShield(Shield* shield) {
-    equippedShield = shield;
-    shield->setIsEquipped();
+    if (equippedShield != nullptr) {
+        if (shield->getQuality() > equippedShield->getQuality()) {
+            itemsInInventory.push_back(equippedShield);
+            equippedShield->setIsEquipped(false);
+
+            equippedShield = shield;
+            equippedShield->setIsEquipped(true);
+        } else {
+            itemsInInventory.push_back(shield);
+        }
+    } else {
+        equippedShield = shield;
+        equippedShield->setIsEquipped(true);
+    }
 }
+
 
 void Inventory::equipPotion(Potion* potion) {
     equippedPotion = potion;
-    potion->setIsEquipped();
+    potion->setIsEquipped(true);
+}
+void Inventory::usePotion(Potion* potion, Player* player) {
+    if (player) {
+        player->addHealth(potion->getHeal());
+    }
 }
 
 Weapon* Inventory::getEquippedWeapon() {

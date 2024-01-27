@@ -6,8 +6,10 @@
 #include "Weapon.h"
 #include "Shield.h"
 #include "Potion.h"
+#include "Player.h"
 
 using namespace std;
+class Player;
 
 class Inventory {
 public:
@@ -20,13 +22,18 @@ public:
     Potion* getEquippedPotion();
     bool containsItem(Item* item);
     vector<Item*> itemsInInventory;
+
+    void equipShield(Shield* shield);
+
+    void equipWeapon(Weapon* weapon);
+
+    void usePotion(Potion* potion, Player* player);
+
 private:
     Weapon* equippedWeapon;
     Shield* equippedShield;
     Potion* equippedPotion;
 
-    void equipWeapon(Weapon* weapon);
-    void equipShield(Shield* shield);
     void equipPotion(Potion* potion);
 };
 
