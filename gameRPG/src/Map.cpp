@@ -241,6 +241,26 @@ void Map::movePlayer(char move) {
             break;
         case 'I':
             getPlayer()->inventory->printItems();
+            cout << "Enter the number of the item to use/equip: ";
+            int itemNumber;
+            cin >> itemNumber;
+
+            if(itemNumber > 0 && itemNumber <= getPlayer()->inventory->itemsInInventory.size()) {
+                Item* selectedItem = getPlayer()->inventory->itemsInInventory[itemNumber - 1];
+                string itemType = selectedItem->getType();
+
+                if (itemType == "Weapon") {
+                    getPlayer()->inventory->equipWeapon(dynamic_cast<Weapon*>(selectedItem));
+                } else if (itemType == "Shield") {
+                    getPlayer()->inventory->equipShield(dynamic_cast<Shield*>(selectedItem));
+                } else if (itemType == "Potion") {
+                    getPlayer()->inventory->usePotion(dynamic_cast<Potion*>(selectedItem), getPlayer());
+                } else {
+                    cout << "Invalid item type." << endl;
+                }
+            } else {
+                cout << "Invalid item number." << endl;
+            }
             break;
     }
     }

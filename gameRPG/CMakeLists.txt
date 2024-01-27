@@ -24,4 +24,5 @@ add_executable(gameRPG
         src/Shield.cpp
         include/Logger.h
         src/Logger.cpp
+        src/Potion.cpp
 )
