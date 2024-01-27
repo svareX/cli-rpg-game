@@ -39,19 +39,17 @@ void Map::resetMap() {
     setPlayerY(0);
     spawnRandomObjects(5);
     spawnEnemies(2 * currentLevel);
-    //TODO fix err 139
-    //spawnQuests(currentLevel);
-}
-
-
-//TODO fix this
-void Map::spawnQuests(int level) {
-    for (int i = 0; i < 2 * level; i++) {
+    srand(time(NULL));
+    int numberOfQuests = rand() % 5 + 1;
+    for (int i = 0; i < numberOfQuests; i++) {
         Quest* newQuest = new Quest(this);
-        m_gameMap[newQuest->getQuestGiverY()][newQuest->getQuestGiverX()] = 'Q';
-        m_quests.push_back(newQuest);
-    }
-}
+        int questGiverX = newQuest->getQuestGiverX();
+        int questGiverY = newQuest->getQuestGiverY();
+        if (m_gameMap[questGiverY][questGiverX] == '.') {
+            addQuestToMap(newQuest);
+            m_quests.push_back(newQuest);
+        }
+    }}
 
 void Map::nextLevel() {
     if (currentLevel < totalLevels) {
@@ -125,7 +123,7 @@ void Map::spawnEnemies(int numEnemies) {
         do {
             x = std::rand() % m_size;
             y = std::rand() % m_size;
-        } while (m_gameMap[x][y] != '.');
+        } while (m_gameMap[x][y] != '.' || (x == getPlayerX() && y == getPlayerY()));
 
         Enemy* enemy = new Enemy(rand()%11+40, rand()%11+5, x, y);
         m_enemies.push_back(enemy);
