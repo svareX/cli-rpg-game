@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <algorithm>
 #include "../include/Map.h"
 #include "../include/Inventory.h"
 #include "../include/Player.h"
@@ -15,7 +16,7 @@ using namespace std;
 Map::Map(){
     currentLevel = 1;
     levelCompleted = false;
-    this->m_size = 5;
+    this->m_size = 10;
     this->setPlayerX(0);
     this->setPlayerY(0);
     for(int i = 0; i < m_size; i++){
@@ -62,13 +63,13 @@ void Map::nextLevel() {
 
 void Map::removeDefeatedEnemies() {
     m_enemies.erase(std::remove_if(m_enemies.begin(), m_enemies.end(),
-   [](Enemy* enemy) { return enemy->getHealth() <= 0; }),
-    m_enemies.end());
+                                   [](Enemy* enemy) { return enemy->getHealth() <= 0; }),
+                    m_enemies.end());
 }
 
 void Map::checkLevelCompletion() {
     removeDefeatedEnemies();
-    if (m_enemies.empty() && !levelCompleted) {
+    if (m_enemies.empty() && m_quests.empty() && !levelCompleted) {
         levelCompleted = true;
         //TODO try to find a better way to do this
         m_gameMap[m_size - 1][m_size - 1] = 'L';
@@ -176,9 +177,6 @@ int Map::getPlayerX() {
 int Map::getPlayerY() {
     return this->m_playerY;
 }
-
-//TODO: Add a method that checks if you can actually set that field as the players coordinates (if theres is an enemy, structure
-// or if it is just out of bounds) + negative numbers
 
 void Map::setPlayerX(int x) {
     this->m_playerX = x;
