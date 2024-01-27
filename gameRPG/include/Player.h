@@ -11,7 +11,7 @@
 
 class Quest;
 class Map;
-
+class Inventory;
 class Player {
 private:
     int m_health, m_strength, m_score;
@@ -25,6 +25,7 @@ public:
     Player(Map* gameMap);
     void movePlayer(char move);
     void setHealth(int h);
+    void addHealth(int h);
     void removeHealth(int h);
     void acceptQuest(Quest* quest);
     void printQuestList();

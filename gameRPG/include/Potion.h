@@ -9,15 +9,12 @@
 
 class Potion : public Item {
     std::string m_name;
-    float m_damage;
     float m_heal;
 
 public:
     Potion();
-    Potion(std::string name, float damage, float heal);
-
-    float getDamage();
-    float getHeal();
+    Potion(std::string name, float heal);
+    int getHeal();
     void printInfo();
 
     ~Potion();

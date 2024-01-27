@@ -59,7 +59,9 @@ void Player::printQuestList(){
     cin.get();
 }
 void Player::setHealth(int h) { m_health = h; }
+void Player::addHealth(int h) {m_health += h; }
 int Player::getHealth() { return m_health; }
+
 int Player::getDamage() {
     if (this->inventory->getEquippedWeapon() != nullptr) {
         return m_strength + this->inventory->getEquippedWeapon()->getDamage();
