@@ -13,7 +13,9 @@ using namespace std;
 
 
 Map::Map(){
-    this->m_size = 10;
+    currentLevel = 1;
+    levelCompleted = false;
+    this->m_size = 5;
     this->setPlayerX(0);
     this->setPlayerY(0);
     for(int i = 0; i < m_size; i++){
@@ -21,8 +23,68 @@ Map::Map(){
         m_gameMap.push_back(row);
     }
     this->spawnRandomObjects(5);
-    this->spawnEnemies(3);
+    this->spawnEnemies(1);
 }
+
+void Map::resetMap() {
+    m_gameMap.clear();
+    m_enemies.clear();
+    m_quests.clear();
+    //TODO need to redo this to avoid code duplication
+    for (int i = 0; i < m_size; i++) {
+        vector<char> row(m_size, '.');
+        m_gameMap.push_back(row);
+    }
+    setPlayerX(0);
+    setPlayerY(0);
+    spawnRandomObjects(5);
+    spawnEnemies(2 * currentLevel);
+    srand(time(NULL));
+    int numberOfQuests = rand() % 5 + 1;
+    for (int i = 0; i < numberOfQuests; i++) {
+        Quest* newQuest = new Quest(this);
+        int questGiverX = newQuest->getQuestGiverX();
+        int questGiverY = newQuest->getQuestGiverY();
+        if (m_gameMap[questGiverY][questGiverX] == '.') {
+            addQuestToMap(newQuest);
+        }
+    }}
+
+void Map::nextLevel() {
+    if (currentLevel < totalLevels) {
+        currentLevel++;
+        resetMap();
+        levelCompleted = false;
+    } else {
+        cout << "You finished all levels, congratulations!" << endl;
+    }
+}
+
+void Map::removeDefeatedEnemies() {
+    m_enemies.erase(std::remove_if(m_enemies.begin(), m_enemies.end(),
+   [](Enemy* enemy) { return enemy->getHealth() <= 0; }),
+    m_enemies.end());
+}
+
+void Map::checkLevelCompletion() {
+    removeDefeatedEnemies();
+    if (m_enemies.empty() && !levelCompleted) {
+        levelCompleted = true;
+        //TODO try to find a better way to do this
+        m_gameMap[m_size - 1][m_size - 1] = 'L';
+    } else {
+        cout << "Enemies remaining: " << m_enemies.size() << endl;
+    }
+
+    displayMap();
+}
+
+void Map::attemptLevelTransition(int x, int y) {
+    if (levelCompleted && x == m_size - 1 && y == m_size - 1) {
+        nextLevel();
+    }
+}
+
 
 void Map::spawnRandomObjects(int objNumber) {
     for (int i = 0; i < objNumber; ++i) {
@@ -60,7 +122,7 @@ void Map::spawnEnemies(int numEnemies) {
         do {
             x = std::rand() % m_size;
             y = std::rand() % m_size;
-        } while (m_gameMap[x][y] != '.');
+        } while (m_gameMap[x][y] != '.' || (x == getPlayerX() && y == getPlayerY()));
 
         Enemy* enemy = new Enemy(rand()%11+40, rand()%11+5, x, y);
         m_enemies.push_back(enemy);
@@ -146,6 +208,7 @@ void Map::displayMap(){
 }
 
 void Map::movePlayer(char move) {
+    if(!(getPlayer()->getHealth() <= 0)){
     switch (toupper(move)) {
         case 'W':
             if (getPlayerY() > 0) {
@@ -182,7 +245,14 @@ void Map::movePlayer(char move) {
             getPlayer()->inventory->printItems();
             break;
     }
+    }
+    else{
+        std::cerr << "Player is dead, you can't move while you are dead" << std::endl;
+        //TODO break the program when this happens
+    }
     checkCollision();
+    checkLevelCompletion();
+    attemptLevelTransition(getPlayerX(), getPlayerY());
     system("CLS");
 }
 int Map::getSize() {

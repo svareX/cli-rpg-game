@@ -27,7 +27,9 @@ class Map {
     int m_playerY;
     int m_size;
     Player* m_player;
-
+    int currentLevel;
+    const int totalLevels = 3;
+    bool levelCompleted;
 public:
     Map();
     void spawnRandomObjects(int objNumber);
@@ -36,6 +38,12 @@ public:
     void changeMap(int x,int y,char z);
     void setPlayerX(int x);
     void setPlayerY(int y);
+    void resetMap();
+    void nextLevel();
+    void checkLevelCompletion();
+    void attemptLevelTransition(int x, int y);
+    void removeDefeatedEnemies();
+    void spawnQuests(int level);
     void setPlayerCoordinates(int x, int y);
     void displayMap();
     void movePlayer(char move);
