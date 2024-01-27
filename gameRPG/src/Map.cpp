@@ -47,7 +47,6 @@ void Map::resetMap() {
         int questGiverY = newQuest->getQuestGiverY();
         if (m_gameMap[questGiverY][questGiverX] == '.') {
             addQuestToMap(newQuest);
-            m_quests.push_back(newQuest);
         }
     }}
 
