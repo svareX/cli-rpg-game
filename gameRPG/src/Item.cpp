@@ -1,5 +1,6 @@
 #include "../include/Item.h"
 #include <string>
+#include <map>
 
 using namespace std;
 
@@ -30,11 +31,12 @@ std::string Item::getQualityName() {
         quality = "Common";
     } else if (this->m_quality == 1) {
         quality = "Rare";
-    } else {
+    } else if (this->m_quality == 2) {
         quality = "Epic";
     }
     return quality;
 }
+
 int Item::getQuality() {
     return m_quality;
 }
@@ -58,8 +60,8 @@ bool Item::getIsEquipped() {
     return m_is_equipped;
 }
 
-void Item::setIsEquipped() {
-    this->m_is_equipped = true;
+void Item::setIsEquipped(bool a) {
+    this->m_is_equipped = a;
 }
 
 void Item::setQuality(int quality) {

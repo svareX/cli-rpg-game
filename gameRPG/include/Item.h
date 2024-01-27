@@ -31,13 +31,12 @@ public:
     Item(std::string name, Quality quality);
 
     virtual void setQuality(int quality);
-
     virtual std::string getName();
     virtual std::string getQualityName();
     virtual int getQuality();
     virtual std::string getType();
     virtual bool getIsEquipped();
-    virtual void setIsEquipped();
+    virtual void setIsEquipped(bool a);
 };
 
 #endif //GAMERPG_ITEM_H
