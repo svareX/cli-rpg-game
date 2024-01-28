@@ -6,12 +6,6 @@
 #include "Map.h"
 using namespace std;
 
-struct Product{
-    Item* m_item;
-    float m_goldAmount;
-};
-
-
 class Merchant{
     int m_merchantX;
     int m_merchantY;
@@ -25,7 +19,6 @@ public:
 
     int getMerchantX();
     int getMerchantY();
-    // add global function addToMap to GameEngine, parameters: coordinates X&Y and an object
 };
 
 #endif //GAMERPG_MERCHANT_H

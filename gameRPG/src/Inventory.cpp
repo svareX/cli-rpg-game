@@ -9,7 +9,6 @@ using namespace std;
 Inventory::Inventory(){
     this->equippedWeapon = nullptr;
     this->equippedShield = nullptr;
-    this->equippedPotion = nullptr;
 }
 void Inventory::addItem(Item* item) {
     system("CLS");
@@ -43,9 +42,6 @@ void Inventory::equipItem(Item* item) {
     {
         equipShield(dynamic_cast<Shield*>(item));
     }
-    else if(item->getType()=="Potion"){
-        equipPotion(dynamic_cast<Potion*>(item));
-    }
     else{
         cout << "Cannot equip item of unknown type." << endl;
     }
@@ -53,6 +49,18 @@ void Inventory::equipItem(Item* item) {
 
 void Inventory::printItems(){
     system("CLS");
+    if (equippedWeapon == nullptr){
+        cout << "Equipped weapon: None" << endl;
+    } else{
+        cout << "Equipped weapon: " << equippedWeapon->getName() << endl;
+    }
+
+    if (equippedShield == nullptr){
+        cout << "Equipped shield: None" << endl;
+    } else{
+        cout << "Equipped shield: " << equippedShield->getName() << endl;
+    }
+    cout << endl;
     if (!itemsInInventory.empty()){
         int itemNumber = 1;
         for (auto item : itemsInInventory){
@@ -104,10 +112,6 @@ void Inventory::equipShield(Shield* shield) {
 }
 
 
-void Inventory::equipPotion(Potion* potion) {
-    equippedPotion = potion;
-    potion->setIsEquipped(true);
-}
 void Inventory::usePotion(Potion* potion, Player* player) {
     if (player) {
         player->addHealth(potion->getHeal());
@@ -120,8 +124,4 @@ Weapon* Inventory::getEquippedWeapon() {
 
 Shield* Inventory::getEquippedShield() {
     return equippedShield;
-}
-
-Potion* Inventory::getEquippedPotion() {
-    return equippedPotion;
 }

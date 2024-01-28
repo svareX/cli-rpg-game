@@ -241,28 +241,43 @@ void Map::movePlayer(char move) {
             break;
         case 'I':
             getPlayer()->inventory->printItems();
-            cout << "Enter the number of the item to use/equip: ";
-            int itemNumber;
-            cin >> itemNumber;
+            if (!getPlayer()->inventory->itemsInInventory.empty()){
+                cout << "Do you want to equip/use an item? (y/n): ";
+                char choice;
+                cin >> choice;
 
-            if(itemNumber > 0 && itemNumber <= getPlayer()->inventory->itemsInInventory.size()) {
-                Item* selectedItem = getPlayer()->inventory->itemsInInventory[itemNumber - 1];
-                string itemType = selectedItem->getType();
+                switch(toupper(choice)){
+                    case 'Y':
+                        cout << "Enter the number of the item to use/equip: ";
+                        int itemNumber;
+                        cin >> itemNumber;
 
-                if (itemType == "Weapon") {
-                    getPlayer()->inventory->equipWeapon(dynamic_cast<Weapon*>(selectedItem));
-                } else if (itemType == "Shield") {
-                    getPlayer()->inventory->equipShield(dynamic_cast<Shield*>(selectedItem));
-                } else if (itemType == "Potion") {
-                    getPlayer()->inventory->usePotion(dynamic_cast<Potion*>(selectedItem), getPlayer());
-                } else {
-                    cout << "Invalid item type." << endl;
+                        if(itemNumber > 0 && itemNumber <= getPlayer()->inventory->itemsInInventory.size()) {
+                            Item* selectedItem = getPlayer()->inventory->itemsInInventory[itemNumber - 1];
+                            if (Weapon* weaponItem = dynamic_cast<Weapon*>(selectedItem)) {
+                                if (weaponItem != getPlayer()->inventory->getEquippedWeapon())
+                                    getPlayer()->inventory->equipWeapon(weaponItem);
+                            } else if (Shield* shieldItem = dynamic_cast<Shield*>(selectedItem)) {
+                                if (shieldItem != getPlayer()->inventory->getEquippedShield())
+                                    getPlayer()->inventory->equipShield(shieldItem);
+                            } else if (Potion* potionItem = dynamic_cast<Potion*>(selectedItem)) {
+                                getPlayer()->inventory->usePotion(potionItem, getPlayer());
+                            }
+                            cin.ignore();
+                            cin.get();
+                        } else {
+                            cout << "Invalid item number." << endl;
+                        }
+                        break;
+                    case 'N':
+                        cout << "You chose not to equip or use any item." << endl;
+                        break;
+                    default:
+                        cout << "Wrong choice." << endl;
                 }
-            } else {
-                cout << "Invalid item number." << endl;
             }
             break;
-    }
+        }
     }
     else{
         std::cerr << "Player is dead, you can't move while you are dead" << std::endl;

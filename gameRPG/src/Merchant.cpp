@@ -1,6 +1,7 @@
 #include "../include/Merchant.h"
 #include "../include/Map.h"
 #include "../include/Weapon.h"
+#include "../include/Potion.h"
 #include "../include/Item.h"
 #include "../include/Logger.h"
 #include <vector>
@@ -14,6 +15,14 @@ Weapon* eSword = new Weapon("Epic Sword", 30, 20, 100, 2);
 
 vector <Item*> items = {
         cSword, rSword, eSword
+};
+
+Potion* smallPotion = new Potion("Small HP Potion", 20);
+Potion* mediumPotion = new Potion("Medium HP Potion", 40);
+Potion* bigPotion = new Potion("Big HP Potion", 20);
+
+vector <Item*> potions = {
+        smallPotion, mediumPotion, bigPotion
 };
 
 Merchant::Merchant(Map* map): m_map(map){

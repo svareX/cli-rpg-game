@@ -19,22 +19,15 @@ public:
     void equipItem(Item* item);
     Weapon* getEquippedWeapon();
     Shield* getEquippedShield();
-    Potion* getEquippedPotion();
     bool containsItem(Item* item);
     vector<Item*> itemsInInventory;
-
     void equipShield(Shield* shield);
-
     void equipWeapon(Weapon* weapon);
-
     void usePotion(Potion* potion, Player* player);
 
 private:
     Weapon* equippedWeapon;
     Shield* equippedShield;
-    Potion* equippedPotion;
-
-    void equipPotion(Potion* potion);
 };
 
 #endif // GAMERPG_INVENTORY_H
