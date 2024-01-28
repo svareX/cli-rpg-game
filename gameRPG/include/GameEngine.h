@@ -36,6 +36,8 @@ public:
     int getDifficulty();
     void addScore(Enemy* enemy);
     int getScore();
+    Player* getPlayer();
+    Map* getMap();
     ~GameEngine();
 };
 

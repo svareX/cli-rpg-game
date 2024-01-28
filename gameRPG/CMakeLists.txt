@@ -25,4 +25,8 @@ add_executable(gameRPG
         include/Logger.h
         src/Logger.cpp
         src/Potion.cpp
+        include/Memory.h
+        src/Memory.cpp
+        include/exceptions/PauseGameException.h
+        src/exceptions/PauseGameException.cpp
 )

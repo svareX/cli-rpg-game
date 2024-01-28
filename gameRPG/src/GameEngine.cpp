@@ -6,8 +6,9 @@
 #include "../include/exceptions/BorderException.h"
 #include "../include/exceptions/EnemyException.h"
 #include "../include/exceptions/GameOverException.h"
-#include "../include/exceptions/DeadEnemyException.h"
 #include "../include/Logger.h"
+#include "../include/exceptions/PauseGameException.h"
+#include "../include/Memory.h"
 #include <algorithm>
 
 using namespace std;
@@ -38,6 +39,9 @@ int GameEngine::getScore() {
 
 void GameEngine::startMenu() {
     cout << endl << "*************************" << endl;
+    if (Memory::getInstance().containsData()) {
+        cout << "Resume (0)" << endl;
+    }
     cout << "Play (1)" << endl;
     cout << "Settings (2)" << endl;
     cout << "Quit (3)";
@@ -48,7 +52,15 @@ void GameEngine::startMenu() {
 void GameEngine::menuSelection() {
     char input;
     cin >> input;
+    if (Memory::getInstance().containsData()) {
+        if (input == '0') {
+            startGame();
+        }
+    }
     if (input == '1') {
+        if (Memory::getInstance().containsData()) {
+            Memory::getInstance().saveData(nullptr);
+        }
         startGame();
     } else if (input == '2') {
         startSettings();
@@ -61,19 +73,22 @@ void GameEngine::menuSelection() {
 }
 
 void GameEngine::startGame() {
-    //create player according to settings
-    this->m_player = new Player();
-    //TODO: Change the starting gold amount according to m_difficulty
-    this->m_player->setGoldAmount(500);
-    this->m_map = new Map();
-    this->m_map->setPlayer(this->m_player);
-    this->m_totalScore = 0;
-    this->m_player->setMap(m_map);
+    if (Memory::getInstance().containsData()) {
+        this->m_player = Memory::getInstance().loadData()->getPlayer();
+        this->m_map = Memory::getInstance().loadData()->getMap();
+        this->m_difficulty = Memory::getInstance().loadData()->getDifficulty();
+        this->m_totalScore = Memory::getInstance().loadData()->getScore();
+    } else {
+        this->m_player = new Player();
+        this->m_player->setGoldAmount(500);
+        this->m_map = new Map();
+        Quest *quest1 = new Quest(this->m_map);
+        Quest *quest2 = new Quest(this->m_map);
+        Merchant *shop = new Merchant(this->m_map);
+        this->m_player->setMap(m_map);
+        this->m_map->setPlayer(this->m_player);
+    }
 
-    //generate quests
-    Quest *quest1 = new Quest(this->m_map);
-    Quest *quest2 = new Quest(this->m_map);
-    Merchant *shop = new Merchant(this->m_map);
     char input;
     do {
         this->m_map->displayMap();
@@ -83,6 +98,9 @@ void GameEngine::startGame() {
             this->m_map->movePlayer(input);
             if (this->m_map->getCurrentLevel() == this->m_map->getTotalLevels() && this->m_map->m_quests.empty() && this->m_map->m_enemies.empty())
                 this->stopGame();
+        } catch (PauseGameException pauseGameException) {
+            Memory::getInstance().saveData(this);
+            startMenu();
         } catch (BorderException borderException) {
             cout << "Border hit";
             Logger::getInstance().log("[ERROR] You hit the map border.");
@@ -298,6 +316,14 @@ void GameEngine::attackSequence(Enemy *enemy) {
         Logger::getInstance().log("[GAME OVER] FINAL SCORE: " + to_string(m_player->getScore()));
         this->stopGame();
     }
+}
+
+Map* GameEngine::getMap() {
+    return this->m_map;
+}
+
+Player* GameEngine::getPlayer() {
+    return this->m_player;
 }
 
 GameEngine::~GameEngine() {

@@ -9,6 +9,8 @@
 #include "../include/Enemy.h"
 #include "../include/exceptions/EnemyException.h"
 #include "../include/Logger.h"
+#include "../include/Memory.h"
+#include "../include/exceptions/PauseGameException.h"
 
 using namespace std;
 
@@ -240,6 +242,9 @@ void Map::movePlayer(char move) {
             break;
         case 'L':
             getPlayer()->printQuestList();
+            break;
+        case 'P':
+            throw PauseGameException();
             break;
         case 'I':
             getPlayer()->inventory->printItems();
