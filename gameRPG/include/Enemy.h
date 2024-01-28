@@ -7,6 +7,8 @@
 
 
 #include <iostream>
+#include "Player.h"
+
 using namespace std;
 class Enemy{
 private:
@@ -25,6 +27,8 @@ public:
     int getDamage();
     int getEnemyX();
     int getEnemyY();
+
+    void attack(Player* player, int difficulty);
 
 };
 

@@ -38,5 +38,7 @@ public:
     void setMap(Map* gameMap);
     int getScore();
     void setScore(int amount);
+
+    void attack(Enemy* enemy);
 };
 #endif //GAMERPG_PLAYER_H

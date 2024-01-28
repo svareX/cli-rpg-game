@@ -180,12 +180,12 @@ void GameEngine::attackSequence(Enemy *enemy) {
                 case '1':
                     if (enemyMove == 0) {
                         //oba seknou => oba dostanou dmg
-                        this->m_player->removeHealth(enemy->getDamage() * this->getDifficulty());
-                        enemy->removeHealth(this->m_player->getDamage());
+                        enemy->attack(this->m_player, this->getDifficulty());
+                        this->m_player->attack(enemy);
                         Logger::getInstance().log("[COMBAT] You and enemy attacked each other. PLAYER HEALTH: " + to_string(this->m_player->getHealth()) + " | ENEMY HEALTH: " + to_string(enemy->getHealth()));
                     } else if (enemyMove == 1) {
                         //hrac sekne & enemy se brani => hrac dostane dmg
-                        this->m_player->removeHealth(this->m_player->getDamage() * this->getDifficulty());
+                        enemy->attack(this->m_player, this->getDifficulty());
                         Logger::getInstance().log("[COMBAT] Enemy reflected your attack. PLAYER HEALTH: " + to_string(this->m_player->getHealth()));
                     } else {
                         //hrac seka a enemy dodguje => nic
@@ -198,7 +198,7 @@ void GameEngine::attackSequence(Enemy *enemy) {
                         //oba se brani => nestane se nic
                     } else if (enemyMove == 0) {
                         //ty se branis & enemy sekne => enemy dostane dmg
-                        enemy->removeHealth(enemy->getDamage());
+                        this->m_player->attack(enemy);
                         Logger::getInstance().log("[COMBAT] Player reflected enemy's attack. ENEMY HEALTH: " + to_string(enemy->getHealth()));
                     } else {
                         //hrac se brani a enemy doguje => nic
