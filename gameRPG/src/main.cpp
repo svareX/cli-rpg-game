@@ -14,5 +14,6 @@ int main() {
     srand(time(0));
     GameEngine* m_game = new GameEngine();
     m_game->startMenu();
+    delete m_game;
     return 0;
 }

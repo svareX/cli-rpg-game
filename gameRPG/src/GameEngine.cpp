@@ -28,13 +28,12 @@ int GameEngine::getDifficulty() {
     return m_difficulty;
 }
 
-void GameEngine::addScore(Enemy *enemy) {
-    int enemyScore = (enemy->getHealth() + enemy->getDamage()) * this->getDifficulty();
-    m_totalScore += enemyScore;
+void GameEngine::addScore() {
+    m_totalScore += 50*getDifficulty();
 }
 
 int GameEngine::getScore() {
-    return m_totalScore;
+    return m_totalScore+m_player->getScore();
 }
 
 void GameEngine::startMenu() {
@@ -160,8 +159,11 @@ void GameEngine::stopGame() {
     else
         cout << "You have won, congratulations." << endl;
     cout << "Gold: " << m_player->getGoldAmount() << endl;
-    cout << "Score: " << this->m_totalScore << endl;
+    cout << "Score: " << getScore() << endl;
     cout << "Press Enter to exit...";
+    delete m_player;
+    delete m_map;
+    Memory::getInstance().saveData(nullptr);
     cin.ignore();
     cin.get();
     exit(EXIT_SUCCESS);
@@ -191,7 +193,6 @@ void GameEngine::attackSequence(Enemy *enemy) {
             if (rand() % 4 == 0) return;
         }
     }
-    Enemy* temp = enemy;
     int playerLast = 0;
     int enemyLast = 0;
     while (this->m_player->getHealth() > 0 && enemy->getHealth() > 0) {
@@ -308,7 +309,7 @@ void GameEngine::attackSequence(Enemy *enemy) {
         cout << "Enemy has been slain." << endl;
         Logger::getInstance().log("[COMBAT END] Enemy has been slain.");
         this->m_map->changeMap(enemy->getEnemyX(), enemy->getEnemyY(), '.');
-        this->addScore(temp);
+        this->addScore();
     } else {
         cout << "You have died." << endl;
         Logger::getInstance().log("[COMBAT END] You have died.");

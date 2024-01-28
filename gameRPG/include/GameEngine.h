@@ -34,7 +34,7 @@ public:
     void stopGame();
     void setDifficulty(int newDifficulty);
     int getDifficulty();
-    void addScore(Enemy* enemy);
+    void addScore();
     int getScore();
     Player* getPlayer();
     Map* getMap();
