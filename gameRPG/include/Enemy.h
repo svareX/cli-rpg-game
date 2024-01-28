@@ -9,6 +9,8 @@
 #include <iostream>
 #include "Player.h"
 
+class Player;
+
 using namespace std;
 class Enemy{
 private:

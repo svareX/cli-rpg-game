@@ -53,6 +53,6 @@ int Enemy::getEnemyY() {
     return m_enemyY;
 };
 
-void Enemy::attack(Player *player, int difficulty) {
+void Enemy::attack(Player* player, int difficulty) {
     player->removeHealth(this->getDamage()*difficulty);
 }

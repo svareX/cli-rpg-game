@@ -15,6 +15,7 @@ using namespace std;
 class Player;
 class Quest;
 class Merchant;
+class Enemy;
 
 struct ItemInfo {
     Item* m_item;

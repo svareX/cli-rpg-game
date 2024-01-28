@@ -101,9 +101,24 @@ void GameEngine::startGame() {
 void GameEngine::startSettings() {
     cout << endl << "*************************" << endl;
     cout << "Difficulty: " << endl;
-    cout << "Easy (1)" << endl;
-    cout << "Medium (2)" << endl;
+    cout << "Easy (1)";
+    if (this->getDifficulty() == 1) {
+        cout << " - selected" << endl;
+    }
+    if (this->getDifficulty() != 1) {
+        cout << endl;
+    }
+    cout << "Medium (2)";
+    if (this->getDifficulty() == 2) {
+        cout << " - selected" << endl;
+    }
+    if (this->getDifficulty() != 2) {
+        cout << endl;
+    }
     cout << "Hard (3)";
+    if (this->getDifficulty() == 3) {
+        cout << " - selected" << endl;
+    }
     cout << endl << "*************************" << endl;
     settingsSelection();
 }

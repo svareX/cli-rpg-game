@@ -1,3 +1,3 @@
-/Users/matejtrifanov/Desktop/rpg/zoo_zs2023_xtemelko/gameRPG/cmake-build-debug/CMakeFiles/gameRPG.dir
-/Users/matejtrifanov/Desktop/rpg/zoo_zs2023_xtemelko/gameRPG/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/matejtrifanov/Desktop/rpg/zoo_zs2023_xtemelko/gameRPG/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Projekty/xtemelko/gameRPG/cmake-build-debug/CMakeFiles/gameRPG.dir
+C:/Projekty/xtemelko/gameRPG/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Projekty/xtemelko/gameRPG/cmake-build-debug/CMakeFiles/rebuild_cache.dir

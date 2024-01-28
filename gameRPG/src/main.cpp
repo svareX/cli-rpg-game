@@ -10,7 +10,7 @@
 #include "../include/GameEngine.h"
 using namespace std;
 
-int main() {S
+int main() {
     srand(time(0));
     GameEngine* m_game = new GameEngine();
     m_game->startMenu();

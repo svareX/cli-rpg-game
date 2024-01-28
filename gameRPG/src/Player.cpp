@@ -93,6 +93,6 @@ void Player::setMap(Map* gameMap){
 int Player::getScore(){ return m_score; }
 void Player::setScore(int amount){ m_score += amount; }
 
-void Player::attack(Enemy *enemy) {
+void Player::attack(Enemy* enemy) {
     enemy->removeHealth(this->getDamage());
 }
