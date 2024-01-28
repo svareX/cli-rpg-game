@@ -4,6 +4,7 @@
 #include "../include/Logger.h"
 #include "../include/Player.h"
 #include "../include/Item.h"
+#include <algorithm>
 using namespace std;
 
 Inventory::Inventory(){
@@ -116,6 +117,8 @@ void Inventory::usePotion(Potion* potion, Player* player) {
     if (player) {
         player->addHealth(potion->getHeal());
     }
+    auto it = find(itemsInInventory.begin(), itemsInInventory.end(), potion);
+    itemsInInventory.erase(it);
 }
 
 Weapon* Inventory::getEquippedWeapon() {

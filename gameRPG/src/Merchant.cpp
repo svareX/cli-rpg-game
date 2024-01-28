@@ -31,12 +31,14 @@ Merchant::Merchant(Map* map): m_map(map){
     map->m_gameMap[rndY][rndX] = 'M';
     map->m_shop = this;
     m_items.insert(m_items.end(), items.begin(), items.end());
+    m_items.insert(m_items.end(), potions.begin(), potions.end());
 }
 void Merchant::displayShop(){
     system("cls");
     vector <Item*> playerInventory = m_map->getPlayer()->inventory->itemsInInventory;
     char choice;
     Item* temp;
+    float m_price;
     bool isValidInput = false;
     int index = 1;
     if (!m_items.empty()){
@@ -46,7 +48,13 @@ void Merchant::displayShop(){
             case 'B':
                 char input;
                 for (auto item : m_items){
-                    float m_price = item->getQuality()*10+50;
+                    if (!(dynamic_cast<Potion*>(item))){
+                        m_price = item->getQuality()*10+50;
+                    }
+                    else{
+                        Potion* temp = dynamic_cast<Potion*>(item);
+                        m_price = temp->getHeal()+15;
+                    }
                     cout << index << ". Item: " << endl;
                     cout << "Name: " << item->getName() << endl;
                     cout << "Price: " << m_price << endl;
@@ -109,11 +117,18 @@ void Merchant::displayShop(){
 }
 
 void Merchant::buyItem(Item* product){
+    float m_price = 0;
     if (m_map->getPlayer()->getGoldAmount() >= product->getQuality()*10+50){
         m_map->getPlayer()->inventory->addItem(product);
-        auto x = find(m_items.begin(), m_items.end(), product);
-        m_items.erase(x);
-        float m_price = product->getQuality()*10+50;
+        if (!(dynamic_cast<Potion*>(product))) {
+            auto x = find(m_items.begin(), m_items.end(), product);
+            m_items.erase(x);
+            float m_price = product->getQuality()*10+50;
+        }
+        else{
+            Potion* potion = dynamic_cast<Potion*>(product);
+            float m_price = potion->getHeal()+15;
+        }
         m_map->getPlayer()->setGoldAmount(m_map->getPlayer()->getGoldAmount() - m_price);
         cout << "Successfully purchased item: " << product->getName() << endl << "New Balance: " << m_map->getPlayer()->getGoldAmount();
     }

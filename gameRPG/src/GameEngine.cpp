@@ -160,7 +160,8 @@ void GameEngine::attackSequence(Enemy *enemy) {
         while (enemyMove == enemyLast) {
             enemyMove = rand() % 3;
         }
-        cout << endl << "E:" <<enemyMove << endl;
+
+        cout << endl << "Enemy:" << enemyMove << " | Player: " << choice << endl;
         if (playerLast != int(choice)) {
             switch (choice) {
                 case '1':
