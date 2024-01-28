@@ -13,7 +13,7 @@ Inventory::Inventory(){
 }
 void Inventory::addItem(Item* item) {
     system("CLS");
-    if (!containsItem(item)) {
+    if (!containsItem(item) || dynamic_cast<Potion*>(item)) {
         itemsInInventory.push_back(item);
         cout << "Added " << item->getName() << " to the inventory." << endl;
         Logger::getInstance().log("[ITEM] You picked up an item: " + item->getName());
@@ -72,26 +72,28 @@ void Inventory::printItems(){
     else{
         cout << "Your inventory is empty." << endl;
     }
-    cout << "Press ENTER to continue..." << endl;
-    cin.ignore();
-    cin.get();
 }
 
 
+//void Inventory::equipWeapon(Weapon* weapon) {
+//    if (equippedWeapon != nullptr) {
+//        itemsInInventory.push_back(equippedWeapon);
+//        equippedWeapon->setIsEquipped(false);
+//        equippedWeapon = weapon;
+//        equippedWeapon->setIsEquipped(true);
+//    } else {
+//        equippedWeapon = weapon;
+//        equippedWeapon->setIsEquipped(true);
+//    }
+//}
+
 void Inventory::equipWeapon(Weapon* weapon) {
     if (equippedWeapon != nullptr) {
-        if (weapon->getQuality() > equippedWeapon->getQuality()) {
-            itemsInInventory.push_back(equippedWeapon);
-            equippedWeapon->setIsEquipped(false);
-            equippedWeapon = weapon;
-            equippedWeapon->setIsEquipped(true);
-        } else {
-            itemsInInventory.push_back(weapon);
-        }
-    } else {
-        equippedWeapon = weapon;
-        equippedWeapon->setIsEquipped(true);
+        equippedWeapon->setIsEquipped(false);
     }
+    Logger::getInstance().log("[INVENTORY] You equipped: " + weapon->getName());
+    equippedWeapon = weapon;
+    equippedWeapon->setIsEquipped(true);
 }
 
 

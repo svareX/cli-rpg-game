@@ -8,6 +8,7 @@
 #include "../include/Quest.h"
 #include "../include/Enemy.h"
 #include "../include/exceptions/EnemyException.h"
+#include "../include//Logger.h"
 
 using namespace std;
 
@@ -41,6 +42,9 @@ void Map::resetMap() {
     spawnRandomObjects(5);
     spawnEnemies(2 * currentLevel);
     srand(time(NULL));
+    int randX = rand() % m_size;
+    int randY = rand() % m_size;
+    m_gameMap[randY][randX] = 'M';
     int numberOfQuests = rand() % 5 + 1;
     for (int i = 0; i < numberOfQuests; i++) {
         Quest* newQuest = new Quest(this);
@@ -209,31 +213,35 @@ void Map::movePlayer(char move) {
     if(!(getPlayer()->getHealth() <= 0)){
     switch (toupper(move)) {
         case 'W':
-            if (getPlayerY() > 0) {
+            if (getPlayerY() > 0 && m_gameMap[getPlayerY()-1][getPlayerX()] != '|') {
                 setPlayerY(getPlayerY()-1);
             } else {
                 cerr << "You have reached the border!" << endl;
+                Logger::getInstance().log("[ERROR] YOU HIT A BORDER/OBSTACLE");
             }
             break;
         case 'A':
-            if (getPlayerX() > 0) {
+            if (getPlayerX() > 0 && m_gameMap[getPlayerY()][getPlayerX()-1] != '|') {
                 setPlayerX(getPlayerX()-1);
             } else {
                 cerr << "You have reached the border!" << endl;
+                Logger::getInstance().log("[ERROR] YOU HIT A BORDER/OBSTACLE");
             }
             break;
         case 'S':
-            if (getPlayerY() < m_size - 1) {
+            if (getPlayerY() < m_size - 1 && m_gameMap[getPlayerY()+1][getPlayerX()] != '|') {
                 setPlayerY(getPlayerY()+1);
             } else {
                 cerr << "You have reached the border!" << endl;
+                Logger::getInstance().log("[ERROR] YOU HIT A BORDER/OBSTACLE");
             }
             break;
         case 'D':
-            if (getPlayerX() < m_size - 1) {
+            if (getPlayerX() < m_size - 1 && m_gameMap[getPlayerY()][getPlayerX()+1] != '|') {
                 setPlayerX(getPlayerX()+1);
             } else {
                 cerr << "You have reached the border!" << endl;
+                Logger::getInstance().log("[ERROR] YOU HIT A BORDER/OBSTACLE");
             }
             break;
         case 'L':

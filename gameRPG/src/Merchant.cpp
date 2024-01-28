@@ -19,7 +19,7 @@ vector <Item*> items = {
 
 Potion* smallPotion = new Potion("Small HP Potion", 20);
 Potion* mediumPotion = new Potion("Medium HP Potion", 40);
-Potion* bigPotion = new Potion("Big HP Potion", 20);
+Potion* bigPotion = new Potion("Big HP Potion", 60);
 
 vector <Item*> potions = {
         smallPotion, mediumPotion, bigPotion
@@ -42,7 +42,7 @@ void Merchant::displayShop(){
     bool isValidInput = false;
     int index = 1;
     if (!m_items.empty()){
-        cout << "Hello, do you wanna buy some items? (B - Buy | S - Sell)" << endl;
+        cout << "Hello, do you wanna buy some items? (B - Buy | S - Sell | E - Exit)" << endl;
         cin >> choice;
         switch (toupper(choice)){
             case 'B':
@@ -104,6 +104,8 @@ void Merchant::displayShop(){
                     Logger::getInstance().log("[MERCHANT] You sold an item: " + temp->getName() + " for " + to_string((temp->getQuality()*10+50)/2) + " gold. NEW BALLANCE: " + to_string(m_map->getPlayer()->getGoldAmount()));
                 }
                 break;
+            case 'E':
+                return;
             default:
                 return;
         }
@@ -123,11 +125,11 @@ void Merchant::buyItem(Item* product){
         if (!(dynamic_cast<Potion*>(product))) {
             auto x = find(m_items.begin(), m_items.end(), product);
             m_items.erase(x);
-            float m_price = product->getQuality()*10+50;
+            m_price = product->getQuality()*10+50;
         }
         else{
             Potion* potion = dynamic_cast<Potion*>(product);
-            float m_price = potion->getHeal()+15;
+            m_price = potion->getHeal()+15;
         }
         m_map->getPlayer()->setGoldAmount(m_map->getPlayer()->getGoldAmount() - m_price);
         cout << "Successfully purchased item: " << product->getName() << endl << "New Balance: " << m_map->getPlayer()->getGoldAmount();
