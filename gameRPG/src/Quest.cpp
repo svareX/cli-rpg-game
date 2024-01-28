@@ -36,6 +36,10 @@ QuestGiven getQuestFromFile(){
 Quest::Quest(Map* gameMap): m_map(gameMap){
     int rndX = rand()% m_map->getSize();
     int rndY = rand()% m_map->getSize();
+    do {
+        rndX = std::rand() % m_map->getSize();
+        rndY = std::rand() % m_map->getSize();
+    } while (m_map->m_gameMap[rndX][rndY] != '.' || (rndX == m_map->getPlayerX() && rndY == m_map->getPlayerY()));
 //    int random = rand()%quests.size();
     m_questGiverX = rndX;
     m_questGiverY = rndY;
@@ -107,6 +111,10 @@ string Quest::getQuestStatus() {
 void Quest::spawnQuestItem() {
     int rndX = rand()% m_map->getSize();
     int rndY = rand()% m_map->getSize();
+    do {
+        rndX = std::rand() % m_map->getSize();
+        rndY = std::rand() % m_map->getSize();
+    } while (m_map->m_gameMap[rndX][rndY] != '.' || (rndX == m_map->getPlayerX() && rndY == m_map->getPlayerY()));
     this->m_questInfo.itemX = rndX;
     this->m_questInfo.itemY = rndY;
     m_map->m_questItems.push_back({this->m_questInfo.itemRequired, rndX, rndY});

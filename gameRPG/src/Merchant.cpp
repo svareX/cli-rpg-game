@@ -33,6 +33,10 @@ vector <Item*> potions = {
 Merchant::Merchant(Map* map): m_map(map){
     int rndX = rand()% map->getSize();
     int rndY = rand()% map->getSize();
+    do {
+        rndX = std::rand() % m_map->getSize();
+        rndY = std::rand() % m_map->getSize();
+    } while (m_map->m_gameMap[rndX][rndY] != '.' || (rndX == m_map->getPlayerX() && rndY == m_map->getPlayerY()));
     map->m_gameMap[rndY][rndX] = 'M';
     map->m_shop = this;
     m_items.insert(m_items.end(), items.begin(), items.end());
