@@ -82,6 +82,8 @@ void Player::setGoldAmount(float gold) { m_goldAmount = gold;}
 void Player::removeHealth(int health) {
     if (this->inventory->getEquippedShield() != nullptr) {
         health -= this->inventory->getEquippedShield()->getDamage();
+        if (health < 0)
+            health = abs(health);
     }
     this->m_health -= health;
 }

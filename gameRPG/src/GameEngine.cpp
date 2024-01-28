@@ -168,7 +168,6 @@ void GameEngine::stopGame() {
 }
 
 void GameEngine::attackSequence(Enemy *enemy) {
-    Enemy* temp = enemy;
     vector<Potion*> potions;
     int inventoryCount = 0;
     srand(time(0));
@@ -192,7 +191,7 @@ void GameEngine::attackSequence(Enemy *enemy) {
             if (rand() % 4 == 0) return;
         }
     }
-
+    Enemy* temp = enemy;
     int playerLast = 0;
     int enemyLast = 0;
     while (this->m_player->getHealth() > 0 && enemy->getHealth() > 0) {

@@ -15,7 +15,7 @@ Weapon* eSword = new Weapon("Epic Sword", 30, 20, 100, 2);
 
 Shield* cShield = new Shield("Common Shield", 10);
 Shield* rShield = new Shield("Rare Shield", 20);
-Shield* eShield = new Shield("Shield Shield", 30);
+Shield* eShield = new Shield("Epic Shield", 30);
 
 vector <Item*> items = {
         cSword, rSword, eSword,

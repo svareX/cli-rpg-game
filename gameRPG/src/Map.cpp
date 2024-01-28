@@ -327,6 +327,8 @@ void Map::displayHelp(){
     cout << "W/A/S/D - Move player on map" << endl;
     cout << "i/I - Open inventory" << endl;
     cout << "l/L - Open quest list" << endl;
+    cout << "h/H - Display Help" << endl;
+    cout << "p/P - Pause the game and save" << endl;
     cout << "----------------------" << endl;
 }
 
