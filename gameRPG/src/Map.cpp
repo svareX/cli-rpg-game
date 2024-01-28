@@ -8,7 +8,7 @@
 #include "../include/Quest.h"
 #include "../include/Enemy.h"
 #include "../include/exceptions/EnemyException.h"
-#include "../include//Logger.h"
+#include "../include/Logger.h"
 
 using namespace std;
 
@@ -32,7 +32,6 @@ void Map::resetMap() {
     m_gameMap.clear();
     m_enemies.clear();
     m_quests.clear();
-    //TODO need to redo this to avoid code duplication
     for (int i = 0; i < m_size; i++) {
         vector<char> row(m_size, '.');
         m_gameMap.push_back(row);
@@ -75,7 +74,6 @@ void Map::checkLevelCompletion() {
     removeDefeatedEnemies();
     if (m_enemies.empty() && m_quests.empty() && !levelCompleted) {
         levelCompleted = true;
-        //TODO try to find a better way to do this
         m_gameMap[m_size - 1][m_size - 1] = 'L';
     }
 }
@@ -333,4 +331,11 @@ Player* Map::getPlayer() {
 
 void Map::setPlayer(Player* player) {
     this->m_player = player;
+}
+
+int Map::getCurrentLevel() {
+    return currentLevel;
+}
+int Map::getTotalLevels() {
+    return totalLevels;
 }

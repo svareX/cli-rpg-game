@@ -61,6 +61,8 @@ public:
     int getSize();
     Player* getPlayer();
     void setPlayer(Player* player);
+    int getCurrentLevel();
+    int getTotalLevels();
 };
 
 #endif //GAMERPG_MAP_H

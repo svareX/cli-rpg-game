@@ -8,6 +8,7 @@
 #include "../include/exceptions/GameOverException.h"
 #include "../include/exceptions/DeadEnemyException.h"
 #include "../include/Logger.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -80,6 +81,8 @@ void GameEngine::startGame() {
         cin >> input;
         try {
             this->m_map->movePlayer(input);
+            if (this->m_map->getCurrentLevel() == this->m_map->getTotalLevels() && this->m_map->m_quests.empty() && this->m_map->m_enemies.empty())
+                this->stopGame();
         } catch (BorderException borderException) {
             cout << "Border hit";
             Logger::getInstance().log("[ERROR] You hit the map border.");
@@ -119,7 +122,10 @@ void GameEngine::settingsSelection() {
 }
 void GameEngine::stopGame() {
     system("CLS");
-    cout << "You have died." << endl;
+    if (m_player->getHealth() <= 0)
+        cout << "You have died." << endl;
+    else
+        cout << "You have won, congratulations." << endl;
     cout << "Gold: " << m_player->getGoldAmount() << endl;
     cout << "Score: " << this->m_totalScore << endl;
     cout << "Press Enter to exit...";
@@ -130,6 +136,8 @@ void GameEngine::stopGame() {
 
 void GameEngine::attackSequence(Enemy *enemy) {
     Enemy* temp = enemy;
+    vector<Potion*> potions;
+    int inventoryCount = 0;
     srand(time(0));
     system("cls");
     char choice;
@@ -166,7 +174,6 @@ void GameEngine::attackSequence(Enemy *enemy) {
         while (enemyMove == enemyLast) {
             enemyMove = rand() % 3;
         }
-
         cout << endl << "Enemy:" << enemyMove << " | Player: " << choice << endl;
         if (playerLast != int(choice)) {
             switch (choice) {
@@ -202,8 +209,43 @@ void GameEngine::attackSequence(Enemy *enemy) {
                     //vzdycky nic (akorat nacist previous move)
                     break;
                 case '4':
-                    //TODO: Add inventory selection options (use potion, ...)
-                    this->m_player->inventory->printItems();
+                    if(inventoryCount != 1){
+                        int index;
+                        index = 1;
+                        for (const auto& item : m_player->inventory->itemsInInventory) {
+                            Potion* potion = dynamic_cast<Potion*>(item);
+                            if (potion != nullptr) {
+                                std::cout << index << ". " << potion->getName() << std::endl;
+                                potions.push_back(potion);
+                                index++;
+                            }
+                        }
+                        if (!m_player->inventory->itemsInInventory.empty()) {
+                            std::cout << "Enter the number of the potion to use: ";
+                            int potionNumber;
+                            cin >> potionNumber;
+
+                            if (potionNumber > 0 && potionNumber <= m_player->inventory->itemsInInventory.size()) {
+                                auto it = find(m_player->inventory->itemsInInventory.begin(), m_player->inventory->itemsInInventory.end(), potions[potionNumber - 1]);
+                                Potion* selectedPotion = dynamic_cast<Potion*>(*it);
+                                if (selectedPotion != nullptr) {
+                                    m_player->inventory->usePotion(selectedPotion, this->m_player);
+                                } else {
+                                    cout << "Invalid potion selection." << endl;
+                                }
+                            } else {
+                                cout << "Invalid potion number." << endl;
+                            }
+                        } else {
+                            cout << "Inventory is empty." << endl;
+                        }
+                        inventoryCount++;
+                    }
+                    else{
+                        cout << "You can't use inventory in this fight anymore." << endl;
+                        cin.ignore();
+                        cin.get();
+                    }
                     break;
                 case '5':
                     /*
