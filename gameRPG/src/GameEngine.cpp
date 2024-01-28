@@ -118,12 +118,19 @@ void GameEngine::settingsSelection() {
     }
     startMenu();
 }
-
 void GameEngine::stopGame() {
-
+    system("CLS");
+    cout << "You have died." << endl;
+    cout << "Gold: " << m_player->getGoldAmount() << endl;
+    cout << "Score: " << this->m_totalScore << endl;
+    cout << "Press Enter to exit...";
+    cin.ignore();
+    cin.get();
+    exit(EXIT_SUCCESS);
 }
 
 void GameEngine::attackSequence(Enemy *enemy) {
+    Enemy* temp = enemy;
     srand(time(0));
     system("cls");
     char choice;
@@ -228,12 +235,12 @@ void GameEngine::attackSequence(Enemy *enemy) {
         cout << "Enemy has been slain." << endl;
         Logger::getInstance().log("[COMBAT END] Enemy has been slain.");
         this->m_map->changeMap(enemy->getEnemyX(), enemy->getEnemyY(), '.');
-        this->addScore(enemy);
+        this->addScore(temp);
     } else {
         cout << "You have died." << endl;
         Logger::getInstance().log("[COMBAT END] You have died.");
         Logger::getInstance().log("[GAME OVER] FINAL SCORE: " + to_string(m_player->getScore()));
-        cout << "Your final score: " << this->getScore();
+        this->stopGame();
     }
 }
 

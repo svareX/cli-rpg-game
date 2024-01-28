@@ -65,7 +65,11 @@ void Inventory::printItems(){
     if (!itemsInInventory.empty()){
         int itemNumber = 1;
         for (auto item : itemsInInventory){
-            cout << itemNumber << ". " << item->getName() << endl;
+            cout << itemNumber << ". " << item->getName();
+            if (item == getEquippedWeapon() || item == getEquippedShield()){
+                cout << " - EQUIPPED";
+            }
+            cout << endl;
             itemNumber++;
         }
     }
@@ -73,19 +77,6 @@ void Inventory::printItems(){
         cout << "Your inventory is empty." << endl;
     }
 }
-
-
-//void Inventory::equipWeapon(Weapon* weapon) {
-//    if (equippedWeapon != nullptr) {
-//        itemsInInventory.push_back(equippedWeapon);
-//        equippedWeapon->setIsEquipped(false);
-//        equippedWeapon = weapon;
-//        equippedWeapon->setIsEquipped(true);
-//    } else {
-//        equippedWeapon = weapon;
-//        equippedWeapon->setIsEquipped(true);
-//    }
-//}
 
 void Inventory::equipWeapon(Weapon* weapon) {
     if (equippedWeapon != nullptr) {
@@ -99,19 +90,11 @@ void Inventory::equipWeapon(Weapon* weapon) {
 
 void Inventory::equipShield(Shield* shield) {
     if (equippedShield != nullptr) {
-        if (shield->getQuality() > equippedShield->getQuality()) {
-            itemsInInventory.push_back(equippedShield);
-            equippedShield->setIsEquipped(false);
-
-            equippedShield = shield;
-            equippedShield->setIsEquipped(true);
-        } else {
-            itemsInInventory.push_back(shield);
-        }
-    } else {
-        equippedShield = shield;
-        equippedShield->setIsEquipped(true);
+        equippedShield->setIsEquipped(false);
     }
+    Logger::getInstance().log("[INVENTORY] You equipped: " + shield->getName());
+    equippedShield = shield;
+    equippedShield->setIsEquipped(true);
 }
 
 
@@ -119,6 +102,7 @@ void Inventory::usePotion(Potion* potion, Player* player) {
     if (player) {
         player->addHealth(potion->getHeal());
     }
+    Logger::getInstance().log("[INVENTORY] You used a potion and healed yourself for : " + to_string(potion->getHeal()) + " HP");
     auto it = find(itemsInInventory.begin(), itemsInInventory.end(), potion);
     itemsInInventory.erase(it);
 }

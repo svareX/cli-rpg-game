@@ -18,7 +18,7 @@ public:
     Weapon(std::string name, float damage, float critical_chance, int durability);
     Weapon(std::string name, float damage, float critical_chance, int durability, int quality);
 
-    float getDamage();
+    int getDamage();
     float getCriticalChance();
     void printInfo();
 

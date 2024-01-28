@@ -120,11 +120,11 @@ void Quest::completeQuest(){
     x = find(player->questList.begin(), m_map->getPlayer()->questList.end(), this);
     m_map->getPlayer()->questList.erase(x);
     m_map->m_gameMap[this->getQuestGiverY()][this->getQuestGiverX()] = '.';
-    player->setScore(player->getScore()+1);
     cout << "You handed over: " << this->m_questInfo.itemRequired->getName() << endl;
     auto questItem = find(m_map->getPlayer()->inventory->itemsInInventory.begin(), m_map->getPlayer()->inventory->itemsInInventory.end(), m_questInfo.itemRequired);
     player->inventory->itemsInInventory.erase(questItem);
     player->setGoldAmount(player->getGoldAmount()+this->m_questInfo.goldAmount);
     cout << "Thank you for your help." << endl;
     Logger::getInstance().log("[QUEST] You completed a quest!");
+    player->setScore(5);
 }

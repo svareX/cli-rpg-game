@@ -77,11 +77,7 @@ void Map::checkLevelCompletion() {
         levelCompleted = true;
         //TODO try to find a better way to do this
         m_gameMap[m_size - 1][m_size - 1] = 'L';
-    } else {
-        cout << "Enemies remaining: " << m_enemies.size() << endl;
     }
-
-    displayMap();
 }
 
 void Map::attemptLevelTransition(int x, int y) {
@@ -271,8 +267,6 @@ void Map::movePlayer(char move) {
                             } else if (Potion* potionItem = dynamic_cast<Potion*>(selectedItem)) {
                                 getPlayer()->inventory->usePotion(potionItem, getPlayer());
                             }
-                            cin.ignore();
-                            cin.get();
                         } else {
                             cout << "Invalid item number." << endl;
                         }
@@ -283,6 +277,11 @@ void Map::movePlayer(char move) {
                     default:
                         cout << "Wrong choice." << endl;
                 }
+            }
+            else{
+                cout << "Press ENTER to continue." << endl;
+                cin.ignore();
+                cin.get();
             }
             break;
         }

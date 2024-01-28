@@ -14,10 +14,9 @@ class Shield : public Item {
 
 public:
     Shield();
-    Shield(std::string name, float damage, float heal);
+    Shield(std::string name, float damage);
 
     float getDamage();
-    float getHeal();
     void printInfo();
 
     ~Shield();

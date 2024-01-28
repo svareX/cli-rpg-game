@@ -15,12 +15,14 @@ Player::Player() {
     this->inventory = inv;
     m_health = 100;
     m_strength = 10;
+    m_score = 0;
 }
 Player::Player(Map* gameMap): m_map(gameMap) {
     Inventory *inv = new Inventory();
     this->inventory = inv;
     m_health = 100;
     m_strength = 2;
+    m_score = 0;
 }
 
 void Player::acceptQuest(Quest *quest){
@@ -64,7 +66,13 @@ int Player::getHealth() { return m_health; }
 
 int Player::getDamage() {
     if (this->inventory->getEquippedWeapon() != nullptr) {
-        return m_strength + this->inventory->getEquippedWeapon()->getDamage();
+        int damage = m_strength + this->inventory->getEquippedWeapon()->getDamage();
+        int critChance = this->inventory->getEquippedWeapon()->getCriticalChance();
+        if (rand() % 100 <= critChance) {
+            return damage*2;
+        } else {
+            return damage;
+        }
     }
     return m_strength;
 }

@@ -21,7 +21,7 @@ Weapon::Weapon(std::string name, float damage, float critical_chance, int durabi
     this->setQuality(quality);
 }
 
-float Weapon::getDamage() {
+int Weapon::getDamage() {
     return m_damage;
 }
 
