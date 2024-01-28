@@ -50,6 +50,7 @@ public:
     void spawnEnemies(int enemiesNumber);
     void checkCollision();
     void attackSequence();
+    void displayHelp();
     Enemy* findEnemy(int x, int y);
     vector<vector<char>> m_gameMap;
     vector<Enemy*> m_enemies;

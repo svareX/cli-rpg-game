@@ -46,7 +46,7 @@ void GameEngine::startMenu() {
 
 void GameEngine::menuSelection() {
     char input;
-    cin.get(input);
+    cin >> input;
     if (input == '1') {
         startGame();
     } else if (input == '2') {
@@ -73,7 +73,6 @@ void GameEngine::startGame() {
     Quest *quest1 = new Quest(this->m_map);
     Quest *quest2 = new Quest(this->m_map);
     Merchant *shop = new Merchant(this->m_map);
-
     char input;
     do {
         this->m_map->displayMap();

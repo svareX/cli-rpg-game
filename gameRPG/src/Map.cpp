@@ -191,7 +191,7 @@ void Map::setPlayerCoordinates(int x, int y) {
 
 void Map::displayMap(){
     system("cls");
-    cout << getPlayerY() << " | " << getPlayerX() << endl;
+    cout << getPlayerY() << " | " << getPlayerX() << " || Press H for Help" << endl;
     for (int i = 0; i < m_size; i++){
         for (int j = 0; j < m_size; j++){
             if (i == getPlayerY() && j == getPlayerX()){
@@ -284,6 +284,12 @@ void Map::movePlayer(char move) {
                 cin.get();
             }
             break;
+        case 'H':
+            this->displayHelp();
+            cout << "Press ENTER to continue." << endl;
+            cin.ignore();
+            cin.get();
+            break;
         }
     }
     else{
@@ -297,6 +303,28 @@ void Map::movePlayer(char move) {
 }
 int Map::getSize() {
     return m_size;
+}
+
+void Map::displayHelp(){
+    system("CLS");
+    cout << "----------------------" << endl;
+    cout << "OBJECTS ON MAP" << endl;
+    cout << "----------------------" << endl;
+    cout << "| - Obstacle" << endl;
+    cout << "P - Player" << endl;
+    cout << "E - Enemy" << endl;
+    cout << "M - Merchant (Shop)" << endl;
+    cout << "Q - Quest" << endl;
+    cout << "q - Quest in Progress (Accepted but not Completed)" << endl;
+    cout << "I - Item on Map (Displays after accepting Quest)" << endl;
+    cout << "L - Next Level (After all Quests are completed and all enemies are dead)" << endl;
+    cout << "----------------------" << endl;
+    cout << "INPUT" << endl;
+    cout << "----------------------" << endl;
+    cout << "W/A/S/D - Move player on map" << endl;
+    cout << "i/I - Open inventory" << endl;
+    cout << "l/L - Open quest list" << endl;
+    cout << "----------------------" << endl;
 }
 
 Player* Map::getPlayer() {
